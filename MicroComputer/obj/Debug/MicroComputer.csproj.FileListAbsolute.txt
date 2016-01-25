@@ -1,0 +1,9 @@
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\bin\Debug\MicroComputer.exe.config
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\bin\Debug\MicroComputer.exe
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\bin\Debug\MicroComputer.pdb
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.csprojResolveAssemblyReference.cache
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.Properties.Resources.resources
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.csproj.GenerateResource.Cache
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.exe
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.pdb
+C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.MicroBaby.resources
