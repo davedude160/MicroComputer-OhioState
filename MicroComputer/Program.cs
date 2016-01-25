@@ -14,12 +14,27 @@ namespace MicroComputer
 
         public static class Globals
         {
-            public static int PC = 0;
-            public static int AC = 0;
-            public static byte IR = 00000000;
-            public static int DB = 0;
-            public static List<int> MEMORY = new List<int>();
-            public static int[] PROGRAM_ARRAY = new int[255];
+            public static int _PC = 0;
+            public static int _AC = 0;
+            public static byte _IR = 00000000;
+            public static int _DATA_BUS = 0;
+            public static List<int> _MEMORY = new List<int>();
+            public static int[] _PROGRAM_ARRAY = new int[255];
+        }
+
+        public class Instructions
+        {
+            public int ADD_IMMEDIATE(int ac, int db)
+            {
+                ac = ac + db;
+                return ac;
+            }
+
+            public int ADD_DIRECT(int ac, int mem_loc)
+            {
+                ac = Globals._MEMORY[mem_loc] + ac;
+                return ac;
+            }
         }
 
         [STAThread]
