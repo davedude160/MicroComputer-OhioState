@@ -1,0 +1,2 @@
+C:\Users\david\Desktop\Microbaby\bin\Debug\$safeprojectname$.exe.config
+C:\Users\david\Source\Repos\MicroComputer\bin\Debug\$safeprojectname$.exe.config

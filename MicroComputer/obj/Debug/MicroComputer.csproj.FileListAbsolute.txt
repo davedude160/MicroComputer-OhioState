@@ -7,3 +7,7 @@ C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\Mic
 C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.exe
 C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.pdb
 C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer\MicroComputer\obj\Debug\MicroComputer.MicroBaby.resources
+C:\Users\david\Source\Repos\MicroComputer\MicroComputer\bin\Debug\MicroComputer.exe.config
+C:\Users\david\Source\Repos\MicroComputer\MicroComputer\obj\Debug\MicroComputer.exe
+C:\Users\david\Source\Repos\MicroComputer\MicroComputer\obj\Debug\MicroComputer.pdb
+C:\Users\david\Source\Repos\MicroComputer\MicroComputer\obj\Debug\MicroComputer.csprojResolveAssemblyReference.cache
