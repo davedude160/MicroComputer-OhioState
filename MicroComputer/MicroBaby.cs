@@ -87,7 +87,21 @@ namespace MicroComputer
 
         }
 
+<<<<<<< HEAD
         private void textBox5_TextChanged(object sender, EventArgs e)
+=======
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+>>>>>>> refs/remotes/origin/MicroComputerUpdateed
         {
 
         }
