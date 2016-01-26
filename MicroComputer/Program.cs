@@ -29,16 +29,188 @@ namespace MicroComputer
 
         public class Instructions
         {
-            public int ADD_IMMEDIATE(int ac, int db)
+            public int LDA_IMMEDIATE(int ac, int db) //Loads whatever is on the databus to the accumulator
             {
-                ac = ac + db;
+                ac = db;
                 return ac;
             }
 
-            public int ADD_DIRECT(int ac, int mem_loc)
+            public int LDA_DIRECT(int ac, int db) //Loads from memory location (on the databus) to accumulator
             {
-                ac = Globals._MEMORY[mem_loc] + ac;
+                ac = Globals._MEMORY[db];
                 return ac;
+            }
+
+            public void STA_DIRECT(int ac, int db)//Stores what is in the accumulator to memory location (on the databus)
+            {
+                Globals._MEMORY[db] = ac;
+            }
+
+            public int ADD_IMMEDIATE(int ac, int db)
+            {
+                ac = ac + db;
+
+                if(ac > 255)
+                {
+                    return -1; //Overflow has occured
+                }
+
+                return ac;
+            }
+
+            public int ADD_DIRECT(int ac, int db)
+            {
+                ac = Globals._MEMORY[db] + ac;
+
+                if (ac > 255)
+                {
+                    return -1; //Overflow has occured
+                }
+
+                return ac;
+            }
+
+            public int ADDC_IMMEDIATE(int ac, int db)
+            {
+                ac = ac + db + 1;
+
+                if (ac > 255)
+                {
+                    return -1; //Overflow has occured
+                }
+
+                return ac;
+            }
+
+            public int ADDC_DIRECT(int ac, int db)
+            {
+                ac = Globals._MEMORY[db] + ac + 1;
+
+                if (ac > 255)
+                {
+                    return -1; //Overflow has occured
+                }
+
+                return ac;
+            }
+
+            public int SUB_IMMEDIATE(int ac, int db)
+            {
+                ac = ac - db;
+
+                if (ac < -255)
+                {
+                    return -1; //Underflow has occured
+                }
+
+                return ac;
+            }
+
+            public int SUB_DIRECT(int ac, int db)
+            {
+                ac = Globals._MEMORY[db] - ac;
+
+                if (ac < -255)
+                {
+                    return -1; //Underflow has occured
+                }
+
+                return ac;
+            }
+
+            public int SUBC_IMMEDIATE(int ac, int db)
+            {
+                ac = ac + db + 1;
+
+                if (ac < -255)
+                {
+                    return -1; //Underflow has occured
+                }
+
+                return ac;
+            }
+
+            public int SUBC_DIRECT(int ac, int db)
+            {
+                ac = Globals._MEMORY[db] + ac + 1;
+
+                if (ac < -255)
+                {
+                    return -1; //Underflow has occured
+                }
+
+                return ac;
+            }
+
+            public int INC_INHERENT(int ac)
+            {
+                ac = ac + 1;
+                if (ac > 255)
+                {
+                    return -1; //Overflow has occured
+                }
+                return ac;
+            }
+
+            public int DEC_INHERENT(int ac)
+            {
+                ac = ac - 1;
+
+                if (ac < -255)
+                {
+                    return -1; //Underflow has occured
+                }
+                return ac;
+            }
+
+            public int AND_DIRECT(int ac, int db)
+            {
+                return (ac & db);
+            }
+
+            public int AND_IMMEDIATE(int ac, int db)
+            {
+                return (ac & Globals._MEMORY[db]);
+            }
+
+            public int OR_DIRECT(int ac, int db)
+            {
+                return (ac | db);
+            }
+
+            public int OR_IMMEDIATE(int ac, int db)
+            {
+                return (ac | Globals._MEMORY[db]);
+            }
+
+            public int XOR_DIRECT(int ac, int db)
+            {
+                return (ac ^ db);
+            }
+
+            public int XOR_IMMEDIATE(int ac, int db)
+            {
+                return (ac ^ Globals._MEMORY[db]);
+            }
+
+            public int INV_INHERENT(int ac)
+            {
+                return (~ac); //Returns bitwise complement
+            }
+
+            public int CLRA_INHERENT(int ac)
+            {
+                ac = 0;
+                return (ac);
+            }
+
+        }
+
+        public class IntegerToBinaryConverter
+        {
+            public string converter(int toBeConverted)
+            {
+                return (Convert.ToString(toBeConverted, 2));
             }
         }
 
