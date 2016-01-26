@@ -12,8 +12,8 @@ namespace MicroComputer
 {
     public partial class MicroBaby : Form
     {
-       
-        
+
+         
 
         public MicroBaby()
         {
@@ -59,10 +59,21 @@ namespace MicroComputer
             
              
         }
+         
 
         public static void convertToOpCode()
         {
 
+           
+        }
+
+        private void updateMem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void memScroll_Scroll(object sender, ScrollEventArgs e)
+        {
 
         }
     }

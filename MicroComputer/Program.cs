@@ -23,6 +23,8 @@ namespace MicroComputer
             public static bool _ZERO = false;
             public static int _DATA_BUS = 0;
             public static int[] _MEMORY = new int[255];
+            public static string[] _INSTR = 
+                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA", "CMP", "JMP" };
             public static string[] _PROGRAM_TOKENS=null;
             public static int[] _PROGRAM_ARRAY = new int[255];
         }
@@ -223,7 +225,7 @@ namespace MicroComputer
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MicroBaby());
 
-    }
+        }
 
     }
 }

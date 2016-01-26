@@ -353,6 +353,7 @@
             this.updateMem.TabIndex = 6;
             this.updateMem.Text = "Update";
             this.updateMem.UseVisualStyleBackColor = true;
+            this.updateMem.Click += new System.EventHandler(this.updateMem_Click);
             // 
             // label8
             // 
@@ -380,6 +381,7 @@
             this.memScroll.Name = "memScroll";
             this.memScroll.Size = new System.Drawing.Size(17, 48);
             this.memScroll.TabIndex = 3;
+            this.memScroll.Scroll += new System.Windows.Forms.ScrollEventHandler(this.memScroll_Scroll);
             // 
             // loadProgram
             // 
