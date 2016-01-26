@@ -31,37 +31,39 @@
             this.EMULATOR = new System.Windows.Forms.TabControl();
             this.Sim = new System.Windows.Forms.TabPage();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.memAddLabel = new System.Windows.Forms.Label();
             this.vScrollBar2 = new System.Windows.Forms.VScrollBar();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.dispMemContent = new System.Windows.Forms.TextBox();
+            this.memContLabel = new System.Windows.Forms.Label();
+            this.dispMemAdd = new System.Windows.Forms.TextBox();
             this.runStep = new System.Windows.Forms.Button();
             this.runProgram = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.dispDataBus = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.negativeLabel = new System.Windows.Forms.Label();
+            this.zeroLabel = new System.Windows.Forms.Label();
+            this.overflowLabel = new System.Windows.Forms.Label();
+            this.carryLabel = new System.Windows.Forms.Label();
+            this.dispAC = new System.Windows.Forms.TextBox();
+            this.dispIR = new System.Windows.Forms.TextBox();
+            this.dispPC = new System.Windows.Forms.TextBox();
+            this.dataBusLabel = new System.Windows.Forms.Label();
+            this.irLabel = new System.Windows.Forms.Label();
+            this.acLabel = new System.Windows.Forms.Label();
+            this.pcLabel = new System.Windows.Forms.Label();
             this.Editor = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.enterMemContent = new System.Windows.Forms.TextBox();
+            this.enterMemAdd = new System.Windows.Forms.TextBox();
+            this.updateMem = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.vScrollBar1 = new System.Windows.Forms.VScrollBar();
-            this.button3 = new System.Windows.Forms.Button();
+            this.memScroll = new System.Windows.Forms.VScrollBar();
+            this.loadProgram = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.programEditor = new System.Windows.Forms.TextBox();
+            this.opCodes = new System.Windows.Forms.TextBox();
             this.Help = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.EMULATOR.SuspendLayout();
@@ -71,6 +73,7 @@
             this.Editor.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.Help.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -79,11 +82,10 @@
             this.EMULATOR.Controls.Add(this.Sim);
             this.EMULATOR.Controls.Add(this.Editor);
             this.EMULATOR.Controls.Add(this.Help);
-            this.EMULATOR.Location = new System.Drawing.Point(-2, 2);
-            this.EMULATOR.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.EMULATOR.Location = new System.Drawing.Point(-1, 1);
             this.EMULATOR.Name = "EMULATOR";
             this.EMULATOR.SelectedIndex = 0;
-            this.EMULATOR.Size = new System.Drawing.Size(831, 857);
+            this.EMULATOR.Size = new System.Drawing.Size(552, 500);
             this.EMULATOR.TabIndex = 1;
             // 
             // Sim
@@ -91,93 +93,84 @@
             this.Sim.Controls.Add(this.groupBox4);
             this.Sim.Controls.Add(this.runStep);
             this.Sim.Controls.Add(this.runProgram);
-            this.Sim.Controls.Add(this.textBox4);
+            this.Sim.Controls.Add(this.dispDataBus);
             this.Sim.Controls.Add(this.groupBox1);
-            this.Sim.Controls.Add(this.textBox3);
-            this.Sim.Controls.Add(this.textBox2);
-            this.Sim.Controls.Add(this.textBox1);
-            this.Sim.Controls.Add(this.label4);
-            this.Sim.Controls.Add(this.label3);
-            this.Sim.Controls.Add(this.label2);
-            this.Sim.Controls.Add(this.label1);
-            this.Sim.Location = new System.Drawing.Point(4, 29);
-            this.Sim.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Sim.Controls.Add(this.dispAC);
+            this.Sim.Controls.Add(this.dispIR);
+            this.Sim.Controls.Add(this.dispPC);
+            this.Sim.Controls.Add(this.dataBusLabel);
+            this.Sim.Controls.Add(this.irLabel);
+            this.Sim.Controls.Add(this.acLabel);
+            this.Sim.Controls.Add(this.pcLabel);
+            this.Sim.Location = new System.Drawing.Point(4, 22);
             this.Sim.Name = "Sim";
-            this.Sim.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Sim.Size = new System.Drawing.Size(823, 824);
+            this.Sim.Padding = new System.Windows.Forms.Padding(3);
+            this.Sim.Size = new System.Drawing.Size(544, 474);
             this.Sim.TabIndex = 0;
             this.Sim.Text = "Sim";
             this.Sim.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.label14);
+            this.groupBox4.Controls.Add(this.memAddLabel);
             this.groupBox4.Controls.Add(this.vScrollBar2);
-            this.groupBox4.Controls.Add(this.textBox8);
-            this.groupBox4.Controls.Add(this.label13);
-            this.groupBox4.Controls.Add(this.textBox9);
-            this.groupBox4.Location = new System.Drawing.Point(34, 552);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox4.Controls.Add(this.dispMemContent);
+            this.groupBox4.Controls.Add(this.memContLabel);
+            this.groupBox4.Controls.Add(this.dispMemAdd);
+            this.groupBox4.Location = new System.Drawing.Point(23, 359);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox4.Size = new System.Drawing.Size(774, 229);
+            this.groupBox4.Size = new System.Drawing.Size(516, 108);
             this.groupBox4.TabIndex = 5;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "View Memory Content";
             // 
-            // label14
+            // memAddLabel
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(32, 45);
-            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(161, 25);
-            this.label14.TabIndex = 15;
-            this.label14.Text = "Memory Address";
+            this.memAddLabel.AutoSize = true;
+            this.memAddLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.memAddLabel.Location = new System.Drawing.Point(21, 29);
+            this.memAddLabel.Name = "memAddLabel";
+            this.memAddLabel.Size = new System.Drawing.Size(111, 16);
+            this.memAddLabel.TabIndex = 15;
+            this.memAddLabel.Text = "Memory Address";
             // 
             // vScrollBar2
             // 
-            this.vScrollBar2.Location = new System.Drawing.Point(580, 74);
+            this.vScrollBar2.Location = new System.Drawing.Point(387, 48);
             this.vScrollBar2.Name = "vScrollBar2";
-            this.vScrollBar2.Size = new System.Drawing.Size(17, 74);
+            this.vScrollBar2.Size = new System.Drawing.Size(17, 48);
             this.vScrollBar2.TabIndex = 14;
-            this.vScrollBar2.Scroll += new System.Windows.Forms.ScrollEventHandler(this.vScrollBar2_Scroll);
             // 
-            // textBox8
+            // dispMemContent
             // 
-            this.textBox8.Location = new System.Drawing.Point(315, 74);
-            this.textBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(200, 26);
-            this.textBox8.TabIndex = 18;
+            this.dispMemContent.Location = new System.Drawing.Point(210, 48);
+            this.dispMemContent.Name = "dispMemContent";
+            this.dispMemContent.Size = new System.Drawing.Size(135, 20);
+            this.dispMemContent.TabIndex = 18;
             // 
-            // label13
+            // memContLabel
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(310, 45);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(157, 25);
-            this.label13.TabIndex = 16;
-            this.label13.Text = "Memory Content";
+            this.memContLabel.AutoSize = true;
+            this.memContLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.memContLabel.Location = new System.Drawing.Point(207, 29);
+            this.memContLabel.Name = "memContLabel";
+            this.memContLabel.Size = new System.Drawing.Size(105, 16);
+            this.memContLabel.TabIndex = 16;
+            this.memContLabel.Text = "Memory Content";
             // 
-            // textBox9
+            // dispMemAdd
             // 
-            this.textBox9.Location = new System.Drawing.Point(36, 74);
-            this.textBox9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(200, 26);
-            this.textBox9.TabIndex = 17;
+            this.dispMemAdd.Location = new System.Drawing.Point(24, 48);
+            this.dispMemAdd.Name = "dispMemAdd";
+            this.dispMemAdd.Size = new System.Drawing.Size(135, 20);
+            this.dispMemAdd.TabIndex = 17;
             // 
             // runStep
             // 
             this.runStep.BackColor = System.Drawing.Color.Yellow;
-            this.runStep.Location = new System.Drawing.Point(339, 25);
-            this.runStep.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.runStep.Location = new System.Drawing.Point(226, 16);
             this.runStep.Name = "runStep";
-            this.runStep.Size = new System.Drawing.Size(154, 43);
+            this.runStep.Size = new System.Drawing.Size(103, 28);
             this.runStep.TabIndex = 12;
             this.runStep.Text = "STEP ";
             this.runStep.UseVisualStyleBackColor = false;
@@ -187,218 +180,187 @@
             // 
             this.runProgram.BackColor = System.Drawing.Color.ForestGreen;
             this.runProgram.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.runProgram.Location = new System.Drawing.Point(70, 25);
-            this.runProgram.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.runProgram.Location = new System.Drawing.Point(47, 16);
             this.runProgram.Name = "runProgram";
-            this.runProgram.Size = new System.Drawing.Size(154, 43);
+            this.runProgram.Size = new System.Drawing.Size(103, 28);
             this.runProgram.TabIndex = 11;
             this.runProgram.Text = "RUN";
             this.runProgram.UseVisualStyleBackColor = false;
             this.runProgram.Click += new System.EventHandler(this.runProgram_Click);
             // 
-            // textBox4
+            // dispDataBus
             // 
-            this.textBox4.Location = new System.Drawing.Point(120, 477);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(208, 26);
-            this.textBox4.TabIndex = 10;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.dispDataBus.Location = new System.Drawing.Point(80, 310);
+            this.dispDataBus.Name = "dispDataBus";
+            this.dispDataBus.Size = new System.Drawing.Size(140, 20);
+            this.dispDataBus.TabIndex = 10;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label12);
-            this.groupBox1.Controls.Add(this.label11);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Location = new System.Drawing.Point(34, 185);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Controls.Add(this.negativeLabel);
+            this.groupBox1.Controls.Add(this.zeroLabel);
+            this.groupBox1.Controls.Add(this.overflowLabel);
+            this.groupBox1.Controls.Add(this.carryLabel);
+            this.groupBox1.Location = new System.Drawing.Point(23, 120);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(776, 266);
+            this.groupBox1.Size = new System.Drawing.Size(517, 173);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Condition Signals";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // label12
+            // negativeLabel
             // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(310, 185);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(71, 20);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "Negative";
+            this.negativeLabel.AutoSize = true;
+            this.negativeLabel.Location = new System.Drawing.Point(207, 120);
+            this.negativeLabel.Name = "negativeLabel";
+            this.negativeLabel.Size = new System.Drawing.Size(50, 13);
+            this.negativeLabel.TabIndex = 4;
+            this.negativeLabel.Text = "Negative";
             // 
-            // label11
+            // zeroLabel
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(32, 185);
-            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 20);
-            this.label11.TabIndex = 3;
-            this.label11.Text = "Zero";
+            this.zeroLabel.AutoSize = true;
+            this.zeroLabel.Location = new System.Drawing.Point(21, 120);
+            this.zeroLabel.Name = "zeroLabel";
+            this.zeroLabel.Size = new System.Drawing.Size(29, 13);
+            this.zeroLabel.TabIndex = 3;
+            this.zeroLabel.Text = "Zero";
             // 
-            // label10
+            // overflowLabel
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(310, 68);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(70, 20);
-            this.label10.TabIndex = 2;
-            this.label10.Text = "Overflow";
+            this.overflowLabel.AutoSize = true;
+            this.overflowLabel.Location = new System.Drawing.Point(207, 44);
+            this.overflowLabel.Name = "overflowLabel";
+            this.overflowLabel.Size = new System.Drawing.Size(49, 13);
+            this.overflowLabel.TabIndex = 2;
+            this.overflowLabel.Text = "Overflow";
             // 
-            // label9
+            // carryLabel
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(32, 68);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(46, 20);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "Carry";
+            this.carryLabel.AutoSize = true;
+            this.carryLabel.Location = new System.Drawing.Point(21, 44);
+            this.carryLabel.Name = "carryLabel";
+            this.carryLabel.Size = new System.Drawing.Size(31, 13);
+            this.carryLabel.TabIndex = 1;
+            this.carryLabel.Text = "Carry";
             // 
-            // textBox3
+            // dispAC
             // 
-            this.textBox3.Location = new System.Drawing.Point(615, 109);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(193, 26);
-            this.textBox3.TabIndex = 7;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.dispAC.Location = new System.Drawing.Point(410, 71);
+            this.dispAC.Name = "dispAC";
+            this.dispAC.Size = new System.Drawing.Size(130, 20);
+            this.dispAC.TabIndex = 7;
             // 
-            // textBox2
+            // dispIR
             // 
-            this.textBox2.Location = new System.Drawing.Point(339, 109);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(193, 26);
-            this.textBox2.TabIndex = 6;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            this.dispIR.Location = new System.Drawing.Point(226, 71);
+            this.dispIR.Name = "dispIR";
+            this.dispIR.Size = new System.Drawing.Size(130, 20);
+            this.dispIR.TabIndex = 6;
             // 
-            // textBox1
+            // dispPC
             // 
-            this.textBox1.Location = new System.Drawing.Point(70, 109);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(193, 26);
-            this.textBox1.TabIndex = 5;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.dispPC.Location = new System.Drawing.Point(47, 71);
+            this.dispPC.Name = "dispPC";
+            this.dispPC.Size = new System.Drawing.Size(130, 20);
+            this.dispPC.TabIndex = 5;
             // 
-            // label4
+            // dataBusLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(30, 477);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(80, 20);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Data Bus ";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.dataBusLabel.AutoSize = true;
+            this.dataBusLabel.Location = new System.Drawing.Point(20, 310);
+            this.dataBusLabel.Name = "dataBusLabel";
+            this.dataBusLabel.Size = new System.Drawing.Size(54, 13);
+            this.dataBusLabel.TabIndex = 3;
+            this.dataBusLabel.Text = "Data Bus ";
             // 
-            // label3
+            // irLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(303, 109);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 20);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "IR";
+            this.irLabel.AutoSize = true;
+            this.irLabel.Location = new System.Drawing.Point(202, 71);
+            this.irLabel.Name = "irLabel";
+            this.irLabel.Size = new System.Drawing.Size(18, 13);
+            this.irLabel.TabIndex = 2;
+            this.irLabel.Text = "IR";
             // 
-            // label2
+            // acLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(574, 109);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(31, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "AC";
+            this.acLabel.AutoSize = true;
+            this.acLabel.Location = new System.Drawing.Point(383, 71);
+            this.acLabel.Name = "acLabel";
+            this.acLabel.Size = new System.Drawing.Size(21, 13);
+            this.acLabel.TabIndex = 1;
+            this.acLabel.Text = "AC";
             // 
-            // label1
+            // pcLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 109);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(30, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "PC";
+            this.pcLabel.AutoSize = true;
+            this.pcLabel.Location = new System.Drawing.Point(20, 71);
+            this.pcLabel.Name = "pcLabel";
+            this.pcLabel.Size = new System.Drawing.Size(21, 13);
+            this.pcLabel.TabIndex = 0;
+            this.pcLabel.Text = "PC";
             // 
             // Editor
             // 
             this.Editor.Controls.Add(this.groupBox3);
-            this.Editor.Controls.Add(this.button3);
+            this.Editor.Controls.Add(this.loadProgram);
             this.Editor.Controls.Add(this.groupBox2);
-            this.Editor.Location = new System.Drawing.Point(4, 29);
-            this.Editor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Editor.Location = new System.Drawing.Point(4, 22);
             this.Editor.Name = "Editor";
-            this.Editor.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Editor.Size = new System.Drawing.Size(823, 824);
+            this.Editor.Padding = new System.Windows.Forms.Padding(3);
+            this.Editor.Size = new System.Drawing.Size(544, 474);
             this.Editor.TabIndex = 1;
             this.Editor.Text = "Editor";
             this.Editor.UseVisualStyleBackColor = true;
             // 
             // groupBox3
             // 
-            this.groupBox3.Controls.Add(this.textBox7);
-            this.groupBox3.Controls.Add(this.textBox6);
-            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.enterMemContent);
+            this.groupBox3.Controls.Add(this.enterMemAdd);
+            this.groupBox3.Controls.Add(this.updateMem);
             this.groupBox3.Controls.Add(this.label8);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.vScrollBar1);
+            this.groupBox3.Controls.Add(this.memScroll);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(32, 555);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox3.Location = new System.Drawing.Point(21, 361);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox3.Size = new System.Drawing.Size(750, 232);
+            this.groupBox3.Size = new System.Drawing.Size(500, 107);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Memory Editor";
             // 
-            // textBox7
+            // enterMemContent
             // 
-            this.textBox7.Location = new System.Drawing.Point(250, 111);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(200, 28);
-            this.textBox7.TabIndex = 8;
-            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
+            this.enterMemContent.Location = new System.Drawing.Point(167, 50);
+            this.enterMemContent.Name = "enterMemContent";
+            this.enterMemContent.Size = new System.Drawing.Size(135, 21);
+            this.enterMemContent.TabIndex = 8;
             // 
-            // textBox6
+            // enterMemAdd
             // 
-            this.textBox6.Location = new System.Drawing.Point(14, 111);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(200, 28);
-            this.textBox6.TabIndex = 7;
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            this.enterMemAdd.Location = new System.Drawing.Point(9, 50);
+            this.enterMemAdd.Name = "enterMemAdd";
+            this.enterMemAdd.Size = new System.Drawing.Size(135, 21);
+            this.enterMemAdd.TabIndex = 7;
             // 
-            // button1
+            // updateMem
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(532, 111);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(208, 74);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Update";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.updateMem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateMem.Location = new System.Drawing.Point(355, 50);
+            this.updateMem.Name = "updateMem";
+            this.updateMem.Size = new System.Drawing.Size(139, 48);
+            this.updateMem.TabIndex = 6;
+            this.updateMem.Text = "Update";
+            this.updateMem.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(246, 77);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label8.Location = new System.Drawing.Point(164, 28);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(157, 25);
+            this.label8.Size = new System.Drawing.Size(105, 16);
             this.label8.TabIndex = 5;
             this.label8.Text = "Memory Content";
             // 
@@ -406,64 +368,78 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(9, 77);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Location = new System.Drawing.Point(6, 28);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(161, 25);
+            this.label7.Size = new System.Drawing.Size(111, 16);
             this.label7.TabIndex = 4;
             this.label7.Text = "Memory Address";
             // 
-            // vScrollBar1
+            // memScroll
             // 
-            this.vScrollBar1.Location = new System.Drawing.Point(474, 111);
-            this.vScrollBar1.Name = "vScrollBar1";
-            this.vScrollBar1.Size = new System.Drawing.Size(17, 74);
-            this.vScrollBar1.TabIndex = 3;
+            this.memScroll.Location = new System.Drawing.Point(316, 50);
+            this.memScroll.Name = "memScroll";
+            this.memScroll.Size = new System.Drawing.Size(17, 48);
+            this.memScroll.TabIndex = 3;
             // 
-            // button3
+            // loadProgram
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(564, 26);
-            this.button3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(208, 74);
-            this.button3.TabIndex = 1;
-            this.button3.Text = "Load Program";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.loadProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadProgram.Location = new System.Drawing.Point(376, 17);
+            this.loadProgram.Name = "loadProgram";
+            this.loadProgram.Size = new System.Drawing.Size(139, 48);
+            this.loadProgram.TabIndex = 1;
+            this.loadProgram.Text = "Load Program";
+            this.loadProgram.UseVisualStyleBackColor = true;
+            this.loadProgram.Click += new System.EventHandler(this.loadProgram_Click);
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.textBox5);
+            this.groupBox2.Controls.Add(this.tableLayoutPanel1);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(32, 109);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox2.Location = new System.Drawing.Point(21, 71);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox2.Size = new System.Drawing.Size(750, 398);
+            this.groupBox2.Size = new System.Drawing.Size(494, 271);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Enter Code Below";
-            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter);
             // 
-            // textBox5
+            // tableLayoutPanel1
             // 
-            this.textBox5.Location = new System.Drawing.Point(9, 31);
-            this.textBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(730, 356);
-            this.textBox5.TabIndex = 3;
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.programEditor, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.opCodes, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 20);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(479, 245);
+            this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // programEditor
+            // 
+            this.programEditor.Location = new System.Drawing.Point(3, 3);
+            this.programEditor.Multiline = true;
+            this.programEditor.Name = "programEditor";
+            this.programEditor.Size = new System.Drawing.Size(233, 239);
+            this.programEditor.TabIndex = 3;
+            // 
+            // opCodes
+            // 
+            this.opCodes.Location = new System.Drawing.Point(242, 3);
+            this.opCodes.Multiline = true;
+            this.opCodes.Name = "opCodes";
+            this.opCodes.Size = new System.Drawing.Size(234, 239);
+            this.opCodes.TabIndex = 4;
             // 
             // Help
             // 
             this.Help.Controls.Add(this.label6);
-            this.Help.Location = new System.Drawing.Point(4, 29);
-            this.Help.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.Help.Location = new System.Drawing.Point(4, 22);
             this.Help.Name = "Help";
-            this.Help.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.Help.Size = new System.Drawing.Size(823, 824);
+            this.Help.Padding = new System.Windows.Forms.Padding(3);
+            this.Help.Size = new System.Drawing.Size(544, 474);
             this.Help.TabIndex = 2;
             this.Help.Text = "Help";
             this.Help.UseVisualStyleBackColor = true;
@@ -471,23 +447,20 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(36, 62);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(24, 40);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(453, 20);
+            this.label6.Size = new System.Drawing.Size(304, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "This tab will contain the instructions on operating the Emulator. ";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // MicroBaby
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(822, 837);
+            this.ClientSize = new System.Drawing.Size(552, 502);
             this.Controls.Add(this.EMULATOR);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.MaximumSize = new System.Drawing.Size(844, 893);
-            this.MinimumSize = new System.Drawing.Size(844, 893);
+            this.MaximumSize = new System.Drawing.Size(568, 594);
+            this.MinimumSize = new System.Drawing.Size(568, 506);
             this.Name = "MicroBaby";
             this.Text = "MicroBaby Emulator";
             this.EMULATOR.ResumeLayout(false);
@@ -501,7 +474,8 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.Help.ResumeLayout(false);
             this.Help.PerformLayout();
             this.ResumeLayout(false);
@@ -514,38 +488,40 @@
         private System.Windows.Forms.TabPage Sim;
         private System.Windows.Forms.Button runStep;
         private System.Windows.Forms.Button runProgram;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox dispDataBus;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox dispAC;
+        private System.Windows.Forms.TextBox dispIR;
+        private System.Windows.Forms.TextBox dispPC;
+        private System.Windows.Forms.Label dataBusLabel;
+        private System.Windows.Forms.Label irLabel;
+        private System.Windows.Forms.Label acLabel;
+        private System.Windows.Forms.Label pcLabel;
         private System.Windows.Forms.TabPage Editor;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button loadProgram;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TabPage Help;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox programEditor;
+        private System.Windows.Forms.TextBox enterMemContent;
+        private System.Windows.Forms.TextBox enterMemAdd;
+        private System.Windows.Forms.Button updateMem;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.VScrollBar vScrollBar1;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.VScrollBar memScroll;
+        private System.Windows.Forms.Label carryLabel;
+        private System.Windows.Forms.Label overflowLabel;
+        private System.Windows.Forms.Label zeroLabel;
+        private System.Windows.Forms.Label negativeLabel;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.Label memAddLabel;
+        private System.Windows.Forms.TextBox dispMemContent;
+        private System.Windows.Forms.Label memContLabel;
+        private System.Windows.Forms.TextBox dispMemAdd;
         private System.Windows.Forms.VScrollBar vScrollBar2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TextBox opCodes;
     }
 }
 

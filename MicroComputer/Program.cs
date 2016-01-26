@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace MicroComputer
 {
-    static class Program
+    static class CPU
     {
         /// <summary>
         /// The main entry point for the application.
@@ -17,8 +17,13 @@ namespace MicroComputer
             public static int _PC = 0;
             public static int _AC = 0;
             public static byte _IR = 00000000;
+            public static bool _CARRY = false;
+            public static bool _OVERFLOW = false;
+            public static bool _NEGATIVE = false;
+            public static bool _ZERO = false;
             public static int _DATA_BUS = 0;
-            public static List<int> _MEMORY = new List<int>();
+            public static int[] _MEMORY = new int[255];
+            public static string[] _PROGRAM_TOKENS=null;
             public static int[] _PROGRAM_ARRAY = new int[255];
         }
 
@@ -36,6 +41,8 @@ namespace MicroComputer
                 return ac;
             }
         }
+
+        
 
         [STAThread]
         static void Main()
