@@ -37,23 +37,27 @@ namespace MicroComputer
         {
             public int LDA_IMMEDIATE(int ac, int db) //Loads whatever is on the databus to the accumulator
             {
+                Globals._PC++;
                 ac = db;
                 return ac;
             }
 
             public int LDA_DIRECT(int ac, int db) //Loads from memory location (on the databus) to accumulator
             {
+                Globals._PC++;
                 ac = Globals._MEMORY[db];
                 return ac;
             }
 
             public void STA_DIRECT(int ac, int db)//Stores what is in the accumulator to memory location (on the databus)
             {
+                Globals._PC++;
                 Globals._MEMORY[db] = ac;
             }
 
-            public int ADD_IMMEDIATE(int ac, int db)
+            public int ADD_IMMEDIATE(int ac, int db)//
             {
+                Globals._PC++;
                 ac = ac + db;
 
                 if (ac > 255)
@@ -78,6 +82,7 @@ namespace MicroComputer
 
             public int ADDC_IMMEDIATE(int ac, int db)
             {
+                Globals._PC++;
                 ac = ac + db + 1;
 
                 if (ac > 255)
@@ -90,6 +95,7 @@ namespace MicroComputer
 
             public int ADDC_DIRECT(int ac, int db)
             {
+                Globals._PC++;
                 ac = Globals._MEMORY[db] + ac + 1;
 
                 if (ac > 255)
@@ -114,6 +120,7 @@ namespace MicroComputer
 
             public int SUB_DIRECT(int ac, int db)
             {
+                Globals._PC++;
                 ac = Globals._MEMORY[db] - ac;
 
                 if (ac < -255)
@@ -126,6 +133,7 @@ namespace MicroComputer
 
             public int SUBC_IMMEDIATE(int ac, int db)
             {
+                Globals._PC++;
                 ac = ac + db + 1;
 
                 if (ac < -255)
@@ -138,6 +146,7 @@ namespace MicroComputer
 
             public int SUBC_DIRECT(int ac, int db)
             {
+                Globals._PC++;
                 ac = Globals._MEMORY[db] + ac + 1;
 
                 if (ac < -255)
@@ -160,6 +169,7 @@ namespace MicroComputer
 
             public int DEC_INHERENT(int ac)
             {
+                Globals._PC++;
                 ac = ac - 1;
 
                 if (ac < -255)
@@ -171,43 +181,62 @@ namespace MicroComputer
 
             public int AND_DIRECT(int ac, int db)
             {
+                Globals._PC++;
                 return (ac & db);
             }
 
             public int AND_IMMEDIATE(int ac, int db)
             {
+                Globals._PC++;
                 return (ac & Globals._MEMORY[db]);
             }
 
             public int OR_DIRECT(int ac, int db)
             {
+                Globals._PC++;
                 return (ac | db);
             }
 
             public int OR_IMMEDIATE(int ac, int db)
             {
+                Globals._PC++;
                 return (ac | Globals._MEMORY[db]);
             }
 
             public int XOR_DIRECT(int ac, int db)
             {
+                Globals._PC++;
                 return (ac ^ db);
             }
 
             public int XOR_IMMEDIATE(int ac, int db)
             {
+                Globals._PC++;
                 return (ac ^ Globals._MEMORY[db]);
             }
 
             public int INV_INHERENT(int ac)
             {
+                Globals._PC++;
                 return (~ac); //Returns bitwise complement
             }
 
             public int CLRA_INHERENT(int ac)
             {
+                Globals._PC++;
                 ac = 0;
                 return (ac);
+            }
+
+            public void JMP_DIRECT(int db)
+            {
+                Globals._PC = db;
+            }
+
+            public void JMP_IMMEDIATE(int db)
+            {
+                Globals._PC = Globals._MEMORY[db];
+
             }
 
         }
