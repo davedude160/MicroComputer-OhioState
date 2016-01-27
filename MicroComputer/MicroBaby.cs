@@ -33,14 +33,24 @@ namespace MicroComputer
 
         private void loadProgram_Click(object sender, EventArgs e)
         {
-            char[] delimiterChars = { ' ', ',', '.', ';', ':', '\t' };
+            
             string[] tempArray = programEditor.Lines;
+            tokenize(tempArray);
+            convertToOpCode(); 
 
+            //output opcodes to opCodes textbox 
+
+
+        }
+         
+        public static void tokenize(String [] program)
+        {
+            char[] delimiterChars = { ' ', ',', '.', ';', ':', '\t' };
             String hold = "";
 
-            for (int counter = 0; counter < tempArray.Length; counter++)
+            for (int counter = 0; counter < program.Length; counter++)
             {
-                hold += tempArray[counter];
+                hold += program[counter];
 
             }
 
@@ -62,22 +72,11 @@ namespace MicroComputer
                 System.Console.WriteLine(s);
 
             }
-
-
-
-        }
-         
-        public static void tokenize(object programEditor)
-        {
-            
         }
         public static void convertToOpCode()
         {
-<<<<<<< HEAD
-            
-           
-        }
-=======
+ 
+ 
             // go through program
             for (int i = 0; i < CPU.Globals._PROGRAM_ARRAY.Length; i++)
             {
@@ -110,7 +109,7 @@ namespace MicroComputer
 
             }
             }
->>>>>>> origin/master
+ 
 
         private void updateMem_Click(object sender, EventArgs e)
         {
