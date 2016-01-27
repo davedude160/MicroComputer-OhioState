@@ -23,10 +23,14 @@ namespace MicroComputer
             public static bool _ZERO = false;
             public static int _DATA_BUS = 0;
             public static int[] _MEMORY = new int[255];
-            public static string[] _INSTR = 
-                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA", "CMP", "JMP" };
-            public static string[] _PROGRAM_TOKENS=null;
+            public static string[] _INSTR =
+                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA","CLRC","CSET", "CMP", "JMP" };
+            public static string[] _OPCODE =
+                { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", "01011110", "01011000", "01010110", "01001111","01000000","01001000", "01001010", "11000000" };
+
+            public static string[] _PROGRAM_TOKENS = null;
             public static int[] _PROGRAM_ARRAY = new int[255];
+            public static int[] _OPCODE_ARRAY = new int[255];
         }
 
         public class Instructions
@@ -52,7 +56,7 @@ namespace MicroComputer
             {
                 ac = ac + db;
 
-                if(ac > 255)
+                if (ac > 255)
                 {
                     return -1; //Overflow has occured
                 }
@@ -216,16 +220,14 @@ namespace MicroComputer
             }
         }
 
-        
-
-        [STAThread]
-        static void Main()
-        {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MicroBaby());
+            [STAThread]
+            static void Main()
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MicroBaby());
 
         }
 
     }
-}
+    }
