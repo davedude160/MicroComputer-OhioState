@@ -33,37 +33,47 @@ namespace MicroComputer
 
         private void loadProgram_Click(object sender, EventArgs e)
         {
-
             char[] delimiterChars = { ' ', ',', '.', ';', ':', '\t' };
             string[] tempArray = programEditor.Lines;
 
-            String hold=""; 
+            String hold = "";
 
-            for (int counter=0; counter < tempArray.Length; counter++)
+            for (int counter = 0; counter < tempArray.Length; counter++)
             {
-                hold +=tempArray[counter]; 
+                hold += tempArray[counter];
 
             }
 
-            String[] tokens= hold.Split(delimiterChars, System.StringSplitOptions.RemoveEmptyEntries);
-            CPU.Globals._PROGRAM_TOKENS = new string[tokens.Length]; 
+            String[] tempArray2 = hold.Split(delimiterChars, System.StringSplitOptions.RemoveEmptyEntries);
 
-             
-            for (int i = 0; i < tokens.Length; i++)
+
+
+            for (int i = 0; i < tempArray2.Length; i++)
             {
-                 String temp =tokens[i];
-                 CPU.Globals._PROGRAM_TOKENS[i] = temp.ToUpper();
+                String temp = tempArray2[i];
+
+                CPU.Globals._PROGRAM_TOKENS.Add(temp.ToUpper());
 
             }
-            
-            
-             
+
+            foreach (String s in CPU.Globals._PROGRAM_TOKENS)
+            {
+
+                System.Console.WriteLine(s);
+
+            }
+
+
+
         }
          
-
+        public static void tokenize(object programEditor)
+        {
+            
+        }
         public static void convertToOpCode()
         {
-
+            
            
         }
 
