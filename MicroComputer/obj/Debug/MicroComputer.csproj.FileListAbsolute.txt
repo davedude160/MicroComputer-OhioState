@@ -23,3 +23,12 @@ C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj
 C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.Properties.Resources.resources
 C:\Users\Nati Tesfaye\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.csproj.GenerateResource.Cache
 >>>>>>> refs/remotes/origin/MicroComputerUpdateed
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\bin\Debug\MicroComputer.exe.config
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\bin\Debug\MicroComputer.exe
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\bin\Debug\MicroComputer.pdb
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.csprojResolveAssemblyReference.cache
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.MicroBaby.resources
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.Properties.Resources.resources
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.csproj.GenerateResource.Cache
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.exe
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.pdb
