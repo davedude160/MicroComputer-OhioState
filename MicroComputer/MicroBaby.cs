@@ -23,6 +23,7 @@ namespace MicroComputer
        
         private void runProgram_Click(object sender, EventArgs e)
         {
+ 
             while (!CPU.Globals._PROGRAM_ARRAY.Equals(null)) {
 
                 CPU.Globals._IR = (byte) CPU.Globals._PROGRAM_ARRAY[CPU.Globals._PC]; 
@@ -40,12 +41,25 @@ namespace MicroComputer
                     break;
             }
             }
+ 
+            dispPC.Text = CPU.Globals._PC.ToString();
+ 
 
         }
 
         private void runStep_Click(object sender, EventArgs e)
         {
-
+            int i = 0;
+            if (CPU.Globals._OPCODE_ARRAY.Count == 0) 
+            {
+                dispIR.Text = "Please load program first.";
+            }
+            else {
+                dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._COUNT];
+                CPU.Globals._COUNT++;
+                dispPC.Text = CPU.Globals._PC.ToString();
+                CPU.Globals._PC++;
+            }
         }
 
         private void loadProgram_Click(object sender, EventArgs e)
@@ -66,6 +80,7 @@ namespace MicroComputer
             }
             
             opCodes.Text = opcodestring;
+            
             /*
             input load in text
             Add #$13;
@@ -176,6 +191,46 @@ output:
         }
 
         private void memScroll_Scroll(object sender, ScrollEventArgs e)
+        {
+
+        }
+
+        private void dispPC_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void dispIR_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dispAC_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Sim_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dispDataBus_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dispMemAdd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dispMemContent_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void programEditor_TextChanged(object sender, EventArgs e)
         {
 
         }
