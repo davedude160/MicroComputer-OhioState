@@ -45,11 +45,12 @@ namespace MicroComputer
 
         private void loadProgram_Click(object sender, EventArgs e)
         {
-            
+            opCodes.Clear();
+            //CPU.Globals._OPCODE_ARRAY.Clear();
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
             convertToOpCode();
-
+        
             //output opcodes to opCodes textbox 
             string opcodestring="";
 
