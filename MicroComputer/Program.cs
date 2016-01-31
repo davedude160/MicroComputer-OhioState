@@ -16,7 +16,7 @@ namespace MicroComputer
         {
             public static int _PC = 0;
             public static int _AC = 0;
-            public static byte _IR = 00000000;
+            public static int _IR = 00000000;
             public static bool _CARRY = false;
             public static bool _OVERFLOW = false;
             public static bool _NEGATIVE = false;
@@ -37,27 +37,27 @@ namespace MicroComputer
 
         public class Instructions
         {
-            public int LDA_IMMEDIATE(int ac, int db) //Loads whatever is on the databus to the accumulator
+            public static int LDA_IMMEDIATE(int ac, int db) //Loads whatever is on the databus to the accumulator
             {
                 Globals._PC++;
                 ac = db;
                 return ac;
             }
 
-            public int LDA_DIRECT(int ac, int db) //Loads from memory location (on the databus) to accumulator
+            public static int LDA_DIRECT(int ac, int db) //Loads from memory location (on the databus) to accumulator
             {
                 Globals._PC++;
                 ac = Globals._MEMORY[db];
                 return ac;
             }
 
-            public void STA_DIRECT(int ac, int db)//Stores what is in the accumulator to memory location (on the databus)
+            public static void STA_DIRECT(int ac, int db)//Stores what is in the accumulator to memory location (on the databus)
             {
                 Globals._PC++;
                 Globals._MEMORY[db] = ac;
             }
 
-            public int ADD_IMMEDIATE(int ac, int db)//
+            public static int ADD_IMMEDIATE(int ac, int db)//
             {
                 Globals._PC++;
                 ac = ac + db;
@@ -70,7 +70,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int ADD_DIRECT(int ac, int db)
+            public static int ADD_DIRECT(int ac, int db)
             {
                 ac = Globals._MEMORY[db] + ac;
 
@@ -82,7 +82,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int ADDC_IMMEDIATE(int ac, int db)
+            public static int ADDC_IMMEDIATE(int ac, int db)
             {
                 Globals._PC++;
                 ac = ac + db + 1;
@@ -95,7 +95,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int ADDC_DIRECT(int ac, int db)
+            public static int ADDC_DIRECT(int ac, int db)
             {
                 Globals._PC++;
                 ac = Globals._MEMORY[db] + ac + 1;
@@ -108,7 +108,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int SUB_IMMEDIATE(int ac, int db)
+            public static int SUB_IMMEDIATE(int ac, int db)
             {
                 ac = ac - db;
 
@@ -120,7 +120,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int SUB_DIRECT(int ac, int db)
+            public static int SUB_DIRECT(int ac, int db)
             {
                 Globals._PC++;
                 ac = Globals._MEMORY[db] - ac;
@@ -133,7 +133,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int SUBC_IMMEDIATE(int ac, int db)
+            public static int SUBC_IMMEDIATE(int ac, int db)
             {
                 Globals._PC++;
                 ac = ac + db + 1;
@@ -146,7 +146,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int SUBC_DIRECT(int ac, int db)
+            public static int SUBC_DIRECT(int ac, int db)
             {
                 Globals._PC++;
                 ac = Globals._MEMORY[db] + ac + 1;
@@ -159,7 +159,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int INC_INHERENT(int ac)
+            public static int INC_INHERENT(int ac)
             {
                 ac = ac + 1;
                 if (ac > 255)
@@ -169,7 +169,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int DEC_INHERENT(int ac)
+            public static int DEC_INHERENT(int ac)
             {
                 Globals._PC++;
                 ac = ac - 1;
@@ -181,7 +181,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int AND_DIRECT(int ac, int db)
+            public static int AND_DIRECT(int ac, int db)
             {
                 Globals._PC++;
                 return (ac & db);
@@ -193,49 +193,49 @@ namespace MicroComputer
                 return (ac & Globals._MEMORY[db]);
             }
 
-            public int OR_DIRECT(int ac, int db)
+            public static int OR_DIRECT(int ac, int db)
             {
                 Globals._PC++;
                 return (ac | db);
             }
 
-            public int OR_IMMEDIATE(int ac, int db)
+            public static int OR_IMMEDIATE(int ac, int db)
             {
                 Globals._PC++;
                 return (ac | Globals._MEMORY[db]);
             }
 
-            public int XOR_DIRECT(int ac, int db)
+            public static int XOR_DIRECT(int ac, int db)
             {
                 Globals._PC++;
                 return (ac ^ db);
             }
 
-            public int XOR_IMMEDIATE(int ac, int db)
+            public static int XOR_IMMEDIATE(int ac, int db)
             {
                 Globals._PC++;
                 return (ac ^ Globals._MEMORY[db]);
             }
 
-            public int INV_INHERENT(int ac)
+            public static int INV_INHERENT(int ac)
             {
                 Globals._PC++;
                 return (~ac); //Returns bitwise complement
             }
 
-            public int CLRA_INHERENT(int ac)
+            public static int CLRA_INHERENT(int ac)
             {
                 Globals._PC++;
                 ac = 0;
                 return (ac);
             }
 
-            public void JMP_DIRECT(int db)
+            public static void JMP_DIRECT(int db)
             {
                 Globals._PC = db;
             }
 
-            public void JMP_IMMEDIATE(int db)
+            public static void JMP_IMMEDIATE(int db)
             {
                 Globals._PC = Globals._MEMORY[db];
 
@@ -245,7 +245,7 @@ namespace MicroComputer
 
         public class IntegerToBinaryConverter
         {
-            public string converter(int toBeConverted)
+            public static string converter(int toBeConverted)
             {
                 return (Convert.ToString(toBeConverted, 2));
             }
@@ -257,6 +257,7 @@ namespace MicroComputer
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new MicroBaby());
+
 
              
 

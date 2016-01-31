@@ -23,6 +23,23 @@ namespace MicroComputer
        
         private void runProgram_Click(object sender, EventArgs e)
         {
+            while (!CPU.Globals._PROGRAM_ARRAY.Equals(null)) {
+
+                CPU.Globals._IR = (byte) CPU.Globals._PROGRAM_ARRAY[CPU.Globals._PC]; 
+
+            switch (CPU.Globals._IR)
+            {
+                case  :
+                     
+                    break;
+                case :
+                     
+                    break;
+                default:
+                   
+                    break;
+            }
+            }
 
         }
 
@@ -36,8 +53,10 @@ namespace MicroComputer
             
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
-            convertToOpCode(); 
+            convertToOpCode();
 
+            string hold = CPU.Globals._OPCODE_ARRAY[0].ToString(); 
+            opCodes.Text=hold; 
             //output opcodes to opCodes textbox 
 
 
