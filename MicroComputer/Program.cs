@@ -30,14 +30,14 @@ namespace MicroComputer
             public static bool _NEGATIVE = false;
             public static bool _ZERO = false;
             public static byte _DATA_BUS = 0;
-            public static byte[] _MEMORY = new byte[255];
+            public static sbyte[] _MEMORY = new sbyte[255];
             public static string[] _INSTR =
                 { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA","CLRC","CSET", "CMP", "JMP" };
             public static string[] _OPCODE =
                 { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", "01011110", "01011000", "01010110", "01001111","01000000","01001000", "01001010", "11000000" };
 
             public static List<String> _PROGRAM_TOKENS = new List<String>();
-            public static List<String> _OPCODE_ARRAY;
+            public static List<String> _OPCODE_ARRAY= new List<String>();
 
 
             public static byte[] _PROGRAM_ARRAY = new byte[255];
@@ -69,7 +69,7 @@ namespace MicroComputer
  
             {
                 Globals._PC++;
-                Globals._MEMORY[db] = Convert.ToByte(ac);
+                Globals._MEMORY[db] = Convert.ToSByte(ac);
             }
  
             public sbyte ADD_IMMEDIATE(sbyte ac, sbyte db)//
@@ -258,7 +258,7 @@ namespace MicroComputer
             public void JMP_DIRECT(byte db)
  
             {
-                Globals._PC = Globals._MEMORY[db];
+                Globals._PC = (byte) Globals._MEMORY[db];
 
             }
 

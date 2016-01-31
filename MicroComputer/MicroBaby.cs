@@ -28,18 +28,7 @@ namespace MicroComputer
 
                 CPU.Globals._IR = (byte) CPU.Globals._PROGRAM_ARRAY[CPU.Globals._PC]; 
 
-            switch (CPU.Globals._IR)
-            {
-                case  :
-                     
-                    break;
-                case :
-                     
-                    break;
-                default:
-                   
-                    break;
-            }
+          
             }
  
             dispPC.Text = CPU.Globals._PC.ToString();
@@ -49,8 +38,8 @@ namespace MicroComputer
 
         private void runStep_Click(object sender, EventArgs e)
         {
-            int i = 0;
-            if (CPU.Globals._OPCODE_ARRAY.Count == 0) 
+            
+            if (CPU.Globals._OPCODE_ARRAY.Count == 0 || CPU.Globals._PC >= CPU.Globals._OPCODE_ARRAY.Count) 
             {
                 dispIR.Text = "Please load program first.";
             }
@@ -60,27 +49,35 @@ namespace MicroComputer
                 dispPC.Text = CPU.Globals._PC.ToString();
                 CPU.Globals._PC++;
             }
+
+
         }
 
         private void loadProgram_Click(object sender, EventArgs e)
         {
-            
+            opCodes.Clear();
+            CPU.Globals._PROGRAM_TOKENS.Clear();
+            CPU.Globals._OPCODE_ARRAY.Clear();
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
             convertToOpCode();
+          
+            if (CPU.Globals._OPCODE_ARRAY.Count > 0)
+            {
 
-            string hold = CPU.Globals._OPCODE_ARRAY[0].ToString(); 
-            opCodes.Text=hold; 
+                string hold = CPU.Globals._OPCODE_ARRAY[0].ToString();
+            opCodes.Text = hold;
             //output opcodes to opCodes textbox 
-            string opcodestring="";
+            string opcodestring = "";
 
-            foreach( string s in CPU.Globals._OPCODE_ARRAY){
+            foreach (string s in CPU.Globals._OPCODE_ARRAY) {
                 opcodestring += s + System.Environment.NewLine;
-                
+
             }
-            
+
             opCodes.Text = opcodestring;
-            
+            }
+
             /*
             input load in text
             Add #$13;
@@ -130,12 +127,7 @@ output:
 
             }
 
-            foreach (String s in CPU.Globals._PROGRAM_TOKENS)
-            {
-
-                System.Console.WriteLine(s);
-
-            }
+          
 
 
         }
@@ -187,13 +179,15 @@ output:
 
         private void updateMem_Click(object sender, EventArgs e)
         {
+            sbyte memAdd = (sbyte) Int32.Parse(enterMemAdd.SelectedItem.ToString());
+            sbyte memValue = (sbyte) Int32.Parse(enterMemContent.Text.ToString());
 
+            System.Console.WriteLine("Mem Address: " + memAdd);
+            System.Console.WriteLine("Mem Content: " + memValue);
+            CPU.Globals._MEMORY[memAdd] = memValue;
         }
 
-        private void memScroll_Scroll(object sender, ScrollEventArgs e)
-        {
-
-        }
+       
 
         private void dispPC_TextChanged(object sender, EventArgs e)
         {
@@ -234,5 +228,12 @@ output:
         {
 
         }
+
+        private void enterMemAdd_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        
     }
 }
