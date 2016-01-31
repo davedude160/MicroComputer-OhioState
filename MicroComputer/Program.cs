@@ -28,9 +28,11 @@ namespace MicroComputer
             public static string[] _OPCODE =
                 { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", "01011110", "01011000", "01010110", "01001111","01000000","01001000", "01001010", "11000000" };
 
-            public static string[] _PROGRAM_TOKENS = null;
+            public static List<String> _PROGRAM_TOKENS = new List<String>();
+            public static List<String> _OPCODE_ARRAY;
+
+
             public static byte[] _PROGRAM_ARRAY = new byte[255];
-            public static byte[] _OPCODE_ARRAY = new byte[255];
         }
 
         public class Instructions
