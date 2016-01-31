@@ -14,6 +14,7 @@ namespace MicroComputer
 
         public static class Globals
         {
+            public static byte _COUNT = 0;
             public static byte _PC = 0;
             public static sbyte _AC = 0;
             public static byte _IR = 0;
@@ -37,7 +38,7 @@ namespace MicroComputer
 
         public class Instructions
         {
-            public sbyte LDA_IMMEDIATE(sbyte ac, sbyte db) //Loads whatever is on the databus to the accumulator
+            public static sbyte LDA_IMMEDIATE(sbyte ac, sbyte db) //Loads whatever is on the databus to the accumulator
             {
                 Globals._PC++;
                 ac = db;
@@ -74,7 +75,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte ADDC_IMMEDIATE(sbyte ac, sbyte db)
+            public static sbyte ADDC_IMMEDIATE(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 int temp = ac + db + 1;
@@ -84,7 +85,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte ADDC_DIRECT(sbyte ac, sbyte db)
+            public static sbyte ADDC_DIRECT(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 int temp = Globals._MEMORY[db] + ac + 1;
