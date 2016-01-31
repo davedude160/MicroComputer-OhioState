@@ -55,6 +55,8 @@ namespace MicroComputer
             INV;
             Add #$13;
             Add $13;
+            jmp #$23;
+            jNC #$02;    
 
 output:
 01000010
