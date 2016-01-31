@@ -69,10 +69,10 @@ namespace MicroComputer
             opCodes.Text = hold;
             //output opcodes to opCodes textbox 
             string opcodestring = "";
-
+                int i = 0;
             foreach (string s in CPU.Globals._OPCODE_ARRAY) {
-                opcodestring += s + System.Environment.NewLine;
-
+                opcodestring += i.ToString("X2")+"   "+ s + System.Environment.NewLine;
+                    i++;
             }
 
             opCodes.Text = opcodestring;
