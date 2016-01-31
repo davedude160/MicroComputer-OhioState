@@ -121,7 +121,7 @@ output:
                     CPU.Globals._OPCODE_ARRAY.Add(inst);
                     
                     //inherent ignores 2nd byte
-                    if (j != 6 && j != 7 && j!= 10) {
+                    if (j != 6 && j != 7 && j!= 10 & j != 12 &j != 13 &j !=14) {
 
                 //read direct or immediate
                 String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
