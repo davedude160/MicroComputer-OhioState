@@ -29,7 +29,7 @@ namespace MicroComputer
 
         private void runStep_Click(object sender, EventArgs e)
         {
-            int i = 0;
+        
             if (CPU.Globals._OPCODE_ARRAY.Count == 0) 
             {
                 dispIR.Text = "Please load program first.";
@@ -39,6 +39,7 @@ namespace MicroComputer
                 CPU.Globals._COUNT++;
                 dispPC.Text = CPU.Globals._PC.ToString();
                 CPU.Globals._PC++;
+                dispAC.Text = CPU.Globals._AC.ToString();
             }
         }
 

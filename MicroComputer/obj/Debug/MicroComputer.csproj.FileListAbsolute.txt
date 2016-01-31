@@ -6,3 +6,4 @@ C:\Users\david\Source\Repos\MicroComputer\MicroComputer\obj\Debug\MicroComputer.
 C:\Users\david\Source\Repos\MicroComputer\MicroComputer\obj\Debug\MicroComputer.csproj.GenerateResource.Cache
 C:\Users\david\Source\Repos\MicroComputer\MicroComputer\obj\Debug\MicroComputer.exe
 C:\Users\david\Source\Repos\MicroComputer\MicroComputer\obj\Debug\MicroComputer.pdb
+C:\Users\david\Source\Repos\MicroComputer\MicroComputer\obj\Debug\MicroComputer.csprojResolveAssemblyReference.cache

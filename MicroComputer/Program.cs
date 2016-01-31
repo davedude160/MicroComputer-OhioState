@@ -45,20 +45,20 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte LDA_DIRECT(sbyte ac, sbyte db) //Loads from memory location (on the databus) to accumulator
+            public static sbyte LDA_DIRECT(sbyte ac, sbyte db) //Loads from memory location (on the databus) to accumulator
             {
                 Globals._PC++;
                 ac = Convert.ToSByte(Globals._MEMORY[db]);
                 return ac;
             }
 
-            public void STA_DIRECT(sbyte ac, sbyte db)//Stores what is in the accumulator to memory location (on the databus)
+            public static void STA_DIRECT(sbyte ac, sbyte db)//Stores what is in the accumulator to memory location (on the databus)
             {
                 Globals._PC++;
                 Globals._MEMORY[db] = Convert.ToByte(ac);
             }
 
-            public sbyte ADD_IMMEDIATE(sbyte ac, sbyte db)//
+            public static sbyte ADD_IMMEDIATE(sbyte ac, sbyte db)//
             {
                 Globals._PC++;
                 int temp = ac + db;
@@ -67,7 +67,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte ADD_DIRECT(sbyte ac, sbyte db)
+            public static sbyte ADD_DIRECT(sbyte ac, sbyte db)
             {
                 int temp = Globals._MEMORY[db] + ac;
                 ac = Convert.ToSByte(temp);
@@ -94,7 +94,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte SUB_IMMEDIATE(sbyte ac, sbyte db)
+            public static sbyte SUB_IMMEDIATE(sbyte ac, sbyte db)
             {
                 int temp = ac - db;
                 ac = Convert.ToSByte(temp);
@@ -102,7 +102,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public int SUB_DIRECT(sbyte ac, sbyte db)
+            public static int SUB_DIRECT(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 int temp = Globals._MEMORY[db] - ac;
@@ -111,7 +111,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte SUBC_IMMEDIATE(sbyte ac, sbyte db)
+            public static sbyte SUBC_IMMEDIATE(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 int temp = ac + db + 1;
@@ -121,7 +121,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte SUBC_DIRECT(sbyte ac, sbyte db)
+            public static sbyte SUBC_DIRECT(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 int temp = Globals._MEMORY[db] + ac + 1;
@@ -130,14 +130,14 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte INC_INHERENT(sbyte ac)
+            public static sbyte INC_INHERENT(sbyte ac)
             {
                 int temp = ac + 1;
                 ac = Convert.ToSByte(temp);
                 return ac;
             }
 
-            public sbyte DEC_INHERENT(sbyte ac)
+            public static sbyte DEC_INHERENT(sbyte ac)
             {
                 Globals._PC++;
                 int temp = ac - 1;
@@ -146,19 +146,19 @@ namespace MicroComputer
                 return ac;
             }
 
-            public sbyte AND_DIRECT(sbyte ac, sbyte db)
+            public static sbyte AND_DIRECT(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 return (Convert.ToSByte(ac & db));
             }
 
-            public sbyte AND_IMMEDIATE(sbyte ac, sbyte db)
+            public static sbyte AND_IMMEDIATE(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 return (Convert.ToSByte(ac & Globals._MEMORY[db]));
             }
 
-            public sbyte OR_DIRECT(sbyte ac, sbyte db)
+            public static sbyte OR_DIRECT(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 return (Convert.ToSByte(ac | db));
@@ -170,25 +170,25 @@ namespace MicroComputer
                 return (Convert.ToSByte(ac | Globals._MEMORY[db]));
             }
 
-            public sbyte XOR_DIRECT(sbyte ac, sbyte db)
+            public static sbyte XOR_DIRECT(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 return (Convert.ToSByte(ac ^ db));
             }
 
-            public sbyte XOR_IMMEDIATE(int ac, int db)
+            public static sbyte XOR_IMMEDIATE(int ac, int db)
             {
                 Globals._PC++;
                 return (Convert.ToSByte(ac ^ Globals._MEMORY[db]));
             }
 
-            public sbyte INV_INHERENT(sbyte ac)
+            public static sbyte INV_INHERENT(sbyte ac)
             {
                 Globals._PC++;
                 return (Convert.ToSByte(~ac)); //Returns bitwise complement
             }
 
-            public sbyte CLRA_INHERENT(sbyte ac)
+            public static sbyte CLRA_INHERENT(sbyte ac)
             {
                 Globals._PC++;
                 ac = 0;
@@ -200,7 +200,7 @@ namespace MicroComputer
             //    Globals._PC = db;
             //}
 
-            public void JMP_DIRECT(byte db)
+            public static void JMP_DIRECT(byte db)
             {
                 Globals._PC = Globals._MEMORY[db];
 
@@ -240,6 +240,33 @@ namespace MicroComputer
                 return (bin);
             }
 
+        }
+
+        public static class InstructionHandler
+        {
+            public static void Handler(string opcode)
+            {
+                if (opcode == "10000010")
+                {
+                    Globals._AC = CPU.Instructions.LDA_IMMEDIATE(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "10000010")
+                {
+                    Globals._AC = CPU.Instructions.LDA_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "10100010")
+                {
+                    CPU.Instructions.STA_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+               
+        
+                    //case:
+                       
+                    //    break;
+                    //case "10000001":
+                    //    Globals._AC = CPU.Instructions.LDA_DIRECT(Globals._AC, Convert.ToSByte(Globals._DATA_BUS));
+                
+            }
         }
 
 
