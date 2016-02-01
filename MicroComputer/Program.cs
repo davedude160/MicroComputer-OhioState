@@ -102,7 +102,7 @@ namespace MicroComputer
                 return ac;
             }
 
-            public static int SUB_DIRECT(sbyte ac, sbyte db)
+            public static sbyte SUB_DIRECT(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 int temp = Globals._MEMORY[db] - ac;
@@ -164,7 +164,7 @@ namespace MicroComputer
                 return (Convert.ToSByte(ac | db));
             }
 
-            public sbyte OR_IMMEDIATE(sbyte ac, sbyte db)
+            public static sbyte OR_IMMEDIATE(sbyte ac, sbyte db)
             {
                 Globals._PC++;
                 return (Convert.ToSByte(ac | Globals._MEMORY[db]));
@@ -257,15 +257,88 @@ namespace MicroComputer
                 else if (opcode == "10100010")
                 {
                     CPU.Instructions.STA_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }else if (opcode == "01000010")
+                {
+                    Globals._AC = CPU.Instructions.ADD_IMMEDIATE(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
                 }
-               
-        
-                    //case:
-                       
-                    //    break;
-                    //case "10000001":
-                    //    Globals._AC = CPU.Instructions.LDA_DIRECT(Globals._AC, Convert.ToSByte(Globals._DATA_BUS));
-                
+                else if (opcode == "01000001")
+                {
+                    Globals._AC = CPU.Instructions.ADD_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01001010")
+                {
+                    Globals._AC = CPU.Instructions.ADDC_IMMEDIATE(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01001001")
+                {
+                    Globals._AC = CPU.Instructions.ADDC_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01000010")
+                {
+                    Globals._AC = CPU.Instructions.SUB_IMMEDIATE(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01000001")
+                {
+                    Globals._AC = CPU.Instructions.SUB_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }else if (opcode == "01011010")
+                {
+                    Globals._AC = CPU.Instructions.SUBC_IMMEDIATE(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01011001")
+                {
+                    Globals._AC = CPU.Instructions.SUBC_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01001100")
+                {
+                    Globals._AC = CPU.Instructions.INC_INHERENT(CPU.Globals._AC);
+                }
+                else if (opcode == "01001100")
+                {
+                    Globals._AC = CPU.Instructions.DEC_INHERENT(CPU.Globals._AC);
+                }
+                else if (opcode == "01011010")
+                {
+                    Globals._AC = CPU.Instructions.AND_IMMEDIATE(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01011001")
+                {
+                    Globals._AC = CPU.Instructions.AND_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01011110")
+                {
+                    Globals._AC = CPU.Instructions.OR_IMMEDIATE(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01011101")
+                {
+                    Globals._AC = CPU.Instructions.OR_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01011000")
+                {
+                    Globals._AC = CPU.Instructions.INV_INHERENT(CPU.Globals._AC);
+                }
+                else if (opcode == "01010110")
+                {
+                    Globals._AC = CPU.Instructions.XOR_IMMEDIATE(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01010101")
+                {
+                    Globals._AC = CPU.Instructions.XOR_DIRECT(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                }
+                else if (opcode == "01010110")
+                {
+                    Globals._AC = CPU.Instructions.CLRA_INHERENT(CPU.Globals._AC);
+                }
+
+                //case:
+
+                //    break;
+                //case "10000001": 
+                //     public static string[] _INSTR =
+                //    { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA","CLRC","CSET", "CMP", "JMP" };
+                //public static string[] _OPCODE =
+                //    { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", !"01011110", !"01011000", !"01010110", "01001111","01000000","01001000", "01001010", "11000000" };
+                //    Globals._AC = CPU.Instructions.LDA_DIRECT(Globals._AC, Convert.ToSByte(Globals._DATA_BUS));
+
             }
         }
 
