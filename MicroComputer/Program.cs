@@ -30,10 +30,46 @@ namespace MicroComputer
 
             public static List<String> _PROGRAM_TOKENS = new List<String>();
             public static List<String> _OPCODE_ARRAY= new List<String>();
-
-
+            public static List<Instr> _INSTRUCTION_ARRAY = new List<Instr>();
+            
             public static byte[] _PROGRAM_ARRAY = new byte[255];
+
+            
+
         }
+
+
+       public class Instr
+        {
+            public string call;
+            public string opcode;
+            public string data;
+            public SByte dataopcode; 
+            public Boolean isJ;
+
+            public Instr()
+            {
+            }
+
+        }
+
+
+      public class Instr_ADD : Instr
+    {
+            
+           public Instr_ADD (){
+                call = "ADD";
+                opcode = "010000";
+                isJ = false;
+            }
+
+    }
+
+
+
+
+
+
 
         public class Instructions
         {

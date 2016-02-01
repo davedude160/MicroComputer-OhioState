@@ -44,10 +44,12 @@ namespace MicroComputer
                 dispIR.Text = "Please load program first.";
             }
             else {
+                /*
                 dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._COUNT];
                 CPU.Globals._COUNT++;
                 dispPC.Text = CPU.Globals._PC.ToString();
                 CPU.Globals._PC++;
+                */
             }
 
 
@@ -70,12 +72,26 @@ namespace MicroComputer
             //output opcodes to opCodes textbox 
             string opcodestring = "";
                 int i = 0;
-            foreach (string s in CPU.Globals._OPCODE_ARRAY) {
-                opcodestring += i.ToString("X2")+"   "+ s + System.Environment.NewLine;
-                    i++;
-            }
 
-            opCodes.Text = opcodestring;
+
+                foreach (CPU.Instr s in CPU.Globals._INSTRUCTION_ARRAY) {
+                opcodestring += i.ToString("X2")+"   "+ s.opcode + System.Environment.NewLine;
+                    i++;
+                opcodestring += i.ToString("X2") + "   " + s.dataopcode + System.Environment.NewLine;
+                    i++;
+
+                }
+
+                /*
+                                foreach (string s in CPU.Globals._OPCODE_ARRAY)
+                                {
+                                    opcodestring += i.ToString("X2") + "   " + s + System.Environment.NewLine;
+                                    i++;
+                                }
+
+                            */
+
+                opCodes.Text = opcodestring;
             }
 
             /*
@@ -133,7 +149,50 @@ output:
         }
         public static void convertToOpCode()
         {
+            for (int i = 0; i < CPU.Globals._PROGRAM_TOKENS.Count; i++)
+            {
+                int j = Array.IndexOf(CPU.Globals._INSTR, CPU.Globals._PROGRAM_TOKENS[i]);
+                CPU.Instr newInstr = new CPU.Instr();
+                switch (j)
+                {
+                    case 2:
+                        newInstr = new CPU.Instr_ADD();
+                        System.Console.WriteLine("create");
+                        break;
+                    default:
+                        break;
+                }
+                System.Console.WriteLine("1");
+                if (j >= 0)
+                {
+                    String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
+                    if (addrMode.First() == '#')
+                    {
+                        newInstr.opcode += "10";
+                        System.Console.WriteLine(newInstr.opcode);
+                        newInstr.dataopcode = sbyte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
+                        System.Console.WriteLine(newInstr.dataopcode);
 
+                    }
+                    else {
+                        newInstr.opcode += "01";
+                        System.Console.WriteLine(newInstr.opcode);
+
+                        newInstr.dataopcode = sbyte.Parse(addrMode.Substring(1), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
+                        System.Console.WriteLine(newInstr.dataopcode);
+
+                    }
+
+                }
+                CPU.Globals._INSTRUCTION_ARRAY.Add(newInstr);
+
+                i++;
+            }
+
+
+
+
+            /*
             CPU.Globals._OPCODE_ARRAY = new List<String>();
             // go through program
             for (int i = 0; i < CPU.Globals._PROGRAM_TOKENS.Count; i++)
@@ -174,8 +233,10 @@ output:
 
                 }
             }
-            }
- 
+            */
+
+        }
+
 
         private void updateMem_Click(object sender, EventArgs e)
         {
