@@ -328,6 +328,10 @@ namespace MicroComputer
                 {
                     Globals._AC = CPU.Instructions.CLRA_INHERENT(CPU.Globals._AC);
                 }
+                else if (opcode == "11000000")
+                {
+                    CPU.Instructions.JMP_DIRECT(CPU.Globals._DATA_BUS);
+                }
 
                 //case:
 
