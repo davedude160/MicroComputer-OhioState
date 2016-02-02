@@ -24,7 +24,7 @@ namespace MicroComputer
             public static byte _DATA_BUS = 0;
             public static sbyte[] _MEMORY = new sbyte[255];
             public static string[] _INSTR =
-                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA","CLRC","CSET", "CMP", "JMP","JC","JNC","JS","JNS","JZ","JNZ","JCS","JNCS","JCNS","JNCNS","JCZ","JNCZ","JCNZ","JNCNZ","JSZ","JNSZ","JSNZ","JNSNZ" };
+                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA", "CMP", "JMP","JC","JNC","JS","JNS","JZ","JNZ","JCS","JNCS","JCNS","JNCNS","JCZ","JNCZ","JCNZ","JNCNZ","JSZ","JNSZ","JSNZ","JNSNZ" };
             public static string[] _OPCODE =
                 { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", "01011110", "01011000", "01010110", "01001111","01000000","01001000", "01001010", "11000000","11100100","11100000","11010010","11010000","11001001","11001000","11110110","11110010","11110100","11110000","11101101","11101001","11101100","11101000","11011011","11011001","11011010","11011000" };
 
@@ -39,18 +39,21 @@ namespace MicroComputer
         }
 
 
-       public class Instr
+        public abstract class Instr
         {
             public string call;
             public string opcode;
             public string data;
-            public SByte dataopcode; 
-            public Boolean isJ;
+            public Byte dataopcode;
+            public Boolean isImmediate;
+            public Boolean isInherent;
+            public Boolean isJMP;
 
             public Instr()
             {
             }
-
+            public abstract sbyte operation(sbyte a, sbyte b);
+            
         }
 
 
@@ -60,18 +63,48 @@ namespace MicroComputer
            public Instr_ADD (){
                 call = "ADD";
                 opcode = "010000";
-                isJ = false;
+                isJMP = false;
+                isInherent = false;
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
             }
 
-    }
+
+        }
+
+        public class Instr_INC : Instr
+        {
+            public Instr_INC()
+            {
+                call = "INC";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+        }
+
+        public class Instr_JMP : Instr
+            {
+                public Instr_JMP()
+                {
+                    call = "JMP";
+                    opcode = "11000000";
+                    isJMP = true;
+                    isInherent = false; 
+
+                }
+
+
+
+            }
 
 
 
 
-
-
-
-        public class Instructions
+    public class Instructions
         {
             public sbyte LDA_IMMEDIATE(sbyte ac, sbyte db) //Loads whatever is on the databus to the accumulator
             {
