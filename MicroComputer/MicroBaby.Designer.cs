@@ -52,6 +52,7 @@
             this.pcLabel = new System.Windows.Forms.Label();
             this.Editor = new System.Windows.Forms.TabPage();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.enterMemAdd = new System.Windows.Forms.ComboBox();
             this.enterMemContent = new System.Windows.Forms.TextBox();
             this.updateMem = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.opCodes = new System.Windows.Forms.TextBox();
             this.Help = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
-            this.enterMemAdd = new System.Windows.Forms.ComboBox();
             this.EMULATOR.SuspendLayout();
             this.Sim.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -336,120 +336,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Memory Editor";
             // 
-            // enterMemContent
-            // 
-            this.enterMemContent.Location = new System.Drawing.Point(167, 50);
-            this.enterMemContent.Multiline = true;
-            this.enterMemContent.Name = "enterMemContent";
-            this.enterMemContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.enterMemContent.Size = new System.Drawing.Size(135, 23);
-            this.enterMemContent.TabIndex = 8;
-            // 
-            // updateMem
-            // 
-            this.updateMem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.updateMem.Location = new System.Drawing.Point(327, 50);
-            this.updateMem.Name = "updateMem";
-            this.updateMem.Size = new System.Drawing.Size(167, 48);
-            this.updateMem.TabIndex = 6;
-            this.updateMem.Text = "Update";
-            this.updateMem.UseVisualStyleBackColor = true;
-            this.updateMem.Click += new System.EventHandler(this.updateMem_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(164, 28);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(105, 16);
-            this.label8.TabIndex = 5;
-            this.label8.Text = "Memory Content";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(6, 28);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(111, 16);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Memory Address";
-            // 
-            // loadProgram
-            // 
-            this.loadProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loadProgram.Location = new System.Drawing.Point(348, 17);
-            this.loadProgram.Name = "loadProgram";
-            this.loadProgram.Size = new System.Drawing.Size(167, 48);
-            this.loadProgram.TabIndex = 1;
-            this.loadProgram.Text = "Load Program";
-            this.loadProgram.UseVisualStyleBackColor = true;
-            this.loadProgram.Click += new System.EventHandler(this.loadProgram_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.tableLayoutPanel1);
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(21, 71);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(494, 271);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Enter Code Below";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.programEditor, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.opCodes, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 20);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(479, 245);
-            this.tableLayoutPanel1.TabIndex = 3;
-            // 
-            // programEditor
-            // 
-            this.programEditor.Location = new System.Drawing.Point(3, 3);
-            this.programEditor.Multiline = true;
-            this.programEditor.Name = "programEditor";
-            this.programEditor.Size = new System.Drawing.Size(233, 239);
-            this.programEditor.TabIndex = 3;
-            this.programEditor.TextChanged += new System.EventHandler(this.programEditor_TextChanged);
-            // 
-            // opCodes
-            // 
-            this.opCodes.Location = new System.Drawing.Point(242, 3);
-            this.opCodes.Multiline = true;
-            this.opCodes.Name = "opCodes";
-            this.opCodes.ReadOnly = true;
-            this.opCodes.Size = new System.Drawing.Size(234, 239);
-            this.opCodes.TabIndex = 4;
-            // 
-            // Help
-            // 
-            this.Help.Controls.Add(this.label6);
-            this.Help.Location = new System.Drawing.Point(4, 22);
-            this.Help.Name = "Help";
-            this.Help.Padding = new System.Windows.Forms.Padding(3);
-            this.Help.Size = new System.Drawing.Size(544, 474);
-            this.Help.TabIndex = 2;
-            this.Help.Text = "Help";
-            this.Help.UseVisualStyleBackColor = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(24, 40);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(304, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "This tab will contain the instructions on operating the Emulator. ";
-            // 
             // enterMemAdd
             // 
             this.enterMemAdd.FormattingEnabled = true;
@@ -714,6 +600,120 @@
             this.enterMemAdd.Name = "enterMemAdd";
             this.enterMemAdd.Size = new System.Drawing.Size(135, 23);
             this.enterMemAdd.TabIndex = 9;
+            // 
+            // enterMemContent
+            // 
+            this.enterMemContent.Location = new System.Drawing.Point(167, 50);
+            this.enterMemContent.Multiline = true;
+            this.enterMemContent.Name = "enterMemContent";
+            this.enterMemContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.enterMemContent.Size = new System.Drawing.Size(135, 23);
+            this.enterMemContent.TabIndex = 8;
+            // 
+            // updateMem
+            // 
+            this.updateMem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.updateMem.Location = new System.Drawing.Point(327, 50);
+            this.updateMem.Name = "updateMem";
+            this.updateMem.Size = new System.Drawing.Size(167, 48);
+            this.updateMem.TabIndex = 6;
+            this.updateMem.Text = "Update";
+            this.updateMem.UseVisualStyleBackColor = true;
+            this.updateMem.Click += new System.EventHandler(this.updateMem_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(164, 28);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(105, 16);
+            this.label8.TabIndex = 5;
+            this.label8.Text = "Memory Content";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(6, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(111, 16);
+            this.label7.TabIndex = 4;
+            this.label7.Text = "Memory Address";
+            // 
+            // loadProgram
+            // 
+            this.loadProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loadProgram.Location = new System.Drawing.Point(348, 17);
+            this.loadProgram.Name = "loadProgram";
+            this.loadProgram.Size = new System.Drawing.Size(167, 48);
+            this.loadProgram.TabIndex = 1;
+            this.loadProgram.Text = "Load Program";
+            this.loadProgram.UseVisualStyleBackColor = true;
+            this.loadProgram.Click += new System.EventHandler(this.loadProgram_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Location = new System.Drawing.Point(21, 71);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(494, 271);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Enter Code Below";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Controls.Add(this.programEditor, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.opCodes, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(9, 20);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(479, 245);
+            this.tableLayoutPanel1.TabIndex = 3;
+            // 
+            // programEditor
+            // 
+            this.programEditor.Location = new System.Drawing.Point(3, 3);
+            this.programEditor.Multiline = true;
+            this.programEditor.Name = "programEditor";
+            this.programEditor.Size = new System.Drawing.Size(233, 239);
+            this.programEditor.TabIndex = 3;
+            this.programEditor.TextChanged += new System.EventHandler(this.programEditor_TextChanged);
+            // 
+            // opCodes
+            // 
+            this.opCodes.Location = new System.Drawing.Point(242, 3);
+            this.opCodes.Multiline = true;
+            this.opCodes.Name = "opCodes";
+            this.opCodes.ReadOnly = true;
+            this.opCodes.Size = new System.Drawing.Size(234, 239);
+            this.opCodes.TabIndex = 4;
+            // 
+            // Help
+            // 
+            this.Help.Controls.Add(this.label6);
+            this.Help.Location = new System.Drawing.Point(4, 22);
+            this.Help.Name = "Help";
+            this.Help.Padding = new System.Windows.Forms.Padding(3);
+            this.Help.Size = new System.Drawing.Size(544, 474);
+            this.Help.TabIndex = 2;
+            this.Help.Text = "Help";
+            this.Help.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(24, 40);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(304, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "This tab will contain the instructions on operating the Emulator. ";
             // 
             // MicroBaby
             // 

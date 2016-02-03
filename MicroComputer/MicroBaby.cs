@@ -44,10 +44,7 @@ namespace MicroComputer
                 dispIR.Text = "Please load program first.";
             }
             else {
-                dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._COUNT];
-                CPU.Globals._COUNT++;
-                dispPC.Text = CPU.Globals._PC.ToString();
-                CPU.Globals._PC++;
+                 
             }
 
 
