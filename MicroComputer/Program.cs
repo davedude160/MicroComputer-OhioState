@@ -40,27 +40,27 @@ namespace MicroComputer
         {
             public static sbyte LDA_IMMEDIATE(sbyte ac, sbyte db) //Loads whatever is on the databus to the accumulator
             {
-                Globals._PC++;
+                Globals._PC+=2;
                 ac = db;
                 return ac;
             }
 
             public static sbyte LDA_DIRECT(sbyte ac, sbyte db) //Loads from memory location (on the databus) to accumulator
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 ac = Convert.ToSByte(Globals._MEMORY[db]);
                 return ac;
             }
 
             public static void STA_DIRECT(sbyte ac, sbyte db)//Stores what is in the accumulator to memory location (on the databus)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 Globals._MEMORY[db] = Convert.ToByte(ac);
             }
 
             public static sbyte ADD_IMMEDIATE(sbyte ac, sbyte db)//
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 int temp = ac + db;
                 ac = Convert.ToSByte(temp);
 
@@ -69,6 +69,7 @@ namespace MicroComputer
 
             public static sbyte ADD_DIRECT(sbyte ac, sbyte db)
             {
+                Globals._PC += 2;
                 int temp = Globals._MEMORY[db] + ac;
                 ac = Convert.ToSByte(temp);
 
@@ -77,7 +78,7 @@ namespace MicroComputer
 
             public static sbyte ADDC_IMMEDIATE(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 int temp = ac + db + 1;
                 ac = Convert.ToSByte(temp);
 
@@ -87,7 +88,7 @@ namespace MicroComputer
 
             public static sbyte ADDC_DIRECT(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 int temp = Globals._MEMORY[db] + ac + 1;
                 ac = Convert.ToSByte(temp);
 
@@ -96,6 +97,7 @@ namespace MicroComputer
 
             public static sbyte SUB_IMMEDIATE(sbyte ac, sbyte db)
             {
+                Globals._PC += 2;
                 int temp = ac - db;
                 ac = Convert.ToSByte(temp);
 
@@ -104,7 +106,7 @@ namespace MicroComputer
 
             public static sbyte SUB_DIRECT(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 int temp = Globals._MEMORY[db] - ac;
                 ac = Convert.ToSByte(temp);
 
@@ -113,7 +115,7 @@ namespace MicroComputer
 
             public static sbyte SUBC_IMMEDIATE(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 int temp = ac + db + 1;
                 ac = Convert.ToSByte(temp);
 
@@ -123,7 +125,7 @@ namespace MicroComputer
 
             public static sbyte SUBC_DIRECT(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 int temp = Globals._MEMORY[db] + ac + 1;
 
 
@@ -132,6 +134,7 @@ namespace MicroComputer
 
             public static sbyte INC_INHERENT(sbyte ac)
             {
+                Globals._PC++;
                 int temp = ac + 1;
                 ac = Convert.ToSByte(temp);
                 return ac;
@@ -148,37 +151,37 @@ namespace MicroComputer
 
             public static sbyte AND_DIRECT(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 return (Convert.ToSByte(ac & db));
             }
 
             public static sbyte AND_IMMEDIATE(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 return (Convert.ToSByte(ac & Globals._MEMORY[db]));
             }
 
             public static sbyte OR_DIRECT(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 return (Convert.ToSByte(ac | db));
             }
 
             public static sbyte OR_IMMEDIATE(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 return (Convert.ToSByte(ac | Globals._MEMORY[db]));
             }
 
             public static sbyte XOR_DIRECT(sbyte ac, sbyte db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 return (Convert.ToSByte(ac ^ db));
             }
 
             public static sbyte XOR_IMMEDIATE(int ac, int db)
             {
-                Globals._PC++;
+                Globals._PC += 2;
                 return (Convert.ToSByte(ac ^ Globals._MEMORY[db]));
             }
 
@@ -203,40 +206,41 @@ namespace MicroComputer
             public static void JMP_DIRECT(byte db)
             {
                 Globals._PC = Globals._MEMORY[db];
-
             }
 
         }
 
-        public class Converters
+        public static class Converters
         {
-            public string SbyteToString(sbyte toBeConverted)
+            public static string SbyteToString(sbyte toBeConverted)
             {
                 return (Convert.ToString(toBeConverted, 2).PadLeft(8, '0'));
             }
 
-            public sbyte StringToSbyte(string toBeConverted)
+            public static sbyte StringToSbyte(string toBeConverted)
             {
                 char[] arr;
                 sbyte bin = 0;
+                Console.WriteLine(toBeConverted);
 
-                arr = toBeConverted.ToCharArray(0, 7); //Converts to char array
+                arr = toBeConverted.ToCharArray(0, 8); //Converts to char array
 
-                int i = 0;
-
-                while (i < 6)
+                int i = 7;
+                Console.WriteLine(arr);
+                while (i > 1)
                 {
                     if (Char.GetNumericValue(arr[i]) == 1)
                     {
-                        bin = Convert.ToSByte(bin + (2 ^ i));
+                        bin = Convert.ToSByte(bin + ((2 ^ i)%7));
                     }
+                    i--;
                 }
 
-                if (Char.GetNumericValue(arr[7]) == 1)
+                if (Char.GetNumericValue(arr[0]) == 1)
                 {
                     bin = Convert.ToSByte(-bin);
                 }
-
+               
                 return (bin);
             }
 

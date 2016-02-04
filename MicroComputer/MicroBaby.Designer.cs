@@ -40,10 +40,6 @@
             this.runProgram = new System.Windows.Forms.Button();
             this.dispDataBus = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.negativeLabel = new System.Windows.Forms.Label();
-            this.zeroLabel = new System.Windows.Forms.Label();
-            this.overflowLabel = new System.Windows.Forms.Label();
-            this.carryLabel = new System.Windows.Forms.Label();
             this.dispAC = new System.Windows.Forms.TextBox();
             this.dispIR = new System.Windows.Forms.TextBox();
             this.dispPC = new System.Windows.Forms.TextBox();
@@ -66,6 +62,10 @@
             this.opCodes = new System.Windows.Forms.TextBox();
             this.Help = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
             this.EMULATOR.SuspendLayout();
             this.Sim.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -212,10 +212,10 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.negativeLabel);
-            this.groupBox1.Controls.Add(this.zeroLabel);
-            this.groupBox1.Controls.Add(this.overflowLabel);
-            this.groupBox1.Controls.Add(this.carryLabel);
+            this.groupBox1.Controls.Add(this.checkBox4);
+            this.groupBox1.Controls.Add(this.checkBox3);
+            this.groupBox1.Controls.Add(this.checkBox2);
+            this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Location = new System.Drawing.Point(34, 185);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
@@ -224,46 +224,6 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Condition Signals";
-            // 
-            // negativeLabel
-            // 
-            this.negativeLabel.AutoSize = true;
-            this.negativeLabel.Location = new System.Drawing.Point(310, 185);
-            this.negativeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.negativeLabel.Name = "negativeLabel";
-            this.negativeLabel.Size = new System.Drawing.Size(71, 20);
-            this.negativeLabel.TabIndex = 4;
-            this.negativeLabel.Text = "Negative";
-            // 
-            // zeroLabel
-            // 
-            this.zeroLabel.AutoSize = true;
-            this.zeroLabel.Location = new System.Drawing.Point(32, 185);
-            this.zeroLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.zeroLabel.Name = "zeroLabel";
-            this.zeroLabel.Size = new System.Drawing.Size(42, 20);
-            this.zeroLabel.TabIndex = 3;
-            this.zeroLabel.Text = "Zero";
-            // 
-            // overflowLabel
-            // 
-            this.overflowLabel.AutoSize = true;
-            this.overflowLabel.Location = new System.Drawing.Point(310, 68);
-            this.overflowLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.overflowLabel.Name = "overflowLabel";
-            this.overflowLabel.Size = new System.Drawing.Size(70, 20);
-            this.overflowLabel.TabIndex = 2;
-            this.overflowLabel.Text = "Overflow";
-            // 
-            // carryLabel
-            // 
-            this.carryLabel.AutoSize = true;
-            this.carryLabel.Location = new System.Drawing.Point(32, 68);
-            this.carryLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.carryLabel.Name = "carryLabel";
-            this.carryLabel.Size = new System.Drawing.Size(46, 20);
-            this.carryLabel.TabIndex = 1;
-            this.carryLabel.Text = "Carry";
             // 
             // dispAC
             // 
@@ -503,6 +463,50 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "This tab will contain the instructions on operating the Emulator. ";
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(36, 68);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(72, 24);
+            this.checkBox1.TabIndex = 5;
+            this.checkBox1.Text = "Carry";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(314, 68);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(96, 24);
+            this.checkBox2.TabIndex = 6;
+            this.checkBox2.Text = "Overflow";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(36, 181);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(68, 24);
+            this.checkBox3.TabIndex = 7;
+            this.checkBox3.Text = "Zero";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(314, 181);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(97, 24);
+            this.checkBox4.TabIndex = 8;
+            this.checkBox4.Text = "Negative";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
             // MicroBaby
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -561,10 +565,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.VScrollBar memScroll;
-        private System.Windows.Forms.Label carryLabel;
-        private System.Windows.Forms.Label overflowLabel;
-        private System.Windows.Forms.Label zeroLabel;
-        private System.Windows.Forms.Label negativeLabel;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label memAddLabel;
         private System.Windows.Forms.TextBox dispMemContent;
@@ -573,6 +573,10 @@
         private System.Windows.Forms.VScrollBar vScrollBar2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox opCodes;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }
 
