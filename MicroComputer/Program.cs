@@ -36,7 +36,7 @@ namespace MicroComputer
             public static byte[] _PROGRAM_ARRAY = new byte[255];
         }
 
-        public class Instructions
+        public static class Instructions
         {
             public static sbyte LDA_IMMEDIATE(sbyte ac, sbyte db) //Loads whatever is on the databus to the accumulator
             {
