@@ -84,6 +84,11 @@ namespace MicroComputer
                 isInherent = true;
 
             }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
         }
 
         public class Instr_JMP : Instr
@@ -96,15 +101,19 @@ namespace MicroComputer
                     isInherent = false; 
 
                 }
-
-
-
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
             }
 
 
 
+        }
 
-    public class Instructions
+
+
+
+        public class Instructions
         {
             public sbyte LDA_IMMEDIATE(sbyte ac, sbyte db) //Loads whatever is on the databus to the accumulator
             {

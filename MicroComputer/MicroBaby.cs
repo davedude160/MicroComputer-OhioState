@@ -98,11 +98,6 @@ namespace MicroComputer
             Add $13;
             INc;
             jmp #$F1;
-
-
-
-
-
 output:
 01000010
 00010011
@@ -264,7 +259,6 @@ output:
                     
                     //inherent ignores 2nd byte
                     if (j != 6 && j != 7 && j!= 10) {
-
                 //read direct or immediate
                 String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
                 if (addrMode.First() == '#')
@@ -272,7 +266,6 @@ output:
                     addrMode = addrMode.Substring(2);
                 }
                 else {
-
                     addrMode = addrMode.Substring(1);
                     String changeOpcode = CPU.Globals._OPCODE[j].Substring(0, 6) + "01";
                     CPU.Globals._OPCODE_ARRAY.RemoveAt(i);
@@ -281,15 +274,12 @@ output:
                 addrMode=Int32.Parse(Convert.ToString(byte.Parse(addrMode, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture),2)).ToString("00000000");
                 CPU.Globals._OPCODE_ARRAY.Add(addrMode);
                         i++;
-
                     }
-
                 }
                 else
                 {
                     //TODO
                     //give error message;
-
                 }
             }
             */
