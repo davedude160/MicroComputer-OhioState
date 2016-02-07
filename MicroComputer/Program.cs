@@ -71,12 +71,48 @@ namespace MicroComputer
             public override sbyte operation(sbyte ac, sbyte db)
             {
                 Globals._PC += 2;
-                int temp;
+                int temp1 = ac;
+                int temp2 = db;
 
-                if (isImmediate) temp = ac + db;
-                else temp = temp = Globals._MEMORY[db] + ac;
-                ac = Convert.ToSByte(temp);
 
+                if (isImmediate) { 
+                while (temp1 != 0)
+                {
+                    int c = temp1 & temp2;
+                        System.Console.WriteLine("C = " + c);
+                    temp2 = temp1 ^ temp2;
+                    temp1 = c << 1;
+                    
+                    }
+                    
+                return Convert.ToSByte(temp2);
+                }
+                else
+                {
+                    return ac = CPU.Globals._MEMORY[db];
+                }
+                
+            }
+        }
+
+        public class Instr_LDA : Instr
+        {
+
+            public Instr_LDA()
+            {
+                call = "LDA";
+                opcode = "100000";
+                isJMP = false;
+                isInherent = false;
+            }
+            public override sbyte operation(sbyte ac, sbyte db)
+            {
+                Globals._PC += 2;
+
+                ac = db;
+
+                if (isImmediate) ac = db;
+                else ac =  Globals._MEMORY[db];
                 return ac;
             }
         }

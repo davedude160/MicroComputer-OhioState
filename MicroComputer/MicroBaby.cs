@@ -50,7 +50,24 @@ namespace MicroComputer
                 dispPC.Text = CPU.Globals._PC.ToString();
                 CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
                 CPU.Globals._AC = currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
-                
+
+                if (CPU.Globals._AC == 0) {
+                    CPU.Globals._ZERO = true;
+                }
+                else
+                {
+                    CPU.Globals._ZERO = false;
+                }
+
+                if (CPU.Globals._AC < 0)
+                {
+                    CPU.Globals._NEGATIVE = true;
+                }
+                else
+                {
+                    CPU.Globals._NEGATIVE = false;
+                }
+
                 CPU.Globals._INSTR_PC++;
                 dispAC.Text = CPU.Globals._AC.ToString();
 
