@@ -73,7 +73,7 @@ namespace MicroComputer
                 Globals._PC += 2;
                 int temp;
 
-                if (!isImmediate) temp = ac + db;
+                if (isImmediate) temp = ac + db;
                 else temp = temp = Globals._MEMORY[db] + ac;
                 ac = Convert.ToSByte(temp);
 

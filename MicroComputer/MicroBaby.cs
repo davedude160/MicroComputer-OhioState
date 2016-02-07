@@ -48,13 +48,11 @@ namespace MicroComputer
                 
                 dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
                 dispPC.Text = CPU.Globals._PC.ToString();
-                CPU.Globals._AC = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC].operation(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
+                CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
+                CPU.Globals._AC = currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
                 
                 CPU.Globals._INSTR_PC++;
                 dispAC.Text = CPU.Globals._AC.ToString();
-                System.Console.WriteLine(CPU.Globals._AC);
-                System.Console.WriteLine(CPU.Globals._INSTR_PC);
-                System.Console.WriteLine(CPU.Globals._PC);
 
             }
 
@@ -70,7 +68,8 @@ namespace MicroComputer
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
             convertToOpCode();
-
+            CPU.Globals._PC = 0;
+            CPU.Globals._INSTR_PC = 0;
             if (CPU.Globals._INSTRUCTION_ARRAY.Count > 0)
             {
 
