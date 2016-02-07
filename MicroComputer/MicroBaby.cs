@@ -40,7 +40,7 @@ namespace MicroComputer
         private void runStep_Click(object sender, EventArgs e)
         {
 
-            if (CPU.Globals._OPCODE_ARRAY.Count == 0 || CPU.Globals._PC >= CPU.Globals._OPCODE_ARRAY.Count)
+            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
                 dispIR.Text = "Please load program first.";
             }
@@ -48,8 +48,14 @@ namespace MicroComputer
                 
                 dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
                 dispPC.Text = CPU.Globals._PC.ToString();
-                CPU.Globals._PC++;
+                CPU.Globals._AC = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC].operation(CPU.Globals._AC, Convert.ToSByte(CPU.Globals._DATA_BUS));
                 
+                CPU.Globals._INSTR_PC++;
+                dispAC.Text = CPU.Globals._AC.ToString();
+                System.Console.WriteLine(CPU.Globals._AC);
+                System.Console.WriteLine(CPU.Globals._INSTR_PC);
+                System.Console.WriteLine(CPU.Globals._PC);
+
             }
 
 
@@ -95,6 +101,7 @@ namespace MicroComputer
             XOR #$A2;
             INV;
             Add #$13;
+            Add $13;
             Add $13;
             INc;
             jmp #$F1;

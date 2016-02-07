@@ -15,6 +15,7 @@ namespace MicroComputer
         public static class Globals
         {
             public static byte _PC = 0;
+            public static int _INSTR_PC = 0;
             public static sbyte _AC = 0;
             public static byte _IR = 0;
             public static bool _CARRY = false;
@@ -29,12 +30,12 @@ namespace MicroComputer
                 { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", "01011110", "01011000", "01010110", "01001111","01000000","01001000", "01001010", "11000000","11100100","11100000","11010010","11010000","11001001","11001000","11110110","11110010","11110100","11110000","11101101","11101001","11101100","11101000","11011011","11011001","11011010","11011000" };
 
             public static List<String> _PROGRAM_TOKENS = new List<String>();
-            public static List<String> _OPCODE_ARRAY= new List<String>();
+            public static List<String> _OPCODE_ARRAY = new List<String>();
             public static List<Instr> _INSTRUCTION_ARRAY = new List<Instr>();
-            
+
             public static byte[] _PROGRAM_ARRAY = new byte[255];
 
-            
+
 
         }
 
@@ -53,25 +54,31 @@ namespace MicroComputer
             {
             }
             public abstract sbyte operation(sbyte a, sbyte b);
-            
+
         }
 
 
-      public class Instr_ADD : Instr
-    {
-            
-           public Instr_ADD (){
+        public class Instr_ADD : Instr
+        {
+
+            public Instr_ADD()
+            {
                 call = "ADD";
                 opcode = "010000";
                 isJMP = false;
                 isInherent = false;
             }
-            public override sbyte operation(sbyte a, sbyte b)
+            public override sbyte operation(sbyte ac, sbyte db)
             {
-                return a;
+                Globals._PC += 2;
+                int temp;
+
+                if (!isImmediate) temp = ac + db;
+                else temp = temp = Globals._MEMORY[db] + ac;
+                ac = Convert.ToSByte(temp);
+
+                return ac;
             }
-
-
         }
 
         public class Instr_INC : Instr
@@ -92,15 +99,15 @@ namespace MicroComputer
         }
 
         public class Instr_JMP : Instr
+        {
+            public Instr_JMP()
             {
-                public Instr_JMP()
-                {
-                    call = "JMP";
-                    opcode = "11000000";
-                    isJMP = true;
-                    isInherent = false; 
+                call = "JMP";
+                opcode = "11000000";
+                isJMP = true;
+                isInherent = false;
 
-                }
+            }
             public override sbyte operation(sbyte a, sbyte b)
             {
                 return a;
@@ -279,7 +286,7 @@ namespace MicroComputer
 
             public void JMP_DIRECT(byte db)
             {
-                Globals._PC = (byte) Globals._MEMORY[db];
+                Globals._PC = (byte)Globals._MEMORY[db];
 
             }
 
