@@ -44,12 +44,14 @@ namespace MicroComputer
             {
                 dispIR.Text = "Please load program first.";
             }
-            else {
-                
+            else
+            {
                 dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
+                CPU.Globals._DATA_BUS = Convert.ToByte(CPU.Converters.StringToSbyte(CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC + 1]));
+                dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
                 dispPC.Text = CPU.Globals._PC.ToString();
-                CPU.Globals._PC++;
-                
+                dispAC.Text = CPU.Globals._AC.ToString();
+
             }
 
 
@@ -342,6 +344,27 @@ output:
         private void enterMemAdd_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            CPU.Globals._CARRY = !CPU.Globals._CARRY;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            CPU.Globals._OVERFLOW = !CPU.Globals._OVERFLOW;
+            Console.WriteLine(CPU.Globals._OVERFLOW);
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            CPU.Globals._ZERO = !CPU.Globals._ZERO;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            CPU.Globals._NEGATIVE = !CPU.Globals._NEGATIVE;
         }
 
 
