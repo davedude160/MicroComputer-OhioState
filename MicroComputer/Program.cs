@@ -40,9 +40,7 @@ namespace MicroComputer
 
       
             public static List<Instr> _INSTRUCTION_ARRAY = new List<Instr>();
-           
-
-
+          
 
         }
 
