@@ -18,29 +18,24 @@ namespace MicroComputer
             public static int _INSTR_PC = 0;
             public static sbyte _AC = 0;
             public static byte _IR = 0;
-
             public static bool _CARRY = false;
             public static bool _OVERFLOW = false;
             public static bool _NEGATIVE = false;
             public static bool _ZERO = false;
             public static byte _DATA_BUS = 0;
-
             public static sbyte[] _MEMORY = new sbyte[256];
-            public static byte[] _PROGRAM_ARRAY = new byte[256];
-
-
             public static string[] _INSTR =
-                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA","CLRC","CSET", "CMP", "JMP","JC","JNC","JS","JNS","JZ","JNZ","JCS","JNCS","JCNS","JNCNS","JCZ","JNCZ","JCNZ","JNCNZ","JSZ","JNSZ","JSNZ","JNSNZ" };
+                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA", "CMP", "JMP","JC","JNC","JS","JNS","JZ","JNZ","JCS","JNCS","JCNS","JNCNS","JCZ","JNCZ","JCNZ","JNCNZ","JSZ","JNSZ","JSNZ","JNSNZ" };
             public static string[] _OPCODE =
                 { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", "01011110", "01011000", "01010110", "01001111","01000000","01001000", "01001010", "11000000","11100100","11100000","11010010","11010000","11001001","11001000","11110110","11110010","11110100","11110000","11101101","11101001","11101100","11101000","11011011","11011001","11011010","11011000" };
 
             public static List<String> _PROGRAM_TOKENS = new List<String>();
-
-            public static List<String> _OPCODE_ARRAY= new List<String>();
-
-      
+            public static List<String> _OPCODE_ARRAY = new List<String>();
             public static List<Instr> _INSTRUCTION_ARRAY = new List<Instr>();
-          
+
+            public static byte[] _PROGRAM_ARRAY = new byte[256];
+
+
 
         }
 
@@ -80,23 +75,24 @@ namespace MicroComputer
                 int temp2 = db;
 
 
-                if (isImmediate) { 
-                while (temp1 != 0)
+                if (isImmediate)
                 {
-                    int c = temp1 & temp2;
+                    while (temp1 != 0)
+                    {
+                        int c = temp1 & temp2;
                         System.Console.WriteLine("C = " + c);
-                    temp2 = temp1 ^ temp2;
-                    temp1 = c << 1;
-                    
+                        temp2 = temp1 ^ temp2;
+                        temp1 = c << 1;
+
                     }
-                    
-                return Convert.ToSByte(temp2);
+
+                    return Convert.ToSByte(temp2);
                 }
                 else
                 {
                     return ac = CPU.Globals._MEMORY[db];
                 }
-                
+
             }
         }
 
@@ -170,7 +166,6 @@ namespace MicroComputer
                 return a;
             }
 
-
         }
 
         public class Instr_LDA : Instr
@@ -190,7 +185,7 @@ namespace MicroComputer
                 ac = db;
 
                 if (isImmediate) ac = db;
-                else ac =  Globals._MEMORY[db];
+                else ac = Globals._MEMORY[db];
                 return ac;
             }
         }
@@ -210,7 +205,7 @@ namespace MicroComputer
                 Globals._PC += 2;
 
                 Globals._MEMORY[db] = ac;
-                
+
                 return 1;
             }
         }
@@ -373,7 +368,6 @@ namespace MicroComputer
 
 
         }
-
 
 
 
