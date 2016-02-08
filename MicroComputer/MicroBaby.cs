@@ -38,13 +38,51 @@ namespace MicroComputer
 
         private void runStep_Click(object sender, EventArgs e)
         {
+
             
             if (CPU.Globals._OPCODE_ARRAY.Count == 0 || CPU.Globals._PC >= CPU.Globals._OPCODE_ARRAY.Count) 
+
+
+            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
+
             {
                 dispIR.Text = "Please load program first.";
             }
             else {
-                 
+     
+                dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
+                dispPC.Text = CPU.Globals._PC.ToString();
+                CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
+
+                if (currentInstr.call == "STA")
+                {
+                    currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+                }
+                else
+                {
+                    CPU.Globals._AC = currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+                }
+
+                if (CPU.Globals._AC == 0) {
+                    CPU.Globals._ZERO = true;
+                }
+                else
+                {
+                    CPU.Globals._ZERO = false;
+                }
+
+                if (CPU.Globals._AC < 0)
+                {
+                    CPU.Globals._NEGATIVE = true;
+                }
+                else
+                {
+                    CPU.Globals._NEGATIVE = false;
+                }
+
+                CPU.Globals._INSTR_PC++;
+                dispAC.Text = CPU.Globals._AC.ToString();
+
             }
 
 
@@ -121,8 +159,14 @@ namespace MicroComputer
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
             convertToOpCode();
+
           
             if (CPU.Globals._OPCODE_ARRAY.Count > 0)
+
+            CPU.Globals._PC = 0;
+            CPU.Globals._INSTR_PC = 0;
+            if (CPU.Globals._INSTRUCTION_ARRAY.Count > 0)
+
             {
 
                 string hold = CPU.Globals._OPCODE_ARRAY[0].ToString();
@@ -146,7 +190,13 @@ namespace MicroComputer
             INV;
             Add #$13;
             Add $13;
+<<<<<<< HEAD
 
+=======
+            Add $13;
+            INc;
+            jmp #$F1;
+>>>>>>> Mergebranch
 output:
 01000010
 00010011
@@ -206,7 +256,6 @@ output:
                     
                     //inherent ignores 2nd byte
                     if (j != 6 && j != 7 && j!= 10) {
-
                 //read direct or immediate
                 String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
                 if (addrMode.First() == '#')
@@ -214,7 +263,6 @@ output:
                     addrMode = addrMode.Substring(2);
                 }
                 else {
-
                     addrMode = addrMode.Substring(1);
                     String changeOpcode = CPU.Globals._OPCODE[j].Substring(0, 6) + "01";
                     CPU.Globals._OPCODE_ARRAY.RemoveAt(i);
@@ -223,15 +271,12 @@ output:
                 addrMode=Int32.Parse(Convert.ToString(byte.Parse(addrMode, System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture),2)).ToString("00000000");
                 CPU.Globals._OPCODE_ARRAY.Add(addrMode);
                         i++;
-
                     }
-
                 }
                 else
                 {
                     //TODO
                     //give error message;
-
                 }
             }
             }
