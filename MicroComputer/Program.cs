@@ -195,7 +195,7 @@ namespace MicroComputer
             public Instr_STA()
             {
                 call = "STA";
-                opcode = "101000";
+                opcode = "010000";
                 isJMP = false;
                 isInherent = false;
             }
@@ -203,11 +203,9 @@ namespace MicroComputer
             {
                 Globals._PC += 2;
 
+                Globals._MEMORY[db] = ac;
                 
-
-                if (isImmediate) ac = db;
-                else ac = Globals._MEMORY[db];
-                return ac;
+                return 1;
             }
         }
 
