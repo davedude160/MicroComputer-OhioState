@@ -50,6 +50,69 @@ namespace MicroComputer
 
         }
 
+        private void resetProgram_Click(object sender, EventArgs e)
+        {
+            CPU.Globals._PC = 0;
+            CPU.Globals._AC = 0;
+            CPU.Globals._IR = 0;
+            CPU.Globals._CARRY = false;
+            CPU.Globals._OVERFLOW = false;
+            CPU.Globals._NEGATIVE = false;
+            CPU.Globals._ZERO = false;
+            CPU.Globals._DATA_BUS = 0;
+    }
+    private void refreshMem_Click(object sender, EventArgs e)
+        {
+            if (CPU.Globals._MEMORY.Length > 0)
+            {
+               
+                //output opcodes to opCodes textbox 
+                string dataString = "";
+
+                int i = 0; 
+
+                foreach(sbyte s in CPU.Globals._MEMORY)
+                {
+                    String binary = Convert.ToString((sbyte) s, 2).PadLeft(8, '0'); 
+                    if (binary.Length > 8)
+                    {
+                        binary = binary.Remove(0, 8); 
+                    }
+                    const string format = "{0,-10} {1,-15} {2,-18}";
+                    // Construct the strings.
+                    string fmtOutputLine = string.Format(format, i.ToString("X2"), binary, s.ToString());
+                    dataString += fmtOutputLine + System.Environment.NewLine;
+                    i++; 
+                }
+
+                dataMem.Text = dataString;
+                dataMem2.Text = dataString;
+
+            }
+        }
+        private void openFile_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamReader readFile = new System.IO.StreamReader(openFileDialog1.FileName);
+                programEditor.Text = readFile.ReadToEnd();
+                readFile.Close();
+            }
+        }
+
+        private void saveFile_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamWriter writeFile = new System.IO.StreamWriter(saveFileDialog1.FileName);
+                writeFile.Write(programEditor.Text);
+                writeFile.Close();
+            }
+        }
         private void loadProgram_Click(object sender, EventArgs e)
         {
             opCodes.Clear();
@@ -176,12 +239,13 @@ output:
 
         private void updateMem_Click(object sender, EventArgs e)
         {
-            sbyte memAdd = (sbyte) Int32.Parse(enterMemAdd.SelectedItem.ToString());
+           int memAdd = int.Parse(enterMemAdd.SelectedItem.ToString(), System.Globalization.NumberStyles.HexNumber);
             sbyte memValue = (sbyte) Int32.Parse(enterMemContent.Text.ToString());
 
             System.Console.WriteLine("Mem Address: " + memAdd);
             System.Console.WriteLine("Mem Content: " + memValue);
             CPU.Globals._MEMORY[memAdd] = memValue;
+            refreshMem_Click(sender, e); 
         }
 
        

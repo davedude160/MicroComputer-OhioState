@@ -17,12 +17,17 @@ namespace MicroComputer
             public static byte _PC = 0;
             public static sbyte _AC = 0;
             public static byte _IR = 0;
+
             public static bool _CARRY = false;
             public static bool _OVERFLOW = false;
             public static bool _NEGATIVE = false;
             public static bool _ZERO = false;
             public static byte _DATA_BUS = 0;
-            public static sbyte[] _MEMORY = new sbyte[255];
+
+            public static sbyte[] _MEMORY = new sbyte[256];
+            public static byte[] _PROGRAM_ARRAY = new byte[256];
+
+
             public static string[] _INSTR =
                 { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA","CLRC","CSET", "CMP", "JMP","JC","JNC","JS","JNS","JZ","JNZ","JCS","JNCS","JCNS","JNCNS","JCZ","JNCZ","JCNZ","JNCNZ","JSZ","JNSZ","JSNZ","JNSNZ" };
             public static string[] _OPCODE =
@@ -32,7 +37,6 @@ namespace MicroComputer
             public static List<String> _OPCODE_ARRAY= new List<String>();
 
 
-            public static byte[] _PROGRAM_ARRAY = new byte[255];
         }
 
         public class Instructions
