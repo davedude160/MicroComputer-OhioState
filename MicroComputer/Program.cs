@@ -95,6 +95,78 @@ namespace MicroComputer
             }
         }
 
+        public class Instr_ADDC : Instr //TODO
+        {
+
+            public Instr_ADDC()
+            {
+                call = "ADD";
+                opcode = "010000";
+                isJMP = false;
+                isInherent = false;
+            }
+            public override sbyte operation(sbyte ac, sbyte db)
+            {
+                Globals._PC += 2;
+                int temp1 = ac;
+                int temp2 = db;
+
+
+                if (isImmediate)
+                {
+                    while (temp1 != 0)
+                    {
+                        int c = temp1 & temp2;
+                        System.Console.WriteLine("C = " + c);
+                        temp2 = temp1 ^ temp2;
+                        temp1 = c << 1;
+
+                    }
+
+                    return Convert.ToSByte(temp2);
+                }
+                else
+                {
+                    return ac = CPU.Globals._MEMORY[db];
+                }
+
+            }
+        }
+
+        public class Instr_SUB : Instr //TODO
+        {
+            public Instr_SUB()
+            {
+                call = "SUB";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_SUBC : Instr //TODO
+        {
+            public Instr_SUBC()
+            {
+                call = "SUB";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
         public class Instr_LDA : Instr
         {
 
@@ -117,6 +189,30 @@ namespace MicroComputer
             }
         }
 
+        public class Instr_STA : Instr //TODO
+        {
+
+            public Instr_STA()
+            {
+                call = "STA";
+                opcode = "101000";
+                isJMP = false;
+                isInherent = false;
+            }
+            public override sbyte operation(sbyte ac, sbyte db)
+            {
+                Globals._PC += 2;
+
+                
+
+                if (isImmediate) ac = db;
+                else ac = Globals._MEMORY[db];
+                return ac;
+            }
+        }
+
+
+
         public class Instr_INC : Instr
         {
             public Instr_INC()
@@ -133,6 +229,127 @@ namespace MicroComputer
             }
 
         }
+
+
+        public class Instr_DEC : Instr //TODO
+        {
+            public Instr_DEC()
+            {
+                call = "INC";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_AND : Instr //TODO
+        {
+            public Instr_AND()
+            {
+                call = "INC";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_OR : Instr //TODO
+        {
+            public Instr_OR()
+            {
+                call = "INC";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_INV : Instr //TODO
+        {
+            public Instr_INV()
+            {
+                call = "INV";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_XOR : Instr //TODO
+        {
+            public Instr_XOR()
+            {
+                call = "XOR";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_CLRA : Instr //TODO
+        {
+            public Instr_CLRA()
+            {
+                call = "CLRA";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_CMP : Instr //TODO
+        {
+            public Instr_CMP()
+            {
+                call = "CMP";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
 
         public class Instr_JMP : Instr
         {
