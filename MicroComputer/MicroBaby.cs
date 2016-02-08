@@ -38,32 +38,22 @@ namespace MicroComputer
 
         private void runStep_Click(object sender, EventArgs e)
         {
-
-            
-            if (CPU.Globals._OPCODE_ARRAY.Count == 0 || CPU.Globals._PC >= CPU.Globals._OPCODE_ARRAY.Count) 
-
+            Console.WriteLine("Fuck");
 
             if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
-
             {
                 dispIR.Text = "Please load program first.";
             }
-            else {
-     
+            else
+            {
+
                 dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
                 dispPC.Text = CPU.Globals._PC.ToString();
                 CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
+                CPU.Globals._AC = currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
 
-                if (currentInstr.call == "STA")
+                if (CPU.Globals._AC == 0)
                 {
-                    currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
-                }
-                else
-                {
-                    CPU.Globals._AC = currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
-                }
-
-                if (CPU.Globals._AC == 0) {
                     CPU.Globals._ZERO = true;
                 }
                 else
@@ -87,6 +77,7 @@ namespace MicroComputer
 
 
         }
+
 
         private void resetProgram_Click(object sender, EventArgs e)
         {
@@ -156,30 +147,33 @@ namespace MicroComputer
             opCodes.Clear();
             CPU.Globals._PROGRAM_TOKENS.Clear();
             CPU.Globals._OPCODE_ARRAY.Clear();
+            CPU.Globals._INSTRUCTION_ARRAY.Clear();
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
             convertToOpCode();
-
-          
-            if (CPU.Globals._OPCODE_ARRAY.Count > 0)
-
             CPU.Globals._PC = 0;
             CPU.Globals._INSTR_PC = 0;
             if (CPU.Globals._INSTRUCTION_ARRAY.Count > 0)
-
             {
 
                 string hold = CPU.Globals._OPCODE_ARRAY[0].ToString();
-            opCodes.Text = hold;
-            //output opcodes to opCodes textbox 
-            string opcodestring = "";
+                opCodes.Text = hold;
+                //output opcodes to opCodes textbox 
+                string opcodestring = "";
+                int i = 0;
 
-            foreach (string s in CPU.Globals._OPCODE_ARRAY) {
-                opcodestring += s + System.Environment.NewLine;
 
-            }
 
-            opCodes.Text = opcodestring;
+
+                foreach (string s in CPU.Globals._OPCODE_ARRAY)
+                {
+                    opcodestring += i.ToString("X2") + "   " + s + System.Environment.NewLine;
+                    i++;
+                }
+
+
+
+                opCodes.Text = opcodestring;
             }
 
             /*
@@ -190,13 +184,9 @@ namespace MicroComputer
             INV;
             Add #$13;
             Add $13;
-<<<<<<< HEAD
-
-=======
             Add $13;
             INc;
             jmp #$F1;
->>>>>>> Mergebranch
 output:
 01000010
 00010011
@@ -243,7 +233,110 @@ output:
         }
         public static void convertToOpCode()
         {
+            for (int i = 0; i < CPU.Globals._PROGRAM_TOKENS.Count; i++)
+            {
+                int j = Array.IndexOf(CPU.Globals._INSTR, CPU.Globals._PROGRAM_TOKENS[i]);
+                CPU.Instr newInstr = new CPU.Instr_ADD();
 
+                switch (j)
+                {
+                    case 0:
+                        break;
+
+                    case 1:
+                        break;
+                    case 2:
+                        newInstr = new CPU.Instr_ADD();
+                        break;
+
+                    case 3:
+                        break;
+
+                    case 4:
+                        break;
+
+                    case 5:
+                        break;
+
+                    case 6:
+                        newInstr = new CPU.Instr_INC();
+
+                        break;
+
+                    case 7:
+                        break;
+
+                    case 8:
+                        break;
+
+                    case 9:
+                        break;
+                    case 10:
+
+                        break;
+                    case 11:
+
+                        break;
+                    case 12:
+
+                        break;
+                    case 13:
+
+                        break;
+                    case 14:
+                        newInstr = new CPU.Instr_JMP();
+
+                        break;
+                    default:
+                        break;
+                }
+                if (j >= 0)
+                {
+
+                    if (!newInstr.isJMP && !newInstr.isInherent)
+                    {
+                        String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
+                        if (addrMode.First() == '#')
+                        {
+                            newInstr.opcode += "10";
+                            newInstr.isImmediate = false;
+                            newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
+
+                        }
+                        else
+                        {
+                            newInstr.opcode += "01";
+                            newInstr.isImmediate = true;
+                            newInstr.dataopcode = byte.Parse(addrMode.Substring(1), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
+                        }
+                        i++;
+                    }
+                    else if (newInstr.isJMP)
+                    {
+                        String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
+                        newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
+                        i++;
+                    }
+
+                }
+                CPU.Globals._INSTRUCTION_ARRAY.Add(newInstr);
+
+            }
+
+            foreach (CPU.Instr s in CPU.Globals._INSTRUCTION_ARRAY)
+            {
+                CPU.Globals._OPCODE_ARRAY.Add(s.opcode);
+
+                if (!s.isInherent)
+                {
+                    CPU.Globals._OPCODE_ARRAY.Add(Convert.ToString(s.dataopcode, 2).PadLeft(8, '0'));
+                }
+            }
+
+
+
+
+            /*
             CPU.Globals._OPCODE_ARRAY = new List<String>();
             // go through program
             for (int i = 0; i < CPU.Globals._PROGRAM_TOKENS.Count; i++)
@@ -279,8 +372,9 @@ output:
                     //give error message;
                 }
             }
-            }
- 
+            */
+
+        }
 
         private void updateMem_Click(object sender, EventArgs e)
         {

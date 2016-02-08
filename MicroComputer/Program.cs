@@ -239,7 +239,7 @@ namespace MicroComputer
         {
             public Instr_DEC()
             {
-                call = "INC";
+                call = "DEC";
                 opcode = "01001100";
                 isJMP = false;
                 isInherent = true;
