@@ -15,29 +15,361 @@ namespace MicroComputer
         public static class Globals
         {
             public static byte _PC = 0;
+            public static int _INSTR_PC = 0;
             public static sbyte _AC = 0;
             public static byte _IR = 0;
-
             public static bool _CARRY = false;
             public static bool _OVERFLOW = false;
             public static bool _NEGATIVE = false;
             public static bool _ZERO = false;
             public static byte _DATA_BUS = 0;
-
-            public static sbyte[] _MEMORY = new sbyte[256];
-            public static byte[] _PROGRAM_ARRAY = new byte[256];
-
-
+            public static sbyte[] _MEMORY = new sbyte[255];
             public static string[] _INSTR =
-                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA","CLRC","CSET", "CMP", "JMP","JC","JNC","JS","JNS","JZ","JNZ","JCS","JNCS","JCNS","JNCNS","JCZ","JNCZ","JCNZ","JNCNZ","JSZ","JNSZ","JSNZ","JNSNZ" };
+                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA", "CMP", "JMP","JC","JNC","JS","JNS","JZ","JNZ","JCS","JNCS","JCNS","JNCNS","JCZ","JNCZ","JCNZ","JNCNZ","JSZ","JNSZ","JSNZ","JNSNZ" };
             public static string[] _OPCODE =
                 { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", "01011110", "01011000", "01010110", "01001111","01000000","01001000", "01001010", "11000000","11100100","11100000","11010010","11010000","11001001","11001000","11110110","11110010","11110100","11110000","11101101","11101001","11101100","11101000","11011011","11011001","11011010","11011000" };
 
             public static List<String> _PROGRAM_TOKENS = new List<String>();
-            public static List<String> _OPCODE_ARRAY= new List<String>();
+            public static List<String> _OPCODE_ARRAY = new List<String>();
+            public static List<Instr> _INSTRUCTION_ARRAY = new List<Instr>();
+
+            public static byte[] _PROGRAM_ARRAY = new byte[255];
+
 
 
         }
+
+
+        public abstract class Instr
+        {
+            public string call;
+            public string opcode;
+            public string data;
+            public Byte dataopcode;
+            public Boolean isImmediate;
+            public Boolean isInherent;
+            public Boolean isJMP;
+
+            public Instr()
+            {
+            }
+            public abstract sbyte operation(sbyte a, sbyte b);
+
+        }
+
+
+        public class Instr_ADD : Instr
+        {
+
+            public Instr_ADD()
+            {
+                call = "ADD";
+                opcode = "010000";
+                isJMP = false;
+                isInherent = false;
+            }
+            public override sbyte operation(sbyte ac, sbyte db)
+            {
+                Globals._PC += 2;
+                int temp1 = ac;
+                int temp2 = db;
+
+
+                if (isImmediate) { 
+                while (temp1 != 0)
+                {
+                    int c = temp1 & temp2;
+                        System.Console.WriteLine("C = " + c);
+                    temp2 = temp1 ^ temp2;
+                    temp1 = c << 1;
+                    
+                    }
+                    
+                return Convert.ToSByte(temp2);
+                }
+                else
+                {
+                    return ac = CPU.Globals._MEMORY[db];
+                }
+                
+            }
+        }
+
+        public class Instr_ADDC : Instr //TODO
+        {
+
+            public Instr_ADDC()
+            {
+                call = "ADD";
+                opcode = "010000";
+                isJMP = false;
+                isInherent = false;
+            }
+            public override sbyte operation(sbyte ac, sbyte db)
+            {
+                Globals._PC += 2;
+                int temp1 = ac;
+                int temp2 = db;
+
+
+                if (isImmediate)
+                {
+                    while (temp1 != 0)
+                    {
+                        int c = temp1 & temp2;
+                        System.Console.WriteLine("C = " + c);
+                        temp2 = temp1 ^ temp2;
+                        temp1 = c << 1;
+
+                    }
+
+                    return Convert.ToSByte(temp2);
+                }
+                else
+                {
+                    return ac = CPU.Globals._MEMORY[db];
+                }
+
+            }
+        }
+
+        public class Instr_SUB : Instr //TODO
+        {
+            public Instr_SUB()
+            {
+                call = "SUB";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_SUBC : Instr //TODO
+        {
+            public Instr_SUBC()
+            {
+                call = "SUB";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_LDA : Instr
+        {
+
+            public Instr_LDA()
+            {
+                call = "LDA";
+                opcode = "100000";
+                isJMP = false;
+                isInherent = false;
+            }
+            public override sbyte operation(sbyte ac, sbyte db)
+            {
+                Globals._PC += 2;
+
+                ac = db;
+
+                if (isImmediate) ac = db;
+                else ac =  Globals._MEMORY[db];
+                return ac;
+            }
+        }
+
+        public class Instr_STA : Instr //TODO
+        {
+
+            public Instr_STA()
+            {
+                call = "STA";
+                opcode = "010000";
+                isJMP = false;
+                isInherent = false;
+            }
+            public override sbyte operation(sbyte ac, sbyte db)
+            {
+                Globals._PC += 2;
+
+                Globals._MEMORY[db] = ac;
+                
+                return 1;
+            }
+        }
+
+
+
+        public class Instr_INC : Instr
+        {
+            public Instr_INC()
+            {
+                call = "INC";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+
+        public class Instr_DEC : Instr //TODO
+        {
+            public Instr_DEC()
+            {
+                call = "INC";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_AND : Instr //TODO
+        {
+            public Instr_AND()
+            {
+                call = "INC";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_OR : Instr //TODO
+        {
+            public Instr_OR()
+            {
+                call = "INC";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_INV : Instr //TODO
+        {
+            public Instr_INV()
+            {
+                call = "INV";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_XOR : Instr //TODO
+        {
+            public Instr_XOR()
+            {
+                call = "XOR";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_CLRA : Instr //TODO
+        {
+            public Instr_CLRA()
+            {
+                call = "CLRA";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+        public class Instr_CMP : Instr //TODO
+        {
+            public Instr_CMP()
+            {
+                call = "CMP";
+                opcode = "01001100";
+                isJMP = false;
+                isInherent = true;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+        }
+
+
+        public class Instr_JMP : Instr
+        {
+            public Instr_JMP()
+            {
+                call = "JMP";
+                opcode = "11000000";
+                isJMP = true;
+                isInherent = false;
+
+            }
+            public override sbyte operation(sbyte a, sbyte b)
+            {
+                return a;
+            }
+
+
+
+        }
+
+
+
 
         public class Instructions
         {
@@ -205,7 +537,7 @@ namespace MicroComputer
 
             public void JMP_DIRECT(byte db)
             {
-                Globals._PC = (byte) Globals._MEMORY[db];
+                Globals._PC = (byte)Globals._MEMORY[db];
 
             }
 
