@@ -40,7 +40,7 @@ namespace MicroComputer
 
         private void runStep_Click(object sender, EventArgs e)
         {
-
+ 
 
             if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
