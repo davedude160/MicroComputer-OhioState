@@ -32,3 +32,6 @@ C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\D
 C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.csproj.GenerateResource.Cache
 C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.exe
 C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.pdb
+C:\Users\hongyi\Desktop\MicroComputer-OhioState\MicroComputer\bin\Debug\MicroComputer.exe.config
+C:\Users\hongyi\Desktop\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.exe
+C:\Users\hongyi\Desktop\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.pdb

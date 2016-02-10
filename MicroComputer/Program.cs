@@ -139,7 +139,7 @@ namespace MicroComputer
             public Instr_SUB()
             {
                 call = "SUB";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
