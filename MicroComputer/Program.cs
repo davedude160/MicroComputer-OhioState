@@ -156,7 +156,7 @@ namespace MicroComputer
             public Instr_SUBC()
             {
                 call = "SUB";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -217,7 +217,7 @@ namespace MicroComputer
             public Instr_INC()
             {
                 call = "INC";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -235,7 +235,7 @@ namespace MicroComputer
             public Instr_DEC()
             {
                 call = "INC";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -252,7 +252,7 @@ namespace MicroComputer
             public Instr_AND()
             {
                 call = "INC";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -269,7 +269,7 @@ namespace MicroComputer
             public Instr_OR()
             {
                 call = "INC";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -286,7 +286,7 @@ namespace MicroComputer
             public Instr_INV()
             {
                 call = "INV";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -303,7 +303,7 @@ namespace MicroComputer
             public Instr_XOR()
             {
                 call = "XOR";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -320,7 +320,7 @@ namespace MicroComputer
             public Instr_CLRA()
             {
                 call = "CLRA";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -337,7 +337,7 @@ namespace MicroComputer
             public Instr_CMP()
             {
                 call = "CMP";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -355,7 +355,7 @@ namespace MicroComputer
             public Instr_JMP()
             {
                 call = "JMP";
-                opcode = "11000000";
+                opcode = "110000";
                 isJMP = true;
                 isInherent = false;
 
