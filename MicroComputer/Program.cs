@@ -72,12 +72,13 @@ namespace MicroComputer
             {
                 Globals._PC += 2;
                 int temp1 = ac;
-                int temp2 = db;
 
+                int temp2;
 
-                if (isImmediate)
-                {
-                    while (temp1 != 0)
+                if (isImmediate) temp2 = db;
+                else
+                    temp2 = CPU.Globals._MEMORY[db];
+                while (temp1 != 0)
                     {
                         int c = temp1 & temp2;
                         System.Console.WriteLine("C = " + c);
@@ -87,11 +88,7 @@ namespace MicroComputer
                     }
 
                     return Convert.ToSByte(temp2);
-                }
-                else
-                {
-                    return ac = CPU.Globals._MEMORY[db];
-                }
+
 
             }
         }
