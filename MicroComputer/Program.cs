@@ -34,7 +34,7 @@ namespace MicroComputer
             public static List<Instr> _INSTRUCTION_ARRAY = new List<Instr>();
 
             public static byte[] _PROGRAM_ARRAY = new byte[256];
-
+            public static bool runflag;
 
 
         }
@@ -102,7 +102,7 @@ namespace MicroComputer
             public Instr_ADDC()
             {
                 call = "ADD";
-                opcode = "010000";
+                opcode = "010010";
                 isJMP = false;
                 isInherent = false;
             }
@@ -139,7 +139,7 @@ namespace MicroComputer
             public Instr_SUB()
             {
                 call = "SUB";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -156,7 +156,7 @@ namespace MicroComputer
             public Instr_SUBC()
             {
                 call = "SUB";
-                opcode = "01001100";
+                opcode = "010011";
                 isJMP = false;
                 isInherent = true;
 
@@ -196,7 +196,7 @@ namespace MicroComputer
             public Instr_STA()
             {
                 call = "STA";
-                opcode = "010000";
+                opcode = "101000";
                 isJMP = false;
                 isInherent = false;
             }
@@ -224,7 +224,8 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC++;              
+                return ++a;
             }
 
         }
@@ -234,7 +235,7 @@ namespace MicroComputer
         {
             public Instr_DEC()
             {
-                call = "INC";
+                call = "DEC";
                 opcode = "01001100";
                 isJMP = false;
                 isInherent = true;
@@ -254,7 +255,7 @@ namespace MicroComputer
                 call = "INC";
                 opcode = "01001100";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
@@ -268,10 +269,10 @@ namespace MicroComputer
         {
             public Instr_OR()
             {
-                call = "INC";
+                call = "OR";
                 opcode = "01001100";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
