@@ -167,6 +167,7 @@
             this.programMem.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.programMem.Size = new System.Drawing.Size(206, 372);
             this.programMem.TabIndex = 14;
+            this.programMem.TextChanged += new System.EventHandler(this.programMem_TextChanged);
             // 
             // dataMem
             // 

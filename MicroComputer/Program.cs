@@ -102,7 +102,7 @@ namespace MicroComputer
             public Instr_ADDC()
             {
                 call = "ADD";
-                opcode = "010000";
+                opcode = "010010";
                 isJMP = false;
                 isInherent = false;
             }
@@ -139,13 +139,15 @@ namespace MicroComputer
             public Instr_SUB()
             {
                 call = "SUB";
-                opcode = "010011";
+                opcode = "010100";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 2;
+
                 return a;
             }
 
@@ -156,13 +158,15 @@ namespace MicroComputer
             public Instr_SUBC()
             {
                 call = "SUB";
-                opcode = "010011";
+                opcode = "010110";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 2;
+
                 return a;
             }
 
@@ -196,7 +200,7 @@ namespace MicroComputer
             public Instr_STA()
             {
                 call = "STA";
-                opcode = "010000";
+                opcode = "101000";
                 isJMP = false;
                 isInherent = false;
             }
@@ -217,14 +221,16 @@ namespace MicroComputer
             public Instr_INC()
             {
                 call = "INC";
-                opcode = "010011";
+                opcode = "01001100";
                 isJMP = false;
                 isInherent = true;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC += 1;
+
+                return (sbyte)(a+1);
             }
 
         }
@@ -235,13 +241,15 @@ namespace MicroComputer
             public Instr_DEC()
             {
                 call = "INC";
-                opcode = "010011";
+                opcode = "01000100";
                 isJMP = false;
                 isInherent = true;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 1;
+
                 return a;
             }
 
@@ -252,13 +260,15 @@ namespace MicroComputer
             public Instr_AND()
             {
                 call = "INC";
-                opcode = "010011";
+                opcode = "011000";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 2;
+
                 return a;
             }
 
@@ -269,13 +279,15 @@ namespace MicroComputer
             public Instr_OR()
             {
                 call = "INC";
-                opcode = "010011";
+                opcode = "011100";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 2;
+
                 return a;
             }
 
@@ -286,13 +298,15 @@ namespace MicroComputer
             public Instr_INV()
             {
                 call = "INV";
-                opcode = "010011";
+                opcode = "01100100";
                 isJMP = false;
                 isInherent = true;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 1;
+
                 return a;
             }
 
@@ -303,13 +317,15 @@ namespace MicroComputer
             public Instr_XOR()
             {
                 call = "XOR";
-                opcode = "010011";
+                opcode = "011011";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 2;
+
                 return a;
             }
 
@@ -320,13 +336,15 @@ namespace MicroComputer
             public Instr_CLRA()
             {
                 call = "CLRA";
-                opcode = "010011";
+                opcode = "01100100";
                 isJMP = false;
                 isInherent = true;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC +=1;
+
                 return a;
             }
 
@@ -337,13 +355,15 @@ namespace MicroComputer
             public Instr_CMP()
             {
                 call = "CMP";
-                opcode = "010011";
+                opcode = "011111";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 2;
+
                 return a;
             }
 
@@ -355,7 +375,7 @@ namespace MicroComputer
             public Instr_JMP()
             {
                 call = "JMP";
-                opcode = "110000";
+                opcode = "11000000";
                 isJMP = true;
                 isInherent = false;
 

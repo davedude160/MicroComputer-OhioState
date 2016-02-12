@@ -13,14 +13,14 @@ namespace MicroComputer
     public partial class MicroBaby : Form
     {
 
-         
+
 
         public MicroBaby()
         {
             InitializeComponent();
         }
-        
-       
+
+
         private void runProgram_Click(object sender, EventArgs e)
         {
 
@@ -40,7 +40,7 @@ namespace MicroComputer
 
         private void runStep_Click(object sender, EventArgs e)
         {
- 
+
 
             if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
@@ -97,29 +97,37 @@ namespace MicroComputer
             CPU.Globals._NEGATIVE = false;
             CPU.Globals._ZERO = false;
             CPU.Globals._DATA_BUS = 0;
-    }
-    private void refreshMem_Click(object sender, EventArgs e)
+            CPU.Globals._INSTR_PC = 0;
+
+            dispAC.Text ="";
+            dispPC.Text = "";
+            dispIR.Text = "";
+
+
+
+        }
+        private void refreshMem_Click(object sender, EventArgs e)
         {
             if (CPU.Globals._MEMORY.Length > 0)
             {
-               
+
                 //output opcodes to opCodes textbox 
                 string dataString = "";
 
-                int i = 0; 
+                int i = 0;
 
-                foreach(sbyte s in CPU.Globals._MEMORY)
+                foreach (sbyte s in CPU.Globals._MEMORY)
                 {
-                    String binary = Convert.ToString((sbyte) s, 2).PadLeft(8, '0'); 
+                    String binary = Convert.ToString((sbyte)s, 2).PadLeft(8, '0');
                     if (binary.Length > 8)
                     {
-                        binary = binary.Remove(0, 8); 
+                        binary = binary.Remove(0, 8);
                     }
                     const string format = "{0,-10} {1,-15} {2,-18}";
                     // Construct the strings.
                     string fmtOutputLine = string.Format(format, i.ToString("X2"), binary, s.ToString());
                     dataString += fmtOutputLine + System.Environment.NewLine;
-                    i++; 
+                    i++;
                 }
 
                 dataMem.Text = dataString;
@@ -171,17 +179,23 @@ namespace MicroComputer
                 int i = 0;
 
 
-
-
-                foreach (string s in CPU.Globals._OPCODE_ARRAY)
+                foreach ( CPU.Instr ins in CPU.Globals._INSTRUCTION_ARRAY)
                 {
-                    opcodestring += i.ToString("X2") + "   " + s + System.Environment.NewLine;
+                    opcodestring += i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.call + System.Environment.NewLine;
                     i++;
+                    if (!ins.isInherent)
+                    {
+                        opcodestring += i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.data + System.Environment.NewLine;
+                        i++;
+
+                    }
                 }
 
 
 
                 opCodes.Text = opcodestring;
+                programMem.Text = opcodestring;
+
             }
 
             /*
@@ -216,7 +230,7 @@ output:
 
         }
 
-        public static void tokenize(String [] program)
+        public static void tokenize(String[] program)
         {
             char[] delimiterChars = { ' ', ',', '.', ';', ':', '\t' };
             String hold = "";
@@ -254,53 +268,60 @@ output:
                 switch (j)
                 {
                     case 0:
-                        break;
+                        newInstr = new CPU.Instr_LDA();
+                                                break;
 
                     case 1:
-                        break;
+                        newInstr = new CPU.Instr_STA();
+                                                break;
                     case 2:
                         newInstr = new CPU.Instr_ADD();
                         break;
 
                     case 3:
-                        break;
+                        newInstr = new CPU.Instr_ADDC();
+                                                break;
 
                     case 4:
+                        newInstr = new CPU.Instr_SUB();
                         break;
 
                     case 5:
+                        newInstr = new CPU.Instr_SUBC();
                         break;
 
                     case 6:
                         newInstr = new CPU.Instr_INC();
-
-                        break;
+                                                break;
 
                     case 7:
+                        newInstr = new CPU.Instr_DEC();
                         break;
 
                     case 8:
+                        newInstr = new CPU.Instr_AND();
                         break;
 
                     case 9:
+                        newInstr = new CPU.Instr_OR();
                         break;
                     case 10:
-
+                        newInstr = new CPU.Instr_INV();
                         break;
                     case 11:
-
+                        newInstr = new CPU.Instr_XOR();
                         break;
                     case 12:
-
+                        newInstr = new CPU.Instr_CLRA();
                         break;
                     case 13:
-
+                        newInstr = new CPU.Instr_CMP();
                         break;
                     case 14:
                         newInstr = new CPU.Instr_JMP();
-
                         break;
                     default:
+                        newInstr = new CPU.Instr_ADD();
                         break;
                 }
                 if (j >= 0)
@@ -313,12 +334,15 @@ output:
                         {
                             newInstr.opcode += "10";
                             newInstr.isImmediate = false;
+                            newInstr.data = addrMode;
                             newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
 
                         }
                         else {
                             newInstr.opcode += "01";
                             newInstr.isImmediate = true;
+                            newInstr.data = addrMode;
+
                             newInstr.dataopcode = byte.Parse(addrMode.Substring(1), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         }
                         i++;
@@ -326,6 +350,8 @@ output:
                     else if (newInstr.isJMP)
                     {
                         String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
+                        newInstr.data = addrMode;
+
                         newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         i++;
                     }
@@ -352,13 +378,14 @@ output:
         {
 
 
-            try { 
-            int memAdd = int.Parse(enterMemAdd.SelectedItem.ToString(), System.Globalization.NumberStyles.HexNumber);
+            try
+            {
+                int memAdd = int.Parse(enterMemAdd.SelectedItem.ToString(), System.Globalization.NumberStyles.HexNumber);
                 sbyte memValue = 0;
 
                 try
                 {
-                    memValue= (sbyte)Int32.Parse(enterMemContent.Text.ToString());
+                    memValue = (sbyte)Int32.Parse(enterMemContent.Text.ToString());
                 }
                 catch (FormatException)
                 {
@@ -367,23 +394,23 @@ output:
                 System.Console.WriteLine("Mem Address: " + memAdd);
                 System.Console.WriteLine("Mem Content: " + memValue);
 
-            
-            CPU.Globals._MEMORY[memAdd] = memValue;
-            refreshMem_Click(sender, e);
+
+                CPU.Globals._MEMORY[memAdd] = memValue;
+                refreshMem_Click(sender, e);
             }
 
             catch (NullReferenceException)
             {
-                 
+
             }
-           
+
         }
 
-       
+
 
         private void dispPC_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void dispIR_TextChanged(object sender, EventArgs e)
@@ -426,6 +453,9 @@ output:
 
         }
 
-        
+        private void programMem_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
