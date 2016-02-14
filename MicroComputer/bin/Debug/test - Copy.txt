@@ -1,0 +1,6 @@
+
+            Add $FF;
+ 
+            Add $01;
+            INc;
+            jmp #$F1;

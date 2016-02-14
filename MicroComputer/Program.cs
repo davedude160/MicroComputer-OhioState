@@ -71,24 +71,38 @@ namespace MicroComputer
             public override sbyte operation(sbyte ac, sbyte db)
             {
                 Globals._PC += 2;
-                int temp1 = ac;
+                byte temp1 = (byte)ac;
 
-                int temp2;
+                byte temp2;
 
-                if (isImmediate) temp2 = db;
+                byte temp3 = (byte)0xFF;
+
+                if (isImmediate) temp2 = (byte)db;
                 else
-                    temp2 = CPU.Globals._MEMORY[db];
-                while (temp1 != 0)
-                    {
-                        int c = temp1 & temp2;
-                        System.Console.WriteLine("C = " + c);
-                        temp2 = temp1 ^ temp2;
-                        temp1 = c << 1;
+                    temp2 = (byte)CPU.Globals._MEMORY[db];
 
-                    }
+                if (Globals._OVERFLOW)
+                {
+                    System.Console.WriteLine("C=1");
+                }
+                else
+                {
+                    System.Console.WriteLine("C=0");
 
-                    return Convert.ToSByte(temp2);
+                }
 
+                Globals._OVERFLOW = (temp1 > temp3 - temp2);
+                if (Globals._OVERFLOW)
+                {
+                    System.Console.WriteLine("C=1");
+                }
+                else
+                {
+                    System.Console.WriteLine("C=0");
+
+                }
+                return Convert.ToSByte( temp1 + temp2);
+                
 
             }
         }
@@ -98,7 +112,7 @@ namespace MicroComputer
 
             public Instr_ADDC()
             {
-                call = "ADD";
+                call = "ADDC";
                 opcode = "010010";
                 isJMP = false;
                 isInherent = false;
@@ -154,7 +168,7 @@ namespace MicroComputer
         {
             public Instr_SUBC()
             {
-                call = "SUB";
+                call = "SUBC";
                 opcode = "010110";
                 isJMP = false;
                 isInherent = false;
