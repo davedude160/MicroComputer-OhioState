@@ -94,14 +94,14 @@ namespace MicroComputer
                 }
 
 
-                if(CPU.Globals._OVERFLOW == true)
-                {
-                    overflowFlag.Checked = true;
-                }
-
-                if(CPU.Globals._CARRY == true)
+                if (CPU.Globals._CARRY == true)
                 {
                     carryFlag.Checked = true;
+                }
+                else
+                {
+                    carryFlag.Checked = false;
+
                 }
 
                 dispPC.Text = CPU.Globals._PC.ToString();

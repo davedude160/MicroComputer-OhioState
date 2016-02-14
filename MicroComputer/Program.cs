@@ -72,34 +72,15 @@ namespace MicroComputer
             {
                 Globals._PC += 2;
                 byte temp1 = (byte)ac;
-
                 byte temp2;
-
                 byte temp3 = (byte)0xFF;
 
                 if (isImmediate) temp2 = (byte)db;
                 else
                     temp2 = (byte)CPU.Globals._MEMORY[db];
 
-                if (Globals._CARRY)
-                {
-                    System.Console.WriteLine("C=1");
-                }
-                else
-                {
-                    System.Console.WriteLine("C=0");
-                }
 
                 Globals._CARRY = (temp1 > temp3 - temp2);
-                if (Globals._CARRY)
-                {
-                    System.Console.WriteLine("C=1");
-                }
-                else
-                {
-                    System.Console.WriteLine("C=0");
-                }
-
                 int temp4 = temp1 + temp2;
 
                 return (sbyte)temp4;
@@ -129,40 +110,16 @@ namespace MicroComputer
                 else
                     temp2 = (byte)CPU.Globals._MEMORY[db];
 
-                if (Globals._OVERFLOW)
+                if (Globals._CARRY)
                 {
-                    System.Console.WriteLine("C=1");
+                    Globals._CARRY = (temp1 >= temp3 - temp2);
+                    temp4 = temp1 + temp2 + 1;
                 }
                 else
                 {
-                    System.Console.WriteLine("C=0");
-                }
-                if (Globals._OVERFLOW)
-                {
-                    Globals._OVERFLOW = (temp1 >= temp3 - temp2);
-                    temp4 = temp1 + temp2+1;
-
-                }
-                else
-                {
-                    Globals._OVERFLOW = (temp1 > temp3 - temp2);
+                    Globals._CARRY = (temp1 > temp3 - temp2);
                     temp4 = temp1 + temp2;
-
                 }
-
-
-
-
-                if (Globals._OVERFLOW)
-                {
-                    System.Console.WriteLine("C=1");
-                }
-                else
-                {
-                    System.Console.WriteLine("C=0");
-                }
-
-
                 return (sbyte)temp4;
             }
 
@@ -173,7 +130,6 @@ namespace MicroComputer
             public Instr_SUB()
             {
                 call = "SUB";
-
                 opcode = "010100";
 
                 isJMP = false;
@@ -189,29 +145,11 @@ namespace MicroComputer
 
                 byte temp3 = (byte)0xFF;
 
-                if (isImmediate) temp2 = (byte)-db;
+                if (isImmediate) temp2 = (byte)(-db);
                 else
-                    temp2 = (byte)-CPU.Globals._MEMORY[db];
+                    temp2 = (byte)(-CPU.Globals._MEMORY[db]);
 
-                if (Globals._CARRY)
-                {
-                    System.Console.WriteLine("C=1");
-                }
-                else
-                {
-                    System.Console.WriteLine("C=0");
-                }
-
-                Globals._CARRY = (temp1 > temp3 - temp2);
-                if (Globals._CARRY)
-                {
-                    System.Console.WriteLine("C=1");
-                }
-                else
-                {
-                    System.Console.WriteLine("C=0");
-                }
-
+                Globals._CARRY = (temp1 <= temp3 - temp2);
                 int temp4 = temp1 + temp2;
 
                 return (sbyte)temp4;
@@ -240,44 +178,21 @@ namespace MicroComputer
 
                 byte temp3 = (byte)0xFF;
                 int temp4;
-                if (isImmediate) temp2 = (byte)-db;
+                if (isImmediate) temp2 = (byte)(-db);
                 else
-                    temp2 = (byte)-CPU.Globals._MEMORY[db];
+                    temp2 = (byte)(-CPU.Globals._MEMORY[db]);
 
-                if (Globals._OVERFLOW)
+                if (Globals._CARRY)
                 {
-                    System.Console.WriteLine("C=1");
-                }
-                else
-                {
-                    System.Console.WriteLine("C=0");
-                }
-                if (Globals._OVERFLOW)
-                {
-                    Globals._OVERFLOW = (temp1 >= temp3 - temp2);
-                    temp4 = temp1 + temp2 + 1;
+                    Globals._CARRY = (temp1 < temp3 - temp2);
+                    temp4 = temp1 + temp2 - 1;
 
                 }
                 else
                 {
-                    Globals._OVERFLOW = (temp1 > temp3 - temp2);
+                    Globals._CARRY = (temp1 <= temp3 - temp2);
                     temp4 = temp1 + temp2;
-
                 }
-
-
-
-
-                if (Globals._OVERFLOW)
-                {
-                    System.Console.WriteLine("C=1");
-                }
-                else
-                {
-                    System.Console.WriteLine("C=0");
-                }
-
-
                 return (sbyte)temp4;
 
             }
@@ -340,8 +255,8 @@ namespace MicroComputer
             {
 
 
-                Globals._PC++;              
-                return (sbyte)(a+1);
+                Globals._PC++;
+                return (sbyte)(a + 1);
 
             }
 
@@ -380,7 +295,8 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                if (isImmediate) {
+                if (isImmediate)
+                {
                     Globals._PC += 2;
                     return Convert.ToSByte(a & b);
                 }
@@ -389,7 +305,7 @@ namespace MicroComputer
                     Globals._PC += 2;
                     return (sbyte)(CPU.Globals._MEMORY[b] & a);
                 }
-               
+
             }
 
         }
@@ -477,7 +393,7 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                Globals._PC +=1;
+                Globals._PC += 1;
                 return 0;
             }
 

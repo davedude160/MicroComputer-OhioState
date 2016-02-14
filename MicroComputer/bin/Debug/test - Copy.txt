@@ -1,6 +1,5 @@
-
-            Add $FF;
- 
-            Add $01;
-            INc;
-            jmp #$F1;
+sub $01;
+subc $7F;
+subc $81;
+subc $7F;
+subc $81;
