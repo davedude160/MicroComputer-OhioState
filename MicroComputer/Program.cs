@@ -81,6 +81,7 @@ namespace MicroComputer
 
 
                 Globals._CARRY = (temp1 > temp3 - temp2);
+
                 int temp4 = temp1 + temp2;
 
                 return (sbyte)temp4;
@@ -109,7 +110,6 @@ namespace MicroComputer
                 if (isImmediate) temp2 = (byte)db;
                 else
                     temp2 = (byte)CPU.Globals._MEMORY[db];
-
                 if (Globals._CARRY)
                 {
                     Globals._CARRY = (temp1 >= temp3 - temp2);
@@ -120,6 +120,8 @@ namespace MicroComputer
                     Globals._CARRY = (temp1 > temp3 - temp2);
                     temp4 = temp1 + temp2;
                 }
+
+
                 return (sbyte)temp4;
             }
 
@@ -152,7 +154,7 @@ namespace MicroComputer
                 Globals._CARRY = (temp1 <= temp3 - temp2);
                 int temp4 = temp1 + temp2;
 
-                return (sbyte)temp4;
+                return (sbyte)(temp4);
 
             }
 
@@ -181,12 +183,10 @@ namespace MicroComputer
                 if (isImmediate) temp2 = (byte)(-db);
                 else
                     temp2 = (byte)(-CPU.Globals._MEMORY[db]);
-
                 if (Globals._CARRY)
                 {
                     Globals._CARRY = (temp1 < temp3 - temp2);
                     temp4 = temp1 + temp2 - 1;
-
                 }
                 else
                 {
@@ -194,7 +194,6 @@ namespace MicroComputer
                     temp4 = temp1 + temp2;
                 }
                 return (sbyte)temp4;
-
             }
         }
 
@@ -211,8 +210,6 @@ namespace MicroComputer
             public override sbyte operation(sbyte ac, sbyte db)
             {
                 Globals._PC += 2;
-
-                ac = db;
 
                 if (isImmediate) ac = db;
                 else ac = Globals._MEMORY[db];
@@ -350,7 +347,7 @@ namespace MicroComputer
             public override sbyte operation(sbyte a, sbyte b)
             {
                 Globals._PC++;
-                return Convert.ToSByte(-a);
+                return Convert.ToSByte(~a + 1);
             }
 
         }
@@ -464,216 +461,6 @@ namespace MicroComputer
 
 
         }
-
-
-
-
-        public class Instructions
-        {
-            public sbyte LDA_IMMEDIATE(sbyte ac, sbyte db) //Loads whatever is on the databus to the accumulator
-            {
-                Globals._PC++;
-                ac = db;
-                return ac;
-            }
-
-            public sbyte LDA_DIRECT(sbyte ac, sbyte db) //Loads from memory location (on the databus) to accumulator
-            {
-                Globals._PC++;
-                ac = Convert.ToSByte(Globals._MEMORY[db]);
-                return ac;
-            }
-
-            public void STA_DIRECT(sbyte ac, sbyte db)//Stores what is in the accumulator to memory location (on the databus)
-            {
-                Globals._PC++;
-                Globals._MEMORY[db] = Convert.ToSByte(ac);
-            }
-
-            public sbyte ADD_IMMEDIATE(sbyte ac, sbyte db)//
-            {
-                Globals._PC++;
-                int temp = ac + db;
-                ac = Convert.ToSByte(temp);
-
-                return ac;
-            }
-
-            public sbyte ADD_DIRECT(sbyte ac, sbyte db)
-            {
-                int temp = Globals._MEMORY[db] + ac;
-                ac = Convert.ToSByte(temp);
-
-                return ac;
-            }
-
-            public sbyte ADDC_IMMEDIATE(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                int temp = ac + db + 1;
-                ac = Convert.ToSByte(temp);
-
-
-                return ac;
-            }
-
-            public sbyte ADDC_DIRECT(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                int temp = Globals._MEMORY[db] + ac + 1;
-                ac = Convert.ToSByte(temp);
-
-                return ac;
-            }
-
-            public sbyte SUB_IMMEDIATE(sbyte ac, sbyte db)
-            {
-                int temp = ac - db;
-                ac = Convert.ToSByte(temp);
-
-                return ac;
-            }
-
-            public int SUB_DIRECT(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                int temp = Globals._MEMORY[db] - ac;
-                ac = Convert.ToSByte(temp);
-
-                return ac;
-            }
-
-            public sbyte SUBC_IMMEDIATE(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                int temp = ac + db + 1;
-                ac = Convert.ToSByte(temp);
-
-
-                return ac;
-            }
-
-            public sbyte SUBC_DIRECT(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                int temp = Globals._MEMORY[db] + ac + 1;
-
-
-                return ac;
-            }
-
-            public sbyte INC_INHERENT(sbyte ac)
-            {
-                int temp = ac + 1;
-                ac = Convert.ToSByte(temp);
-                return ac;
-            }
-
-            public sbyte DEC_INHERENT(sbyte ac)
-            {
-                Globals._PC++;
-                int temp = ac - 1;
-                ac = Convert.ToSByte(temp);
-
-                return ac;
-            }
-
-            public sbyte AND_DIRECT(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                return (Convert.ToSByte(ac & db));
-            }
-
-            public sbyte AND_IMMEDIATE(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                return (Convert.ToSByte(ac & Globals._MEMORY[db]));
-            }
-
-            public sbyte OR_DIRECT(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                return (Convert.ToSByte(ac | db));
-            }
-
-            public sbyte OR_IMMEDIATE(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                return (Convert.ToSByte(ac | Globals._MEMORY[db]));
-            }
-
-            public sbyte XOR_DIRECT(sbyte ac, sbyte db)
-            {
-                Globals._PC++;
-                return (Convert.ToSByte(ac ^ db));
-            }
-
-            public sbyte XOR_IMMEDIATE(int ac, int db)
-            {
-                Globals._PC++;
-                return (Convert.ToSByte(ac ^ Globals._MEMORY[db]));
-            }
-
-            public sbyte INV_INHERENT(sbyte ac)
-            {
-                Globals._PC++;
-                return (Convert.ToSByte(~ac)); //Returns bitwise complement
-            }
-
-            public sbyte CLRA_INHERENT(sbyte ac)
-            {
-                Globals._PC++;
-                ac = 0;
-                return (ac);
-            }
-
-            //public void JMP_DIRECT(int db)
-            //{
-            //    Globals._PC = db;
-            //}
-
-            public void JMP_DIRECT(byte db)
-            {
-                Globals._PC = (byte)Globals._MEMORY[db];
-
-            }
-
-        }
-
-        public class Converters
-        {
-            public string SbyteToString(sbyte toBeConverted)
-            {
-                return (Convert.ToString(toBeConverted, 2).PadLeft(8, '0'));
-            }
-
-            public sbyte StringToSbyte(string toBeConverted)
-            {
-                char[] arr;
-                sbyte bin = 0;
-
-                arr = toBeConverted.ToCharArray(0, 7); //Converts to char array
-
-                int i = 0;
-
-                while (i < 6)
-                {
-                    if (Char.GetNumericValue(arr[i]) == 1)
-                    {
-                        bin = Convert.ToSByte(bin + (2 ^ i));
-                    }
-                }
-
-                if (Char.GetNumericValue(arr[7]) == 1)
-                {
-                    bin = Convert.ToSByte(-bin);
-                }
-
-                return (bin);
-            }
-
-        }
-
 
 
         [STAThread]
