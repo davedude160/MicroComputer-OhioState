@@ -88,7 +88,6 @@ namespace MicroComputer
                 else
                 {
                     System.Console.WriteLine("C=0");
-
                 }
 
                 Globals._OVERFLOW = (temp1 > temp3 - temp2);
@@ -99,11 +98,11 @@ namespace MicroComputer
                 else
                 {
                     System.Console.WriteLine("C=0");
-
                 }
-                return Convert.ToSByte( temp1 + temp2);
-                
 
+                int temp4 = temp1 + temp2;
+
+                return (sbyte)temp4;
             }
         }
 
@@ -120,29 +119,53 @@ namespace MicroComputer
             public override sbyte operation(sbyte ac, sbyte db)
             {
                 Globals._PC += 2;
-                int temp1 = ac;
-                int temp2 = db;
+                byte temp1 = (byte)ac;
 
+                byte temp2;
 
-                if (isImmediate)
+                byte temp3 = (byte)0xFF;
+                int temp4;
+                if (isImmediate) temp2 = (byte)db;
+                else
+                    temp2 = (byte)CPU.Globals._MEMORY[db];
+
+                if (Globals._OVERFLOW)
                 {
-                    while (temp1 != 0)
-                    {
-                        int c = temp1 & temp2;
-                        System.Console.WriteLine("C = " + c);
-                        temp2 = temp1 ^ temp2;
-                        temp1 = c << 1;
-
-                    }
-
-                    return Convert.ToSByte(temp2);
+                    System.Console.WriteLine("C=1");
                 }
                 else
                 {
-                    return ac = CPU.Globals._MEMORY[db];
+                    System.Console.WriteLine("C=0");
+                }
+                if (Globals._OVERFLOW)
+                {
+                    Globals._OVERFLOW = (temp1 >= temp3 - temp2);
+                    temp4 = temp1 + temp2+1;
+
+                }
+                else
+                {
+                    Globals._OVERFLOW = (temp1 > temp3 - temp2);
+                    temp4 = temp1 + temp2;
+
                 }
 
+
+
+
+                if (Globals._OVERFLOW)
+                {
+                    System.Console.WriteLine("C=1");
+                }
+                else
+                {
+                    System.Console.WriteLine("C=0");
+                }
+
+
+                return (sbyte)temp4;
             }
+
         }
 
         public class Instr_SUB : Instr //TODO
@@ -241,7 +264,7 @@ namespace MicroComputer
             {
                 Globals._PC += 1;
 
-                return (sbyte)(a+1);
+                return (sbyte)(a + 1);
             }
 
         }
@@ -354,7 +377,7 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                Globals._PC +=1;
+                Globals._PC += 1;
 
                 return a;
             }
