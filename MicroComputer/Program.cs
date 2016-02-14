@@ -146,7 +146,7 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                return Convert.ToSByte(a - b);
             }
 
         }
@@ -163,7 +163,7 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                return Convert.ToSByte(a-b);
             }
 
         }
@@ -243,7 +243,8 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC++;
+                return --a;
             }
 
         }
@@ -260,7 +261,8 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC += 2; ;
+                return Convert.ToSByte(a & b);
             }
 
         }
@@ -277,7 +279,8 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC += 2;
+                return Convert.ToSByte(a ^ b);
             }
 
         }
@@ -294,7 +297,8 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC++;
+                return Convert.ToSByte(-a);
             }
 
         }
@@ -311,6 +315,7 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+                Globals._PC += 2;
                 return a;
             }
 
@@ -328,7 +333,8 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC++;
+                return 0;
             }
 
         }
@@ -345,7 +351,15 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                if(a < b)
+                {
+                    return -1;
+                }if (a > b)
+                {
+                    return 1;
+                } else
+                    return 0;
+
             }
 
         }
