@@ -81,7 +81,7 @@ namespace MicroComputer
                 else
                     temp2 = (byte)CPU.Globals._MEMORY[db];
 
-                if (Globals._OVERFLOW)
+                if (Globals._CARRY)
                 {
                     System.Console.WriteLine("C=1");
                 }
@@ -90,8 +90,8 @@ namespace MicroComputer
                     System.Console.WriteLine("C=0");
                 }
 
-                Globals._OVERFLOW = (temp1 > temp3 - temp2);
-                if (Globals._OVERFLOW)
+                Globals._CARRY = (temp1 > temp3 - temp2);
+                if (Globals._CARRY)
                 {
                     System.Console.WriteLine("C=1");
                 }
@@ -180,18 +180,41 @@ namespace MicroComputer
                 isInherent = false;
 
             }
-            public override sbyte operation(sbyte a, sbyte b)
+            public override sbyte operation(sbyte ac, sbyte db)
             {
-                if (isImmediate)
+                Globals._PC += 2;
+                byte temp1 = (byte)ac;
+
+                byte temp2;
+
+                byte temp3 = (byte)0xFF;
+
+                if (isImmediate) temp2 = (byte)-db;
+                else
+                    temp2 = (byte)-CPU.Globals._MEMORY[db];
+
+                if (Globals._CARRY)
                 {
-                    Globals._PC += 2;
-                    return Convert.ToSByte(a - b);
+                    System.Console.WriteLine("C=1");
                 }
                 else
                 {
-                    Globals._PC += 2;
-                    return a;
+                    System.Console.WriteLine("C=0");
                 }
+
+                Globals._CARRY = (temp1 > temp3 - temp2);
+                if (Globals._CARRY)
+                {
+                    System.Console.WriteLine("C=1");
+                }
+                else
+                {
+                    System.Console.WriteLine("C=0");
+                }
+
+                int temp4 = temp1 + temp2;
+
+                return (sbyte)temp4;
 
             }
 
@@ -208,12 +231,56 @@ namespace MicroComputer
                 isInherent = false;
 
             }
-            public override sbyte operation(sbyte a, sbyte b)
+            public override sbyte operation(sbyte ac, sbyte db)
             {
                 Globals._PC += 2;
-                return Convert.ToSByte(a - b);
-            }
+                byte temp1 = (byte)ac;
 
+                byte temp2;
+
+                byte temp3 = (byte)0xFF;
+                int temp4;
+                if (isImmediate) temp2 = (byte)-db;
+                else
+                    temp2 = (byte)-CPU.Globals._MEMORY[db];
+
+                if (Globals._OVERFLOW)
+                {
+                    System.Console.WriteLine("C=1");
+                }
+                else
+                {
+                    System.Console.WriteLine("C=0");
+                }
+                if (Globals._OVERFLOW)
+                {
+                    Globals._OVERFLOW = (temp1 >= temp3 - temp2);
+                    temp4 = temp1 + temp2 + 1;
+
+                }
+                else
+                {
+                    Globals._OVERFLOW = (temp1 > temp3 - temp2);
+                    temp4 = temp1 + temp2;
+
+                }
+
+
+
+
+                if (Globals._OVERFLOW)
+                {
+                    System.Console.WriteLine("C=1");
+                }
+                else
+                {
+                    System.Console.WriteLine("C=0");
+                }
+
+
+                return (sbyte)temp4;
+
+            }
         }
 
         public class Instr_LDA : Instr
@@ -403,7 +470,7 @@ namespace MicroComputer
             public Instr_CLRA()
             {
                 call = "CLRA";
-                opcode = "01100100";
+                opcode = "01110100";
                 isJMP = false;
                 isInherent = true;
 

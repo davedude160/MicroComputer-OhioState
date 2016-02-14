@@ -123,9 +123,12 @@ namespace MicroComputer
             CPU.Globals._IR = 0;
             dispIR.Text = CPU.Globals._IR.ToString();
             CPU.Globals._CARRY = false;
+            carryFlag.Checked = false;
             CPU.Globals._OVERFLOW = false;
             CPU.Globals._NEGATIVE = false;
+            negFlag.Checked = false;
             CPU.Globals._ZERO = false;
+            zeroFlag.Checked = false;
             CPU.Globals._DATA_BUS = 0;
             CPU.Globals._INSTR_PC = 0;
 

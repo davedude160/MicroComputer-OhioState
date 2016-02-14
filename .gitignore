@@ -46,3 +46,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 MicroComputer/bin/Debug/MicroComputer.exe
+MicroComputer/bin/Debug/MicroComputer.exe
+*.pdb
+MicroComputer/obj/Debug/MicroComputer.csproj.FileListAbsolute.txt
