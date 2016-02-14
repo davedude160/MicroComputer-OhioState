@@ -48,6 +48,8 @@ namespace MicroComputer
                     dispIR.Text = "Please load program first.";
                 else
                     dispIR.Text = "End of execution";
+                //dispIR.Text = "Load Program."; 
+                MessageBox.Show( "Please load program first.");
             }
             else {
                 CPU.Globals.runflag = true;
@@ -60,6 +62,9 @@ namespace MicroComputer
                 if (currentInstr.call == "STA")
                 {
                     currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+                }else if (currentInstr.isJMP)
+                {
+
                 }
                 else
                 {
@@ -69,24 +74,39 @@ namespace MicroComputer
                 if (CPU.Globals._AC == 0)
                 {
                     CPU.Globals._ZERO = true;
+                    zeroFlag.Checked = true;
                 }
                 else
                 {
                     CPU.Globals._ZERO = false;
+                    zeroFlag.Checked = false;
                 }
 
                 if (CPU.Globals._AC < 0)
                 {
                     CPU.Globals._NEGATIVE = true;
+                    negFlag.Checked = true;
                 }
                 else
                 {
                     CPU.Globals._NEGATIVE = false;
+                    negFlag.Checked = false;
                 }
 
+                if(CPU.Globals._OVERFLOW == true)
+                {
+                    overflowFlag.Checked = true;
+                }
+
+                if(CPU.Globals._CARRY == true)
+                {
+                    carryFlag.Checked = true;
+                }
+
+                dispPC.Text = CPU.Globals._PC.ToString();
                 CPU.Globals._INSTR_PC++;
                 dispAC.Text = CPU.Globals._AC.ToString();
-
+                refreshMem_Click(sender, e);
             }
 
 
@@ -106,8 +126,13 @@ namespace MicroComputer
             CPU.Globals._ZERO = false;
             CPU.Globals._DATA_BUS = 0;
             dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
-            
-            
+            dispPC.Text = CPU.Globals._PC.ToString();
+            dispAC.Text = CPU.Globals._AC.ToString();
+            dispIR.Text = CPU.Globals._IR.ToString();
+            loadProgram_Click(sender, e); 
+
+
+
     }
     private void refreshMem_Click(object sender, EventArgs e)
         {
@@ -193,6 +218,7 @@ namespace MicroComputer
 
 
                 opCodes.Text = opcodestring;
+                refreshMem_Click(sender, e);
             }
 
             /*

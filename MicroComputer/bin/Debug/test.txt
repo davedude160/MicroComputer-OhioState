@@ -1,0 +1,12 @@
+            Add #$13;
+            SUb $23;
+            XOR #$A2;
+            INV;
+            Add #$13;
+            Add $13;
+ 
+
+ 
+            Add $13;
+            INc;
+            jmp #$F1;

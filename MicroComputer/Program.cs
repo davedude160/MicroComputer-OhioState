@@ -72,12 +72,13 @@ namespace MicroComputer
             {
                 Globals._PC += 2;
                 int temp1 = ac;
-                int temp2 = db;
 
+                int temp2;
 
-                if (isImmediate)
-                {
-                    while (temp1 != 0)
+                if (isImmediate) temp2 = db;
+                else
+                    temp2 = CPU.Globals._MEMORY[db];
+                while (temp1 != 0)
                     {
                         int c = temp1 & temp2;
                         System.Console.WriteLine("C = " + c);
@@ -87,11 +88,7 @@ namespace MicroComputer
                     }
 
                     return Convert.ToSByte(temp2);
-                }
-                else
-                {
-                    return ac = CPU.Globals._MEMORY[db];
-                }
+
 
             }
         }
@@ -128,7 +125,7 @@ namespace MicroComputer
                 }
                 else
                 {
-                    return ac = CPU.Globals._MEMORY[db];
+                    return ac = (sbyte)(ac + CPU.Globals._MEMORY[db]);
                 }
 
             }
@@ -139,14 +136,26 @@ namespace MicroComputer
             public Instr_SUB()
             {
                 call = "SUB";
-                opcode = "010011";
+
+                opcode = "010100";
+
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                if (isImmediate)
+                {
+                    Globals._PC += 2;
+                    return Convert.ToSByte(a - b);
+                }
+                else
+                {
+                    Globals._PC += 2;
+                    return a;
+                }
+
             }
 
         }
@@ -155,15 +164,18 @@ namespace MicroComputer
         {
             public Instr_SUBC()
             {
-                call = "SUB";
-                opcode = "010011";
+                call = "SUBC";
+
+                opcode = "010110";
+
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC += 2;
+                return Convert.ToSByte(a - b);
             }
 
         }
@@ -203,7 +215,6 @@ namespace MicroComputer
             public override sbyte operation(sbyte ac, sbyte db)
             {
                 Globals._PC += 2;
-
                 Globals._MEMORY[db] = ac;
 
                 return 1;
@@ -224,8 +235,10 @@ namespace MicroComputer
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
+
                 Globals._PC++;              
-                return ++a;
+                return (sbyte)(a+1);
+
             }
 
         }
@@ -235,15 +248,18 @@ namespace MicroComputer
         {
             public Instr_DEC()
             {
+
                 call = "DEC";
-                opcode = "01001100";
+                opcode = "01000100";
+
                 isJMP = false;
                 isInherent = true;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC++;
+                return --a;
             }
 
         }
@@ -252,15 +268,24 @@ namespace MicroComputer
         {
             public Instr_AND()
             {
-                call = "INC";
-                opcode = "01001100";
+                call = "AND";
+                opcode = "011000";
                 isJMP = false;
                 isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                if (isImmediate) {
+                    Globals._PC += 2;
+                    return Convert.ToSByte(a & b);
+                }
+                else
+                {
+                    Globals._PC += 2;
+                    return (sbyte)(CPU.Globals._MEMORY[b] & a);
+                }
+               
             }
 
         }
@@ -269,15 +294,25 @@ namespace MicroComputer
         {
             public Instr_OR()
             {
+
                 call = "OR";
-                opcode = "01001100";
+                opcode = "011100";
                 isJMP = false;
                 isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                if (isImmediate)
+                {
+                    Globals._PC += 2;
+                    return Convert.ToSByte(a | b);
+                }
+                else
+                {
+                    Globals._PC += 2;
+                    return (sbyte)(CPU.Globals._MEMORY[b] | a);
+                }
             }
 
         }
@@ -287,14 +322,15 @@ namespace MicroComputer
             public Instr_INV()
             {
                 call = "INV";
-                opcode = "01001100";
+                opcode = "01100100";
                 isJMP = false;
                 isInherent = true;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC++;
+                return Convert.ToSByte(-a);
             }
 
         }
@@ -304,14 +340,23 @@ namespace MicroComputer
             public Instr_XOR()
             {
                 call = "XOR";
-                opcode = "01001100";
+                opcode = "011011";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                if (isImmediate)
+                {
+                    Globals._PC += 2;
+                    return Convert.ToSByte(a ^ b);
+                }
+                else
+                {
+                    Globals._PC += 2;
+                    return (sbyte)(CPU.Globals._MEMORY[b] ^ a);
+                }
             }
 
         }
@@ -321,14 +366,15 @@ namespace MicroComputer
             public Instr_CLRA()
             {
                 call = "CLRA";
-                opcode = "01001100";
+                opcode = "01100100";
                 isJMP = false;
                 isInherent = true;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                Globals._PC +=1;
+                return 0;
             }
 
         }
@@ -338,14 +384,43 @@ namespace MicroComputer
             public Instr_CMP()
             {
                 call = "CMP";
-                opcode = "01001100";
+                opcode = "011111";
                 isJMP = false;
-                isInherent = true;
+                isInherent = false;
 
             }
             public override sbyte operation(sbyte a, sbyte b)
             {
-                return a;
+                if (isImmediate)
+                {
+                    Globals._PC += 2;
+
+                    if (a < b)
+                    {
+                        return -1;
+                    }
+                    if (a > b)
+                    {
+                        return 1;
+                    }
+                    else
+                        return 0;
+                }
+                else
+                {
+                    Globals._PC += 2;
+
+                    if (a < CPU.Globals._MEMORY[b])
+                    {
+                        return -1;
+                    }
+                    if (a > CPU.Globals._MEMORY[b])
+                    {
+                        return 1;
+                    }
+                    else
+                        return 0;
+                }
             }
 
         }
