@@ -93,23 +93,19 @@ namespace MicroComputer
                     negFlag.Checked = false;
                 }
 
-<<<<<<< HEAD
+
 
                 if (CPU.Globals._CARRY == true)
                 {
                     carryFlag.Checked = true;
                 }
                 else
-=======
+
                 if(CPU.Globals._CARRY == true)
->>>>>>> origin/GUI-Update
+
                 {
                     carryFlag.Checked = false;
 
-                }
-                else
-                {
-                    carryFlag.Checked = false;
                 }
 
                 dispPC.Text = CPU.Globals._PC.ToString();
@@ -425,5 +421,12 @@ namespace MicroComputer
             }
 
         }
+
+        private void programEditor_Click(object sender, EventArgs e)
+        {
+            if(programEditor.Text == "Enter your code...")
+            programEditor.Text = "";
+        }
+
     }
 }
