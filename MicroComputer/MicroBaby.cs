@@ -44,9 +44,7 @@ namespace MicroComputer
 
             if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
-
-                //dispIR.Text = "Load Program."; 
-                MessageBox.Show( "Please load program first.");
+                dispIR.Text = "Please load program first.";
             }
             else {
 
@@ -80,11 +78,10 @@ namespace MicroComputer
                 {
                     CPU.Globals._NEGATIVE = false;
                 }
-                dispPC.Text = CPU.Globals._PC.ToString();
-                
+
                 CPU.Globals._INSTR_PC++;
                 dispAC.Text = CPU.Globals._AC.ToString();
-                refreshMem_Click(sender, e);
+
             }
 
 
@@ -100,13 +97,6 @@ namespace MicroComputer
             CPU.Globals._NEGATIVE = false;
             CPU.Globals._ZERO = false;
             CPU.Globals._DATA_BUS = 0;
-
-            dispPC.Text = CPU.Globals._PC.ToString();
-            dispAC.Text = CPU.Globals._AC.ToString();
-            dispIR.Text = CPU.Globals._IR.ToString();
-            loadProgram_Click(sender, e); 
-
-
     }
     private void refreshMem_Click(object sender, EventArgs e)
         {
@@ -192,7 +182,6 @@ namespace MicroComputer
 
 
                 opCodes.Text = opcodestring;
-                refreshMem_Click(sender, e);
             }
 
             /*
