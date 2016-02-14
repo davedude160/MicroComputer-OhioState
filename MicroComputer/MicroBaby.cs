@@ -93,15 +93,13 @@ namespace MicroComputer
                     negFlag.Checked = false;
                 }
 
-
-                if(CPU.Globals._OVERFLOW == true)
-                {
-                    overflowFlag.Checked = true;
-                }
-
                 if(CPU.Globals._CARRY == true)
                 {
                     carryFlag.Checked = true;
+                }
+                else
+                {
+                    carryFlag.Checked = false;
                 }
 
                 dispPC.Text = CPU.Globals._PC.ToString();
@@ -135,7 +133,6 @@ namespace MicroComputer
             dispAC.Text = "";
             dispPC.Text = "";
             dispIR.Text = "";
-
 
 
         }
@@ -239,35 +236,6 @@ namespace MicroComputer
 
             }
 
-            /*
-            input load in text
-            Add #$13;
-            SUb $23;
-            XOR #$A2;
-            INV;
-            Add #$13;
-            Add $13;
- 
- 
-            Add $13;
-            INc;
-            jmp #$F1;
- 
-output:
-01000010
-00010011
-01010001
-00100011
-01010110
-10100010
-01011000
-01000010
-00010011
-01000001
-00010011
-*/
-
-
         }
 
         public static void tokenize(String[] program)
@@ -292,8 +260,6 @@ output:
                 CPU.Globals._PROGRAM_TOKENS.Add(temp.ToUpper());
 
             }
-
-
 
 
         }
@@ -447,58 +413,6 @@ output:
             {
 
             }
-
-        }
-
-
-
-        private void dispPC_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dispIR_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dispAC_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Sim_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dispDataBus_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dispMemAdd_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dispMemContent_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void programEditor_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void enterMemAdd_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void programMem_TextChanged(object sender, EventArgs e)
-        {
 
         }
     }
