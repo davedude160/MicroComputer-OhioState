@@ -153,7 +153,7 @@ namespace MicroComputer
             dispPC.Text = CPU.Globals._PC.ToString();
             dispAC.Text = CPU.Globals._AC.ToString();
             dispIR.Text = CPU.Globals._IR.ToString();
-            loadProgram_Click(sender, e); 
+          
 
             if (CPU.Globals._MEMORY.Length > 0)
             {
@@ -246,6 +246,8 @@ namespace MicroComputer
 
             }
 
+            refreshMem_Click(sender, e);
+
         }
 
         public static void tokenize(String[] program)
@@ -284,25 +286,48 @@ namespace MicroComputer
                 }
 
             }
-
+             
 
             List<String> dataFromFile = new List<String>();
-            if (CPU.Globals._PROGRAM_TOKENS.Contains(".DATA") || CPU.Globals._PROGRAM_TOKENS.Contains("END"))
+            if (CPU.Globals._PROGRAM_TOKENS.Contains(".DATA") && CPU.Globals._PROGRAM_TOKENS.Contains("END"))
                 {
                     
                     int start = CPU.Globals._PROGRAM_TOKENS.IndexOf(".DATA");
                     int end = CPU.Globals._PROGRAM_TOKENS.IndexOf("END");
 
-                    dataFromFile = CPU.Globals._PROGRAM_TOKENS.GetRange(start, end-1); 
+                     
+                for (int i=start+1; i < end; i++)
+                    {
+
+                    dataFromFile.Add(CPU.Globals._PROGRAM_TOKENS.ElementAt(i));
+                    
+
+                    }
+                CPU.Globals._PROGRAM_TOKENS.RemoveRange(start, (end +1) - start); 
+
+
                 }
 
-                foreach(string s in dataFromFile)
-            {
-                System.Console.WriteLine(s); 
-            }
-           
+            
+            
+                while(dataFromFile.Count > 0)
+                {
 
-           
+                String address = dataFromFile.ElementAt(0);
+                dataFromFile.RemoveAt(0);
+                String data = dataFromFile.ElementAt(0);
+                dataFromFile.RemoveAt(0);
+
+                int memAdd = int.Parse(address, System.Globalization.NumberStyles.HexNumber);
+                sbyte memValue = 0;
+                memValue = (sbyte)Int32.Parse(data);
+                
+                CPU.Globals._MEMORY[memAdd] = memValue;
+                
+            }
+
+
+
         }
         public static void convertToOpCode()
         {
