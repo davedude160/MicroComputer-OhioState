@@ -1,4 +1,4 @@
-            Add #$13;
+label:           Add #$13;
             SUb $23;
             XOR #$A2;
             INV;
@@ -9,4 +9,4 @@
  
             Add $13;
             INc;
-            jmp #$F1;
+            jmp label;
