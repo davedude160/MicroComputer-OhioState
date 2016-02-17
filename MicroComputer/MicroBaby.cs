@@ -24,52 +24,29 @@ namespace MicroComputer
         private void runProgram_Click(object sender, EventArgs e)
         {
 
-            while (!CPU.Globals._PROGRAM_ARRAY.Equals(null))
-            {
-
-                CPU.Globals._IR = (byte)CPU.Globals._PROGRAM_ARRAY[CPU.Globals._PC];
-
-
-            }
-
-            dispPC.Text = CPU.Globals._PC.ToString();
-
-
-
-        }
-
-        private void runStep_Click(object sender, EventArgs e)
-        {
- 
-
-            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
+            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
                 if (!CPU.Globals.runflag)
                     dispIR.Text = "Please load program first.";
                 else
                     dispIR.Text = "End of execution";
                 //dispIR.Text = "Load Program."; 
-                MessageBox.Show( "Please load program first.");
+                MessageBox.Show("Please load program first.");
             }
-            else {
+            else
+                while(CPU.Globals._INSTRUCTION_ARRAY.Count != 0 && CPU.Globals._INSTR_PC < CPU.Globals._INSTRUCTION_ARRAY.Count)
+            {
                 CPU.Globals.runflag = true;
                 dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
                 dispPC.Text = CPU.Globals._PC.ToString();
                 CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
                 CPU.Globals._DATA_BUS = (byte)currentInstr.dataopcode;
                 dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
+                CPU.Globals._INSTR_PC++;
 
-                if (currentInstr.call == "STA")
-                {
-                    currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
-                }else if (currentInstr.isJMP)
-                {
-
-                }
-                else
-                {
-                    CPU.Globals._AC = currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
-                }
+                currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+                dispPC.Text = CPU.Globals._PC.ToString();
+                Console.WriteLine(CPU.Globals._AC);
 
                 if (CPU.Globals._AC == 0)
                 {
@@ -93,31 +70,110 @@ namespace MicroComputer
                     negFlag.Checked = false;
                 }
 
- 
+
+
                 if (CPU.Globals._CARRY == true)
                 {
                     carryFlag.Checked = true;
                 }
                 else
- 
-                if(CPU.Globals._CARRY == true)
- 
-                {
-                    carryFlag.Checked = false;
 
+                if (CPU.Globals._CARRY == true)
+
+                    if (CPU.Globals._CARRY == true)
+
+                    {
+                        carryFlag.Checked = false;
+
+
+                        {
+                            carryFlag.Checked = false;
+
+                        }
+
+
+                    }
+            }
+            dispAC.Text = CPU.Globals._AC.ToString();
+
+
+
+        }
+
+        private void runStep_Click(object sender, EventArgs e)
+        {
+
+
+            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
+            {
+                if (!CPU.Globals.runflag)
+                    dispIR.Text = "Please load program first.";
+                else
+                    dispIR.Text = "End of execution";
+                //dispIR.Text = "Load Program."; 
+                MessageBox.Show("Please load program first.");
+            }
+            else
+            {
+                CPU.Globals.runflag = true;
+                dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
+                dispPC.Text = CPU.Globals._PC.ToString();
+                CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
+                CPU.Globals._DATA_BUS = (byte)currentInstr.dataopcode;
+                dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
+                CPU.Globals._INSTR_PC++;
+
+                currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+                dispPC.Text = CPU.Globals._PC.ToString();
+                Console.WriteLine(CPU.Globals._AC);
+
+                if (CPU.Globals._AC == 0)
+                {
+                    CPU.Globals._ZERO = true;
+                    zeroFlag.Checked = true;
                 }
                 else
                 {
-                    carryFlag.Checked = false;
+                    CPU.Globals._ZERO = false;
+                    zeroFlag.Checked = false;
                 }
 
-                dispPC.Text = CPU.Globals._PC.ToString();
+                if (CPU.Globals._AC < 0)
+                {
+                    CPU.Globals._NEGATIVE = true;
+                    negFlag.Checked = true;
+                }
+                else
+                {
+                    CPU.Globals._NEGATIVE = false;
+                    negFlag.Checked = false;
+                }
 
-                CPU.Globals._INSTR_PC++;
-                dispAC.Text = CPU.Globals._AC.ToString();
 
+
+                if (CPU.Globals._CARRY == true)
+                {
+                    carryFlag.Checked = true;
+                }
+                else
+
+                if (CPU.Globals._CARRY == true)
+
+                    if (CPU.Globals._CARRY == true)
+
+                    {
+                        carryFlag.Checked = false;
+
+
+                        {
+                            carryFlag.Checked = false;
+
+                        }
+                        
+
+                    }
             }
-
+            dispAC.Text = CPU.Globals._AC.ToString();
 
         }
 
@@ -147,13 +203,17 @@ namespace MicroComputer
         }
 
 
-    private void refreshMem_Click(object sender, EventArgs e)
+        private void refreshMem_Click(object sender, EventArgs e)
         {
             dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
             dispPC.Text = CPU.Globals._PC.ToString();
             dispAC.Text = CPU.Globals._AC.ToString();
             dispIR.Text = CPU.Globals._IR.ToString();
+<<<<<<< HEAD
           
+=======
+            loadProgram_Click(sender, e);
+>>>>>>> origin/GUI-Update
 
             if (CPU.Globals._MEMORY.Length > 0)
             {
@@ -191,6 +251,7 @@ namespace MicroComputer
                 System.IO.StreamReader readFile = new System.IO.StreamReader(openFileDialog1.FileName);
                 programEditor.Text = readFile.ReadToEnd();
                 readFile.Close();
+                loadProgram.Enabled = true;
             }
         }
 
@@ -211,12 +272,22 @@ namespace MicroComputer
             CPU.Globals._PROGRAM_TOKENS.Clear();
             CPU.Globals._OPCODE_ARRAY.Clear();
             CPU.Globals._INSTRUCTION_ARRAY.Clear();
-            CPU.Globals._INSTRUCTION_LABELS.Clear(); 
+            CPU.Globals._INSTRUCTION_LABELS.Clear();
+            CPU.Globals._INSTR_PC_LOOKUP.Clear();
+
+            CPU.Instr.Directcount = 0;
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
             convertToOpCode();
             CPU.Globals._PC = 0;
             CPU.Globals._INSTR_PC = 0;
+
+            dispAC.Text = "";
+            dispPC.Text = "";
+            dispIR.Text = "";
+
+
+
             if (CPU.Globals._INSTRUCTION_ARRAY.Count > 0)
             {
 
@@ -268,33 +339,39 @@ namespace MicroComputer
             for (int i = 0; i < tempArray2.Length; i++)
             {
                 String temp = tempArray2[i];
-                
 
-                bool checkLabel = temp.Contains(':'); 
-                if (checkLabel ){ 
+
+                bool checkLabel = temp.Contains(':');
+                if (checkLabel)
+                {
 
                     String jumpAddress = "#$" + (i - CPU.Globals._INSTRUCTION_LABELS.Count()).ToString("X2");
-                    
+
 
                     //TODO check if label exists  
 
-                    CPU.Globals._INSTRUCTION_LABELS.Add(temp.Substring(0, temp.Length - 1).ToUpper(), jumpAddress); 
+                    CPU.Globals._INSTRUCTION_LABELS.Add(temp.Substring(0, temp.Length - 1).ToUpper(), jumpAddress);
 
                 }
                 else {
-                CPU.Globals._PROGRAM_TOKENS.Add(temp.ToUpper());
+                    CPU.Globals._PROGRAM_TOKENS.Add(temp.ToUpper());
                 }
 
             }
+ 
              
 
+            
+
             List<String> dataFromFile = new List<String>();
-            if (CPU.Globals._PROGRAM_TOKENS.Contains(".DATA") && CPU.Globals._PROGRAM_TOKENS.Contains("END"))
+                if (CPU.Globals._PROGRAM_TOKENS.Contains(".DATA") || CPU.Globals._PROGRAM_TOKENS.Contains("END"))
+ 
                 {
-                    
+
                     int start = CPU.Globals._PROGRAM_TOKENS.IndexOf(".DATA");
                     int end = CPU.Globals._PROGRAM_TOKENS.IndexOf("END");
 
+ 
                      
                 for (int i=start+1; i < end; i++)
                     {
@@ -329,7 +406,11 @@ namespace MicroComputer
 
 
         }
-        public static void convertToOpCode()
+  
+
+
+            }
+         public static void convertToOpCode()
         {
 
             for (int i = 0; i < CPU.Globals._PROGRAM_TOKENS.Count; i++)
@@ -343,7 +424,7 @@ namespace MicroComputer
                     case 0:
                         newInstr = new CPU.Instr_LDA();
                         break;
-                        
+
                     case 1:
                         newInstr = new CPU.Instr_STA();
                         break;
@@ -391,47 +472,85 @@ namespace MicroComputer
                     case 13:
                         newInstr = new CPU.Instr_CMP();
                         break;
-
                     case 14:
                         newInstr = new CPU.Instr_JMP();
                         break;
-
+                    case 15:
+                        newInstr = new CPU.Instr_JC();
+                        break;
+                    case 16:
+                        newInstr = new CPU.Instr_JNC();
+                        break;
+                    case 17:
+                        newInstr = new CPU.Instr_JN();
+                        break;
+                    case 18:
+                        newInstr = new CPU.Instr_JNN();
+                        break;
+                    case 19:
+                        newInstr = new CPU.Instr_JZ();
+                        break;
+                    case 20:
+                        newInstr = new CPU.Instr_JNZ();
+                        break;
+                    case 21:
+                        newInstr = new CPU.Instr_JCN();
+                        break;
+                    case 22:
+                        newInstr = new CPU.Instr_JNCN();
+                        break;
+                    case 23:
+                        newInstr = new CPU.Instr_JNCNZ();
+                        break;
+                    case 24:
+                        newInstr = new CPU.Instr_JZN();
+                        break;
+                    case 25:
+                        newInstr = new CPU.Instr_JNZN();
+                        break;
+                    case 26:
+                        newInstr = new CPU.Instr_JZNN();
+                        break;
+                    case 27:
+                        newInstr = new CPU.Instr_JNZNN();
+                        break;
                     default:
                         newInstr = new CPU.Instr_ADD();
                         break;
                 }
                 if (j >= 0)
                 {
+                    CPU.Globals._INSTR_PC_LOOKUP.Add(i, i - CPU.Instr.Directcount);
+
 
                     if (!newInstr.isJMP && !newInstr.isInherent)
                     {
+                        CPU.Instr.Directcount++;
+
                         String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
                         if (addrMode.First() == '#')
                         {
                             newInstr.opcode += "10";
                             newInstr.isImmediate = false;
                             newInstr.data = addrMode;
-                            newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
 
+                            newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         }
                         else {
                             newInstr.opcode += "01";
                             newInstr.isImmediate = true;
                             newInstr.data = addrMode;
-
-                            //newInstr.dataopcode = byte.Parse(addrMode.Substring(1), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
+                            newInstr.dataopcode = byte.Parse(addrMode.Substring(1), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         }
                         i++;
                     }
                     else if (newInstr.isJMP)
                     {
                         String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
-                         
+                        CPU.Instr.Directcount++;
+
                         newInstr.data = CPU.Globals._INSTRUCTION_LABELS[addrMode];
-
-                        
-
-                       // newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
+                        newInstr.dataopcode = byte.Parse(newInstr.data.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         i++;
                     }
 
@@ -482,6 +601,21 @@ namespace MicroComputer
             {
 
             }
+
+        }
+
+        private void programEditor_Click(object sender, EventArgs e)
+        {
+            if (programEditor.Text == "Enter your code...")
+            {
+                programEditor.Text = "";
+                loadProgram.Enabled = true;
+            }
+            
+        }
+
+        private void Sim_Click(object sender, EventArgs e)
+        {
 
         }
     }
