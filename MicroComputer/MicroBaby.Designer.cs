@@ -113,6 +113,7 @@
             this.Sim.TabIndex = 0;
             this.Sim.Text = "Sim";
             this.Sim.UseVisualStyleBackColor = true;
+            this.Sim.Click += new System.EventHandler(this.Sim_Click);
             // 
             // memView
             // 
@@ -209,7 +210,7 @@
             this.dispDataBus.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dispDataBus.Name = "dispDataBus";
             this.dispDataBus.ReadOnly = true;
-            this.dispDataBus.Size = new System.Drawing.Size(207, 26);
+            this.dispDataBus.Size = new System.Drawing.Size(210, 26);
             this.dispDataBus.TabIndex = 10;
             // 
             // groupBox1
@@ -232,7 +233,7 @@
             this.negFlag.AutoSize = true;
             this.negFlag.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.negFlag.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.negFlag.Location = new System.Drawing.Point(49, 120);
+            this.negFlag.Location = new System.Drawing.Point(49, 123);
             this.negFlag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.negFlag.Name = "negFlag";
             this.negFlag.Size = new System.Drawing.Size(97, 24);
@@ -245,7 +246,7 @@
             this.zeroFlag.AutoCheck = false;
             this.zeroFlag.AutoSize = true;
             this.zeroFlag.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.zeroFlag.Location = new System.Drawing.Point(78, 179);
+            this.zeroFlag.Location = new System.Drawing.Point(78, 188);
             this.zeroFlag.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.zeroFlag.Name = "zeroFlag";
             this.zeroFlag.Size = new System.Drawing.Size(68, 24);
@@ -737,6 +738,7 @@
             // 
             // loadProgram
             // 
+            this.loadProgram.Enabled = false;
             this.loadProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadProgram.Location = new System.Drawing.Point(386, 26);
             this.loadProgram.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
