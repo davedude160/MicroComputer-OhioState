@@ -93,16 +93,15 @@ namespace MicroComputer
                     negFlag.Checked = false;
                 }
 
-<<<<<<< HEAD
-
+ 
                 if (CPU.Globals._CARRY == true)
                 {
                     carryFlag.Checked = true;
                 }
                 else
-=======
+ 
                 if(CPU.Globals._CARRY == true)
->>>>>>> origin/GUI-Update
+ 
                 {
                     carryFlag.Checked = false;
 
@@ -212,6 +211,7 @@ namespace MicroComputer
             CPU.Globals._PROGRAM_TOKENS.Clear();
             CPU.Globals._OPCODE_ARRAY.Clear();
             CPU.Globals._INSTRUCTION_ARRAY.Clear();
+            CPU.Globals._INSTRUCTION_LABELS.Clear(); 
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
             convertToOpCode();
@@ -250,7 +250,7 @@ namespace MicroComputer
 
         public static void tokenize(String[] program)
         {
-            char[] delimiterChars = { ' ', ',', '.', ';', ':', '\t' };
+            char[] delimiterChars = { ' ', ',', ';', '\t' };
             String hold = "";
 
             for (int counter = 0; counter < program.Length; counter++)
@@ -267,11 +267,29 @@ namespace MicroComputer
             {
                 String temp = tempArray2[i];
 
+                if (temp.Contains(':')){ 
+
+                    String jumpAddress = "#$" + (i - CPU.Globals._INSTRUCTION_LABELS.Count()).ToString("X2");
+                    
+
+                    //TODO check if label exists  
+
+                    CPU.Globals._INSTRUCTION_LABELS.Add(temp.Substring(0, temp.Length - 1).ToUpper(), jumpAddress); 
+
+                }
+                else {
                 CPU.Globals._PROGRAM_TOKENS.Add(temp.ToUpper());
+                }
 
             }
 
+             
 
+            foreach (string s in CPU.Globals._PROGRAM_TOKENS) {
+                System.Console.WriteLine(s);
+            }
+
+           
         }
         public static void convertToOpCode()
         {
@@ -370,9 +388,12 @@ namespace MicroComputer
                     else if (newInstr.isJMP)
                     {
                         String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
-                        newInstr.data = addrMode;
+                         
+                        newInstr.data = CPU.Globals._INSTRUCTION_LABELS[addrMode];
 
-                        newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
+                        
+
+                        //newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         i++;
                     }
 

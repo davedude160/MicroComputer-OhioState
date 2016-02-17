@@ -116,7 +116,7 @@
             this.Sim.TabIndex = 0;
             this.Sim.Text = "Sim";
             this.Sim.UseVisualStyleBackColor = true;
-            this.Sim.Click += new System.EventHandler(this.Sim_Click);
+           
             // 
             // dispSR
             // 
@@ -219,7 +219,7 @@
             this.dispDataBus.ReadOnly = true;
             this.dispDataBus.Size = new System.Drawing.Size(118, 20);
             this.dispDataBus.TabIndex = 10;
-            this.dispDataBus.TextChanged += new System.EventHandler(this.dispDataBus_TextChanged);
+             
             // 
             // groupBox1
             // 
@@ -285,7 +285,7 @@
             this.dispAC.ReadOnly = true;
             this.dispAC.Size = new System.Drawing.Size(118, 20);
             this.dispAC.TabIndex = 7;
-            this.dispAC.TextChanged += new System.EventHandler(this.dispAC_TextChanged);
+             
             // 
             // dispIR
             // 
@@ -294,7 +294,7 @@
             this.dispIR.ReadOnly = true;
             this.dispIR.Size = new System.Drawing.Size(118, 20);
             this.dispIR.TabIndex = 6;
-            this.dispIR.TextChanged += new System.EventHandler(this.dispIR_TextChanged);
+             
             // 
             // dispPC
             // 
@@ -303,7 +303,7 @@
             this.dispPC.ReadOnly = true;
             this.dispPC.Size = new System.Drawing.Size(118, 20);
             this.dispPC.TabIndex = 5;
-            this.dispPC.TextChanged += new System.EventHandler(this.dispPC_TextChanged);
+            
             // 
             // dataBusLabel
             // 
@@ -759,7 +759,7 @@
             this.programEditor.Name = "programEditor";
             this.programEditor.Size = new System.Drawing.Size(354, 239);
             this.programEditor.TabIndex = 3;
-            this.programEditor.TextChanged += new System.EventHandler(this.programEditor_TextChanged);
+            
             // 
             // Help
             // 

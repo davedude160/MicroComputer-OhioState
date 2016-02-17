@@ -32,6 +32,7 @@ namespace MicroComputer
             public static List<String> _PROGRAM_TOKENS = new List<String>();
             public static List<String> _OPCODE_ARRAY = new List<String>();
             public static List<Instr> _INSTRUCTION_ARRAY = new List<Instr>();
+            public static Dictionary<string, string> _INSTRUCTION_LABELS= new Dictionary<string, string>(); 
 
             public static byte[] _PROGRAM_ARRAY = new byte[256];
             public static bool runflag;
