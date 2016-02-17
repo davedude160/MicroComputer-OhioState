@@ -42,7 +42,7 @@ namespace MicroComputer
         {
 
 
-            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
+            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
                 if (!CPU.Globals.runflag)
                     dispIR.Text = "Please load program first.";
@@ -200,11 +200,21 @@ namespace MicroComputer
             CPU.Globals._OPCODE_ARRAY.Clear();
             CPU.Globals._INSTRUCTION_ARRAY.Clear();
             CPU.Globals._INSTRUCTION_LABELS.Clear();
+            CPU.Globals._INSTR_PC_LOOKUP.Clear();
+            
+            CPU.Instr.Directcount = 0;
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
             convertToOpCode();
             CPU.Globals._PC = 0;
             CPU.Globals._INSTR_PC = 0;
+
+            dispAC.Text = "";
+            dispPC.Text = "";
+            dispIR.Text = "";
+
+
+
             if (CPU.Globals._INSTRUCTION_ARRAY.Count > 0)
             {
 
@@ -354,16 +364,19 @@ namespace MicroComputer
                 }
                 if (j >= 0)
                 {
+                    CPU.Globals._INSTR_PC_LOOKUP.Add(i,i - CPU.Instr.Directcount);
+
 
                     if (!newInstr.isJMP && !newInstr.isInherent)
                     {
+                        CPU.Instr.Directcount++;
+
                         String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
                         if (addrMode.First() == '#')
                         {
                             newInstr.opcode += "10";
                             newInstr.isImmediate = false;
                             newInstr.data = addrMode;
-                            CPU.Instr.Directcount++;
 
                             newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         }
@@ -378,6 +391,7 @@ namespace MicroComputer
                     else if (newInstr.isJMP)
                     {
                         String addrMode = CPU.Globals._PROGRAM_TOKENS[i + 1];
+                        CPU.Instr.Directcount++;
 
                         newInstr.data = CPU.Globals._INSTRUCTION_LABELS[addrMode];
                         newInstr.dataopcode = byte.Parse(newInstr.data.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);

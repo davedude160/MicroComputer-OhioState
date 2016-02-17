@@ -33,7 +33,7 @@ namespace MicroComputer
             public static List<String> _OPCODE_ARRAY = new List<String>();
             public static List<Instr> _INSTRUCTION_ARRAY = new List<Instr>();
             public static Dictionary<string, string> _INSTRUCTION_LABELS = new Dictionary<string, string>();
-
+            public static Dictionary<int, int> _INSTR_PC_LOOKUP = new Dictionary<int, int>();
             public static byte[] _PROGRAM_ARRAY = new byte[256];
             public static bool runflag;
 
@@ -433,12 +433,7 @@ namespace MicroComputer
             public override void operation(sbyte a, sbyte b)
             {
                 CPU.Globals._PC = (byte)(b);
-                System.Console.WriteLine(b);
-                System.Console.WriteLine(CPU.Globals._PC);
-
-                CPU.Globals._INSTR_PC = (byte)(b - CPU.Instr.Directcount-1);
-                System.Console.WriteLine(CPU.Globals._INSTR_PC);
-
+                CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
             }
 
         }
