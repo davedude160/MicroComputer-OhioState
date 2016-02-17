@@ -5,8 +5,16 @@
             Add #$13;
             Add $13;
  
-
+label:
  
             Add $13;
             INc;
-            jmp #$F1;
+            jmp label;
+
+.data
+
+2=4
+
+4=2
+
+end

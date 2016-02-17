@@ -248,7 +248,7 @@ namespace MicroComputer
 
         public static void tokenize(String[] program)
         {
-            char[] delimiterChars = { ' ', ',', ';', '\t' };
+            char[] delimiterChars = { ' ', '=', ',', ';', '\t' };
             String hold = "";
 
             for (int counter = 0; counter < program.Length; counter++)
@@ -265,7 +265,9 @@ namespace MicroComputer
             {
                 String temp = tempArray2[i];
 
-                if (temp.Contains(':'))
+
+                bool checkLabel = temp.Contains(':');
+                if (checkLabel)
                 {
 
                     String jumpAddress = "#$" + (i - CPU.Globals._INSTRUCTION_LABELS.Count()).ToString("X2");
@@ -282,15 +284,23 @@ namespace MicroComputer
 
             }
 
+            List<String> dataFromFile = new List<String>();
+                if (CPU.Globals._PROGRAM_TOKENS.Contains(".DATA") || CPU.Globals._PROGRAM_TOKENS.Contains("END"))
+                {
+
+                    int start = CPU.Globals._PROGRAM_TOKENS.IndexOf(".DATA");
+                    int end = CPU.Globals._PROGRAM_TOKENS.IndexOf("END");
+
+                    dataFromFile = CPU.Globals._PROGRAM_TOKENS.GetRange(start, end-1 );
+                }
+
+                foreach (string s in dataFromFile)
+                {
+                    System.Console.WriteLine(s);
+                }
 
 
-            foreach (string s in CPU.Globals._PROGRAM_TOKENS)
-            {
-                System.Console.WriteLine(s);
             }
-
-
-        }
         public static void convertToOpCode()
         {
 
