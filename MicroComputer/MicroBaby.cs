@@ -363,11 +363,48 @@ namespace MicroComputer
                     case 13:
                         newInstr = new CPU.Instr_CMP();
                         break;
-
-                    case 14:
+case 14:
                         newInstr = new CPU.Instr_JMP();
                         break;
-
+                    case 15:
+                        newInstr = new CPU.Instr_JC();
+                        break;
+                    case 16:
+                        newInstr = new CPU.Instr_JNC();
+                        break;
+                    case 17:
+                        newInstr = new CPU.Instr_JN();
+                        break;
+                    case 18:
+                        newInstr = new CPU.Instr_JNN();
+                        break;
+                    case 19:
+                        newInstr = new CPU.Instr_JZ();
+                        break;
+                    case 20:
+                        newInstr = new CPU.Instr_JNZ();
+                        break;
+                    case 21:
+                        newInstr = new CPU.Instr_JCN();
+                        break;
+                    case 22:
+                        newInstr = new CPU.Instr_JNCN();
+                        break;
+                    case 23:
+                        newInstr = new CPU.Instr_JNCNZ();
+                        break;
+                    case 24:
+                        newInstr = new CPU.Instr_JZN();
+                        break;
+                    case 25:
+                        newInstr = new CPU.Instr_JNZN();
+                        break;
+                    case 26:
+                        newInstr = new CPU.Instr_JZNN();
+                        break;
+                    case 27:
+                        newInstr = new CPU.Instr_JNZNN();
+                        break;
                     default:
                         newInstr = new CPU.Instr_ADD();
                         break;

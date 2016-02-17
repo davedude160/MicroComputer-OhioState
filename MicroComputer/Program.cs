@@ -25,7 +25,7 @@ namespace MicroComputer
             public static byte _DATA_BUS = 0;
             public static sbyte[] _MEMORY = new sbyte[256];
             public static string[] _INSTR =
-                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA", "CMP", "JMP","JC","JNC","JS","JNS","JZ","JNZ","JCS","JNCS","JCNS","JNCNS","JCZ","JNCZ","JCNZ","JNCNZ","JSZ","JNSZ","JSNZ","JNSNZ" };
+                { "LDA","STA", "ADD", "ADDC", "SUB", "SUBC", "INC", "DEC", "AND", "OR", "INV", "XOR", "CLRA", "CMP", "JMP","JC","JNC","JN","JNN","JZ","JNZ","JCN","JNCN","JCNN","JNCNN","JCZ","JNCZ","JCNZ","JNCNZ","JZN","JNZN","JZNN","JNZNN" };
             public static string[] _OPCODE =
                 { "10000010","10100010", "01000010", "01001010", "01000010", "01011010", "01001100", "01000100", "01011010", "01011110", "01011000", "01010110", "01001111","01000000","01001000", "01001010", "11000000","11100100","11100000","11010010","11010000","11001001","11001000","11110110","11110010","11110100","11110000","11101101","11101001","11101100","11101000","11011011","11011001","11011010","11011000" };
 
@@ -437,16 +437,472 @@ namespace MicroComputer
             }
 
         }
-
-
-        [STAThread]
-        static void Main()
+        public class Instr_JC : Instr
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MicroBaby());
+            public Instr_JC()
+            {
+                call = "JC";
+                opcode = "11100100";
+                isJMP = true;
+                isInherent = false;
+
+            }
+            public override void operation(sbyte a, sbyte b)
+            {
+
+                if (CPU.Globals._CARRY)
+                {
+                    CPU.Globals._PC = (byte)(b);
+                    CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                }
+                else
+                {
+                    CPU.Globals._PC += 2;
+                    CPU.Globals._INSTR_PC++;
+                }
+            }
+
+        }
+        public class Instr_JNC : Instr
+        {
+            public Instr_JNC()
+            {
+                call = "JNC";
+                opcode = "11100000";
+                isJMP = true;
+                isInherent = false;
+
+            }
+            public override void operation(sbyte a, sbyte b)
+            {
+                if (!CPU.Globals._CARRY)
+                {
+                    CPU.Globals._PC = (byte)(b);
+                    CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                }
+                else
+                {
+                    CPU.Globals._PC += 2;
+                    CPU.Globals._INSTR_PC++;
+                }
+            }
+
+        }
+        public class Instr_JN : Instr
+        {
+            public Instr_JN()
+            {
+                call = "JN";
+                opcode = "11010010";
+                isJMP = true;
+                isInherent = false;
+
+            }
+            public override void operation(sbyte a, sbyte b)
+            {
+                if (!CPU.Globals._NEGATIVE)
+                {
+                    CPU.Globals._PC = (byte)(b);
+                    CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                }
+                else
+                {
+                    CPU.Globals._PC += 2;
+                    CPU.Globals._INSTR_PC++;
+                }
+            }
+
+        }
+        public class Instr_JNN : Instr
+        {
+            public Instr_JNN()
+            {
+                call = "JNN";
+                opcode = "11010000";
+                isJMP = true;
+                isInherent = false;
+
+            }
+            public override void operation(sbyte a, sbyte b)
+            {
+                if (CPU.Globals._NEGATIVE)
+                {
+                    CPU.Globals._PC = (byte)(b);
+                    CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                }
+                else
+                {
+                    CPU.Globals._PC += 2;
+                    CPU.Globals._INSTR_PC++;
+                }
+            }
 
         }
 
+        public class Instr_JZ : Instr
+        {
+            public Instr_JZ()
+            {
+                call = "JZ";
+                opcode = "11001001";
+                isJMP = true;
+                isInherent = false;
+
+            }
+            public override void operation(sbyte a, sbyte b)
+            {
+                if (CPU.Globals._ZERO)
+                {
+                    CPU.Globals._PC = (byte)(b);
+                    CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                }
+                else
+                {
+                    CPU.Globals._PC += 2;
+                    CPU.Globals._INSTR_PC++;
+                }
+            }
+
+        }
+        public class Instr_JNZ : Instr
+        {
+            public Instr_JNZ()
+            {
+                call = "JNZ";
+                opcode = "11001000";
+                isJMP = true;
+                isInherent = false;
+
+            }
+            public override void operation(sbyte a, sbyte b)
+            {
+                if (!CPU.Globals._ZERO)
+                {
+                    CPU.Globals._PC = (byte)(b);
+                    CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                }
+                else
+                {
+                    CPU.Globals._PC += 2;
+                    CPU.Globals._INSTR_PC++;
+                }
+            }
+
+        }
+
+        public class Instr_JCN : Instr
+        {
+            public Instr_JCN()
+            {
+                call = "JCN";
+                opcode = "11110110";
+                isJMP = true;
+                isInherent = false;
+
+            }
+            public override void operation(sbyte a, sbyte b)
+            {
+                if (CPU.Globals._CARRY || CPU.Globals._NEGATIVE)
+                {
+                    CPU.Globals._PC = (byte)(b);
+                    CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                }
+                else
+                {
+                    CPU.Globals._PC += 2;
+                    CPU.Globals._INSTR_PC++;
+                }
+            }
+        }
+            public class Instr_JNCN : Instr
+            {
+                public Instr_JNCN()
+                {
+                    call = "JNCN";
+                    opcode = "11110010";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (!CPU.Globals._CARRY || CPU.Globals._NEGATIVE)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+            public class Instr_JCNN : Instr
+            {
+                public Instr_JCNN()
+                {
+                    call = "JCNN";
+                    opcode = "11110100";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (CPU.Globals._CARRY || !CPU.Globals._NEGATIVE)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+            public class Instr_JNCNN : Instr
+            {
+                public Instr_JNCNN()
+                {
+                    call = "JNCNN";
+                    opcode = "11110000";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (!CPU.Globals._CARRY || !CPU.Globals._NEGATIVE)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+
+            public class Instr_JCZ : Instr
+            {
+                public Instr_JCZ()
+                {
+                    call = "JCZ";
+                    opcode = "11101101";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (CPU.Globals._CARRY || CPU.Globals._ZERO)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+            public class Instr_JNCZ : Instr
+            {
+                public Instr_JNCZ()
+                {
+                    call = "JNCZ";
+                    opcode = "11101001";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (!CPU.Globals._CARRY || CPU.Globals._ZERO)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+            public class Instr_JCNZ : Instr
+            {
+                public Instr_JCNZ()
+                {
+                    call = "JCNZ";
+                    opcode = "11101100";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (CPU.Globals._CARRY || !CPU.Globals._ZERO)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+            public class Instr_JNCNZ : Instr
+            {
+                public Instr_JNCNZ()
+                {
+                    call = "JNCNZ";
+                    opcode = "11101000";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (!CPU.Globals._CARRY || !CPU.Globals._ZERO)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+            public class Instr_JZN : Instr
+            {
+                public Instr_JZN()
+                {
+                    call = "JZN";
+                    opcode = "11011011";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (CPU.Globals._NEGATIVE || CPU.Globals._ZERO)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+            public class Instr_JNZN : Instr
+            {
+                public Instr_JNZN()
+                {
+                    call = "JNZN";
+                    opcode = "11011001";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (CPU.Globals._NEGATIVE || !CPU.Globals._ZERO)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+            public class Instr_JZNN : Instr
+            {
+                public Instr_JZNN()
+                {
+                    call = "JZNN";
+                    opcode = "11011010";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (!CPU.Globals._NEGATIVE || CPU.Globals._ZERO)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+
+            public class Instr_JNZNN : Instr
+            {
+                public Instr_JNZNN()
+                {
+                    call = "JNZNN";
+                    opcode = "11011000";
+                    isJMP = true;
+                    isInherent = false;
+
+                }
+                public override void operation(sbyte a, sbyte b)
+                {
+                    if (!CPU.Globals._NEGATIVE || !CPU.Globals._ZERO)
+                    {
+                        CPU.Globals._PC = (byte)(b);
+                        CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
+                    }
+                    else
+                    {
+                        CPU.Globals._PC += 2;
+                        CPU.Globals._INSTR_PC++;
+                    }
+                }
+
+            }
+
+            
+
+            [STAThread]
+            static void Main()
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new MicroBaby());
+
+            }
+
+        }
     }
-}
+
