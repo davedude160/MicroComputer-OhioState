@@ -51,3 +51,6 @@ MicroComputer/bin/Debug/MicroComputer.exe
 MicroComputer/obj/Debug/MicroComputer.csproj.FileListAbsolute.txt
 MicroComputer/bin/Debug/MicroComputer.exe
 MicroComputer/bin/Debug/MicroComputer.exe
+*.txt
+*.cache
+*.exe
