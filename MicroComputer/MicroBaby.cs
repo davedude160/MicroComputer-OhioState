@@ -209,11 +209,7 @@ namespace MicroComputer
             dispPC.Text = CPU.Globals._PC.ToString();
             dispAC.Text = CPU.Globals._AC.ToString();
             dispIR.Text = CPU.Globals._IR.ToString();
-<<<<<<< HEAD
-          
-=======
-            loadProgram_Click(sender, e);
->>>>>>> origin/GUI-Update
+//            loadProgram_Click(sender, e);
 
             if (CPU.Globals._MEMORY.Length > 0)
             {
@@ -317,7 +313,7 @@ namespace MicroComputer
 
             }
 
-            refreshMem_Click(sender, e);
+           refreshMem_Click(sender, e);
 
         }
 
@@ -409,7 +405,7 @@ namespace MicroComputer
   
 
 
-            }
+            
          public static void convertToOpCode()
         {
 
