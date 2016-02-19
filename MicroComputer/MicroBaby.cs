@@ -212,7 +212,7 @@ namespace MicroComputer
             dispAC.Text = CPU.Globals._AC.ToString();
             dispIR.Text = CPU.Globals._IR.ToString();
  
-             
+ 
  
 
             if (CPU.Globals._MEMORY.Length > 0)
@@ -317,7 +317,7 @@ namespace MicroComputer
 
             }
 
-            refreshMem_Click(sender, e);
+           refreshMem_Click(sender, e);
 
         }
 
