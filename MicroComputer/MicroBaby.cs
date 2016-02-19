@@ -110,7 +110,7 @@ namespace MicroComputer
                     dispIR.Text = "Please load program first.";
                 else
                     dispIR.Text = "End of execution";
-                //dispIR.Text = "Load Program."; 
+               
                 MessageBox.Show("Please load program first.");
             }
             else
@@ -174,6 +174,7 @@ namespace MicroComputer
                     }
             }
             dispAC.Text = CPU.Globals._AC.ToString();
+            refreshMem_Click(sender, e); 
 
         }
 
@@ -198,6 +199,7 @@ namespace MicroComputer
             dispAC.Text = "";
             dispPC.Text = "";
             dispIR.Text = "";
+            dispDataBus.Text = ""; 
 
 
         }
@@ -209,11 +211,9 @@ namespace MicroComputer
             dispPC.Text = CPU.Globals._PC.ToString();
             dispAC.Text = CPU.Globals._AC.ToString();
             dispIR.Text = CPU.Globals._IR.ToString();
-<<<<<<< HEAD
-          
-=======
-            loadProgram_Click(sender, e);
->>>>>>> origin/GUI-Update
+ 
+             
+ 
 
             if (CPU.Globals._MEMORY.Length > 0)
             {
@@ -409,7 +409,7 @@ namespace MicroComputer
   
 
 
-            }
+            
          public static void convertToOpCode()
         {
 
@@ -571,10 +571,8 @@ namespace MicroComputer
 
         }
 
-
         private void updateMem_Click(object sender, EventArgs e)
         {
-
 
             try
             {
@@ -601,8 +599,8 @@ namespace MicroComputer
             {
 
             }
-
         }
+
 
         private void programEditor_Click(object sender, EventArgs e)
         {
@@ -614,9 +612,6 @@ namespace MicroComputer
             
         }
 
-        private void Sim_Click(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
