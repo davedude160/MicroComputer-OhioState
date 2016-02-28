@@ -23,6 +23,8 @@ namespace MicroComputer
 
         private void runProgram_Click(object sender, EventArgs e)
         {
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
 
             if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
@@ -93,9 +95,16 @@ namespace MicroComputer
 
 
                     }
+                if(sw.ElapsedMilliseconds > 6000)
+                    {
+                        MessageBox.Show("Infinite loop detected, ending program.");
+                        break;
+                    }
+                    
             }
             dispAC.Text = CPU.Globals._AC.ToString();
-
+            
+            
 
 
         }
