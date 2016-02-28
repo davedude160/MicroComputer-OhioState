@@ -95,7 +95,7 @@ namespace MicroComputer
 
 
                     }
-                if(sw.ElapsedMilliseconds > 3000)
+                if(sw.ElapsedMilliseconds > 5000)
                     {
                         DialogResult dialogResult = MessageBox.Show("Potential infinite loop detected, continue?", "Infinite Loop Alert", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.No)
