@@ -95,10 +95,18 @@ namespace MicroComputer
 
 
                     }
-                if(sw.ElapsedMilliseconds > 6000)
+                if(sw.ElapsedMilliseconds > 3000)
                     {
-                        MessageBox.Show("Infinite loop detected, ending program.");
-                        break;
+                        DialogResult dialogResult = MessageBox.Show("Potential infinite loop detected, continue?", "Infinite Loop Alert", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.No)
+                        {
+                            break;
+                        }
+                        else if (dialogResult == DialogResult.Yes)
+                        {
+                            sw.Restart();
+                            continue;
+                        }
                     }
                     
             }
