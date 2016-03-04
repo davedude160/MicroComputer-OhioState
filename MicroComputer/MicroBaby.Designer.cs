@@ -106,7 +106,7 @@
             this.Sim.Controls.Add(this.pcLabel);
             this.Sim.Location = new System.Drawing.Point(4, 22);
             this.Sim.Name = "Sim";
-            this.Sim.Padding = new System.Windows.Forms.Padding(3);
+            this.Sim.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Sim.Size = new System.Drawing.Size(877, 483);
             this.Sim.TabIndex = 0;
             this.Sim.Text = "Sim";
@@ -219,7 +219,7 @@
             this.negFlag.AutoSize = true;
             this.negFlag.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.negFlag.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.negFlag.Location = new System.Drawing.Point(33, 80);
+            this.negFlag.Location = new System.Drawing.Point(31, 78);
             this.negFlag.Name = "negFlag";
             this.negFlag.Size = new System.Drawing.Size(69, 17);
             this.negFlag.TabIndex = 8;
@@ -320,7 +320,7 @@
             this.Editor.Controls.Add(this.groupBox2);
             this.Editor.Location = new System.Drawing.Point(4, 22);
             this.Editor.Name = "Editor";
-            this.Editor.Padding = new System.Windows.Forms.Padding(3);
+            this.Editor.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Editor.Size = new System.Drawing.Size(877, 483);
             this.Editor.TabIndex = 1;
             this.Editor.Text = "Editor";
@@ -700,7 +700,6 @@
             // 
             // loadProgram
             // 
-            this.loadProgram.Enabled = false;
             this.loadProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.loadProgram.Location = new System.Drawing.Point(257, 17);
             this.loadProgram.Name = "loadProgram";
@@ -737,7 +736,7 @@
             this.Help.Controls.Add(this.label6);
             this.Help.Location = new System.Drawing.Point(4, 22);
             this.Help.Name = "Help";
-            this.Help.Padding = new System.Windows.Forms.Padding(3);
+            this.Help.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Help.Size = new System.Drawing.Size(877, 483);
             this.Help.TabIndex = 2;
             this.Help.Text = "Help";
@@ -758,11 +757,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(882, 494);
+            this.ClientSize = new System.Drawing.Size(880, 499);
             this.Controls.Add(this.EMULATOR);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(898, 544);
-            this.MinimumSize = new System.Drawing.Size(857, 506);
+            this.MaximumSize = new System.Drawing.Size(896, 538);
+            this.MinimumSize = new System.Drawing.Size(855, 500);
             this.Name = "MicroBaby";
             this.Text = "MicroBaby Emulator";
             this.EMULATOR.ResumeLayout(false);

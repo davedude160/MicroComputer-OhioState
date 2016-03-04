@@ -23,6 +23,8 @@ namespace MicroComputer
 
         private void runProgram_Click(object sender, EventArgs e)
         {
+            System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
 
             if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
@@ -93,9 +95,24 @@ namespace MicroComputer
 
 
                     }
+                if(sw.ElapsedMilliseconds > 5000)
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Potential infinite loop detected, continue?", "Infinite Loop Alert", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.No)
+                        {
+                            break;
+                        }
+                        else if (dialogResult == DialogResult.Yes)
+                        {
+                            sw.Restart();
+                            continue;
+                        }
+                    }
+                    
             }
             dispAC.Text = CPU.Globals._AC.ToString();
-
+            
+            
 
 
         }
@@ -210,7 +227,9 @@ namespace MicroComputer
             dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
             dispPC.Text = CPU.Globals._PC.ToString();
             dispAC.Text = CPU.Globals._AC.ToString();
-             
+ 
+//            dispIR.Text = CPU.Globals._IR.ToString();
+ 
  
  
  
