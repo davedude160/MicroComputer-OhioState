@@ -210,7 +210,7 @@ namespace MicroComputer
             dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
             dispPC.Text = CPU.Globals._PC.ToString();
             dispAC.Text = CPU.Globals._AC.ToString();
-            dispIR.Text = CPU.Globals._IR.ToString();
+             
  
  
  
@@ -331,6 +331,7 @@ namespace MicroComputer
                 hold += program[counter];
 
             }
+            
 
             String[] tempArray2 = hold.Split(delimiterChars, System.StringSplitOptions.RemoveEmptyEntries);
 
