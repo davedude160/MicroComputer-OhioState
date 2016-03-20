@@ -133,15 +133,15 @@ namespace MicroComputer
             else
             {
                 CPU.Globals.runflag = true;
-                dispPC.Text = CPU.Globals._PC.ToString()+"     "+ CPU.Globals._PC.ToString("X2");
+                dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
+                dispPC.Text = CPU.Globals._PC.ToString();
                 CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
-                dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC]+"    "+currentInstr.call;
-
                 CPU.Globals._DATA_BUS = (byte)currentInstr.dataopcode;
                 dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
                 CPU.Globals._INSTR_PC++;
 
                 currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+                dispPC.Text = CPU.Globals._PC.ToString();
                 Console.WriteLine(CPU.Globals._AC);
 
                 if (CPU.Globals._AC == 0)
@@ -225,8 +225,11 @@ namespace MicroComputer
         private void refreshMem_Click(object sender, EventArgs e)
         {
             dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
+            dispPC.Text = CPU.Globals._PC.ToString();
             dispAC.Text = CPU.Globals._AC.ToString();
+ 
 //            dispIR.Text = CPU.Globals._IR.ToString();
+ 
  
  
  
@@ -347,6 +350,7 @@ namespace MicroComputer
                 hold += program[counter];
 
             }
+            
 
             String[] tempArray2 = hold.Split(delimiterChars, System.StringSplitOptions.RemoveEmptyEntries);
 
@@ -396,7 +400,7 @@ namespace MicroComputer
                     
 
                     }
-                CPU.Globals._PROGRAM_TOKENS.RemoveRange(start, (end +1) - start); 
+                CPU.Globals._PROGRAM_TOKENS.RemoveRange(start, end+1 - start); 
 
 
                 }
@@ -549,12 +553,9 @@ namespace MicroComputer
                             newInstr.opcode += "10";
                             newInstr.isImmediate = false;
                             newInstr.data = addrMode;
-                            System.Console.WriteLine(newInstr.call);
 
                             newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         }
-
-
                         else {
                             newInstr.opcode += "01";
                             newInstr.isImmediate = true;
@@ -631,6 +632,51 @@ namespace MicroComputer
             
         }
 
-       
+
+        private void dataGridView1_Layout(object sender, LayoutEventArgs e)
+        {
+            dataGridView1.Rows.Add("	LDA	", "	1 0 0 0 0 0 1 0 	", "	Load Accumulator	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	STA	", "	1 0 1 0 0 0 1 0 	", "	Save Accumulator 	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	ADD	", "	0 1 0 0  0 0 1 0 	", "	Add value to accumulator 	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	ADD(immediate)	", "	0 1 0 0  0 0 0 1	", "	Add value to accumulator 	", "	Immediate	", "	/	");
+            dataGridView1.Rows.Add("	ADDC	", "	0 1 0 0  1 0 1 0	", "	Add value and carry to accumulator 	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	ADDC(immediate)	", "	0 1 0 0  1 0 0 1 	", "	Add value and carry to accumulator 	", "	Immediate 	", "	/	");
+            dataGridView1.Rows.Add("	SUB	", "	0 1 0 1  0 0 1 0	", "	Subtract value from accumulator	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	SUB(Immediate)	", "	0 1 0 1  0 0 0 1	", "	Subtract value from accumulator	", "	Immediate 	", "	/	");
+            dataGridView1.Rows.Add("	SUBC	", "	0 1 0 1  1 0 1 0	", "	Subtract value and borrow from accumulator	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	SUBC(immediate)	", "	0 1 0 1  1 0 0 1 	", "	Subtract value and borrow from accumulator	", "	Immediate	", "	/	");
+            dataGridView1.Rows.Add("	INC	", "	0 1 0 0  1 1 0 0	", "	Increment accumulator	", "	Inherent	", "	/	");
+            dataGridView1.Rows.Add("	DEC	", "	0 1 0 0  0 1 0 0	", "	Decrement accumulator	", "	Inherent	", "	/	");
+            dataGridView1.Rows.Add("	AND	", "	0 1 1 0  0 0 1 0	", "	Logically AND the accumulator and value	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	AND(immediate)	", "	0 1 1 0  0 0 0 1	", "	Logically AND the accumulator and value	", "	Immediate	", "	/	");
+            dataGridView1.Rows.Add("	OR	", "	0 1 1 1  0 0 1 0	", "	Logically OR the accumulator and value	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	OR(immediate)	", "	0 1 1 1  0 0 0 1 	", "	Logically OR the accumulator and value	", "	Immediate 	", "	/	");
+            dataGridView1.Rows.Add("	INV	", "	0 1 1 0  0 1 0 0 	", "	Logically invert the accumulator	", "	Inherent	", "	/	");
+            dataGridView1.Rows.Add("	XOR	", "	0 1 1 0  1 1 1 0	", "	Logically XOR the accumulator and value	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	XOR(immediate)	", "	0 1 1 0  1 1 0 1	", "	Logically XOR the accumulator and value	", "	Immediate	", "	/	");
+            dataGridView1.Rows.Add("	CLRA	", "	0 1 1 0  0 1 0 0	", "	Clear Accumulator	", "	Inherent	", "	/	");
+            dataGridView1.Rows.Add("	CMP	", "	0 1 1 1  1 1 1 0	", "	Compare   (executes Accumulator – argument) does not modify accumulator	", "	Direct	", "	/	");
+            dataGridView1.Rows.Add("	CMP(immediate)	", "	0 1 1 1  1 1 0 1	", "	Compare   (executes Accumulator – argument) does not modify accumulator	", "	Inherent	", "	/	");
+            dataGridView1.Rows.Add("	JMP	", "	1 1 0 0 0 0 0 0 	", "	Jump to certain address	", "	/	", "		");
+            dataGridView1.Rows.Add("	JC	", "	1 1 1 0 0 1 0 0	", "	Conditional jump 	", "	/	", "	Carry: 1	");
+            dataGridView1.Rows.Add("	JNC	", "	1 1 1 0 0 0 0 0	", "	Conditional jump 	", "	/	", "	Carry: 0	");
+            dataGridView1.Rows.Add("	JNN	", "	1 1 0 1 0 0 0 0	", "	Conditional jump 	", "	/	", "	Negative:0	");
+            dataGridView1.Rows.Add("	JZ	", "	1 1 0 0 1 0 0 1	", "	Conditional jump 	", "	/	", "	Zero:1	");
+            dataGridView1.Rows.Add("	JNZ	", "	1 1 0 0 1 0 0 0             	", "	Conditional jump 	", "	/	", "	Zero:0	");
+            dataGridView1.Rows.Add("	JCN	", "	1 1 1 1 0 1 1 0	", "	Conditional jump 	", "	/	", "	Carry:1 Negative:1	");
+            dataGridView1.Rows.Add("	JNCN	", "	1 1 1 1 0 0 1 0             	", "	Conditional jump 	", "	/	", "	Carry:0 Negative:1	");
+            dataGridView1.Rows.Add("	JCNN	", "	1 1 1 1 0 1 0 0             	", "	Conditional jump 	", "	/	", "	Carry 1 Negative:0	");
+            dataGridView1.Rows.Add("	JNCNN	", "	1 1 1 1 0 0 0 0               	", "	Conditional jump 	", "	/	", "	Carry:0 Negative:0	");
+            dataGridView1.Rows.Add("	JCZ	", "	1 1 1 0 1 1 0 1             	", "	Conditional jump 	", "	/	", "	Carry:1 Zero:1	");
+            dataGridView1.Rows.Add("	JNCZ	", "	1 1 1 0 1 0 0 1             	", "	Conditional jump 	", "	/	", "	Carry:0 Zero:1	");
+            dataGridView1.Rows.Add("	JCNZ	", "	1 1 1 0 1 1 0 0             	", "	Conditional jump 	", "	/	", "	Carry:1 Zero:0	");
+            dataGridView1.Rows.Add("	JNCNZ	", "	1 1 1 0 1 0 0 0             	", "	Conditional jump 	", "	/	", "	Carry:0 Zero:0	");
+            dataGridView1.Rows.Add("	JZN	", "	1 1 0 1 1 0 1 1             	", "	Conditional jump 	", "	/	", "	Zero:1 Negative:1	");
+            dataGridView1.Rows.Add("	JNZN	", "	1 1 0 1 1 0 0 1             	", "	Conditional jump 	", "	/	", "	Zero:0 Negative:1	");
+            dataGridView1.Rows.Add("	JNZNN	", "	1 1 0 1 1 0 0 0             	", "	Conditional jump 	", "	/	", "	Zero:0 Negative:0	");
+            dataGridView1.Rows.Add("	JZNN	", "	1 1 0 1 1 0 1 0             	", "	Conditional jump 	", "	/	", "	Zero:1 Negative:0	");
+            dataGridView1.Rows.Add("	Not Used 	", "	0 0 X X X X X X 	", "	Void opcode	", "	/	", "	/	");
+
+        }
     }
 }
