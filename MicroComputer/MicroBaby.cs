@@ -133,15 +133,15 @@ namespace MicroComputer
             else
             {
                 CPU.Globals.runflag = true;
-                dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
-                dispPC.Text = CPU.Globals._PC.ToString();
+                dispPC.Text = CPU.Globals._PC.ToString()+"     "+ CPU.Globals._PC.ToString("X2");
                 CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
+                dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC]+"    "+currentInstr.call;
+
                 CPU.Globals._DATA_BUS = (byte)currentInstr.dataopcode;
                 dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
                 CPU.Globals._INSTR_PC++;
 
                 currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
-                dispPC.Text = CPU.Globals._PC.ToString();
                 Console.WriteLine(CPU.Globals._AC);
 
                 if (CPU.Globals._AC == 0)
@@ -225,7 +225,6 @@ namespace MicroComputer
         private void refreshMem_Click(object sender, EventArgs e)
         {
             dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
-            dispPC.Text = CPU.Globals._PC.ToString();
             dispAC.Text = CPU.Globals._AC.ToString();
 //            dispIR.Text = CPU.Globals._IR.ToString();
  
@@ -550,9 +549,12 @@ namespace MicroComputer
                             newInstr.opcode += "10";
                             newInstr.isImmediate = false;
                             newInstr.data = addrMode;
+                            System.Console.WriteLine(newInstr.call);
 
                             newInstr.dataopcode = byte.Parse(addrMode.Substring(2), System.Globalization.NumberStyles.HexNumber, System.Globalization.CultureInfo.InvariantCulture);
                         }
+
+
                         else {
                             newInstr.opcode += "01";
                             newInstr.isImmediate = true;
