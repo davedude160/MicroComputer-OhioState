@@ -111,8 +111,8 @@ namespace MicroComputer
                     
             }
             dispAC.Text = CPU.Globals._AC.ToString();
-            
-            
+
+            refreshMem_Click(sender, e);
 
 
         }
@@ -121,7 +121,7 @@ namespace MicroComputer
         {
 
 
-            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
+            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
                 if (!CPU.Globals.runflag)
                     dispIR.Text = "Please load program first.";
@@ -315,26 +315,32 @@ namespace MicroComputer
                 //output opcodes to opCodes textbox 
                 string opcodestring = "";
                 int i = 0;
-
-
+                List<String> items = new List<string>();
+                
                 foreach (CPU.Instr ins in CPU.Globals._INSTRUCTION_ARRAY)
                 {
                     opcodestring += i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.call + System.Environment.NewLine;
+                    items.Add(i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.call);
                     i++;
                     if (!ins.isInherent)
                     {
                         opcodestring += i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.data + System.Environment.NewLine;
-                        i++;
 
+                        items.Add(i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.data);
+                        i++;
                     }
+                    
                 }
 
 
 
                 opCodes.Text = opcodestring;
                 programMem.Text = opcodestring;
+                programMem.DataSource = items;
 
             }
+
+            
 
            refreshMem_Click(sender, e);
 
@@ -632,6 +638,106 @@ namespace MicroComputer
             
         }
 
-       
+        private void debugPrg_Click(object sender, EventArgs e)
+        {
+           foreach(int i in programMem.SelectedIndices)
+            {
+
+                int index = (byte)CPU.Globals._INSTR_PC_LOOKUP[i];
+
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
+
+                if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
+                {
+                    if (!CPU.Globals.runflag)
+                        dispIR.Text = "Please load program first.";
+                    else
+                        dispIR.Text = "End of execution";
+                    //dispIR.Text = "Load Program."; 
+                    MessageBox.Show("Please load program first.");
+                }
+                else
+                    while (CPU.Globals._INSTRUCTION_ARRAY.Count != 0 && CPU.Globals._INSTR_PC < index)
+                    {
+                        CPU.Globals.runflag = true;
+                        dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC];
+
+                        dispPC.Text = CPU.Globals._PC.ToString();
+                        CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
+                        CPU.Globals._DATA_BUS = (byte)currentInstr.dataopcode;
+                        dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
+                        CPU.Globals._INSTR_PC++;
+                        currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+                        dispPC.Text = CPU.Globals._PC.ToString();
+                        Console.WriteLine(CPU.Globals._AC);
+
+                        if (CPU.Globals._AC == 0)
+                        {
+                            CPU.Globals._ZERO = true;
+                            zeroFlag.Checked = true;
+                        }
+                        else
+                        {
+                            CPU.Globals._ZERO = false;
+                            zeroFlag.Checked = false;
+                        }
+
+                        if (CPU.Globals._AC < 0)
+                        {
+                            CPU.Globals._NEGATIVE = true;
+                            negFlag.Checked = true;
+                        }
+                        else
+                        {
+                            CPU.Globals._NEGATIVE = false;
+                            negFlag.Checked = false;
+                        }
+
+
+
+                        if (CPU.Globals._CARRY == true)
+                        {
+                            carryFlag.Checked = true;
+                        }
+                        else
+
+                        if (CPU.Globals._CARRY == true)
+
+                            if (CPU.Globals._CARRY == true)
+
+                            {
+                                carryFlag.Checked = false;
+
+
+                                {
+                                    carryFlag.Checked = false;
+
+                                }
+
+
+                            }
+                        if (sw.ElapsedMilliseconds > 5000)
+                        {
+                            DialogResult dialogResult = MessageBox.Show("Potential infinite loop detected, continue?", "Infinite Loop Alert", MessageBoxButtons.YesNo);
+                            if (dialogResult == DialogResult.No)
+                            {
+                                break;
+                            }
+                            else if (dialogResult == DialogResult.Yes)
+                            {
+                                sw.Restart();
+                                continue;
+                            }
+                        }
+
+                    }
+                dispAC.Text = CPU.Globals._AC.ToString();
+
+                refreshMem_Click(sender, e);
+
+            }
+        }
+
     }
 }
