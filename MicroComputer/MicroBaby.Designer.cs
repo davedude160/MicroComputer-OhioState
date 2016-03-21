@@ -67,6 +67,7 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.programEditor = new System.Windows.Forms.TextBox();
             this.Help = new System.Windows.Forms.TabPage();
+            this.label1 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,8 +75,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
-            this.table = new System.Data.DataTable();
-            this.label1 = new System.Windows.Forms.Label();
             this.EMULATOR.SuspendLayout();
             this.Sim.SuspendLayout();
             this.memView.SuspendLayout();
@@ -86,7 +85,6 @@
             this.groupBox2.SuspendLayout();
             this.Help.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table)).BeginInit();
             this.SuspendLayout();
             // 
             // EMULATOR
@@ -768,6 +766,18 @@
             this.Help.Text = "Help";
             this.Help.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label1.Location = new System.Drawing.Point(463, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "here";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
@@ -820,24 +830,12 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(24, 40);
+            this.label6.Location = new System.Drawing.Point(33, 19);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(304, 13);
+            this.label6.Size = new System.Drawing.Size(467, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "This tab will contain the instructions on operating the Emulator. For User Guide " +
     "please click         . ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label1.Location = new System.Drawing.Point(463, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "here";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // MicroBaby
             // 
@@ -869,7 +867,6 @@
             this.Help.ResumeLayout(false);
             this.Help.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -912,13 +909,9 @@
         private System.Windows.Forms.CheckBox negFlag;
         private System.Windows.Forms.CheckBox zeroFlag;
         private System.Windows.Forms.CheckBox carryFlag;
-<<<<<<< HEAD
         private System.Windows.Forms.ListBox programMem;
-        
         private System.Windows.Forms.Button debugPrg;
-=======
         private System.Windows.Forms.Label label6;
-        private System.Data.DataTable table;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
@@ -926,7 +919,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.Label label1;
->>>>>>> refs/remotes/origin/Final-Branch
     }
 }
 
