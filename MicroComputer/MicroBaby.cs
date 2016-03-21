@@ -36,65 +36,65 @@ namespace MicroComputer
                 MessageBox.Show("Please load program first.");
             }
             else
-                while(CPU.Globals._INSTRUCTION_ARRAY.Count != 0 && CPU.Globals._INSTR_PC < CPU.Globals._INSTRUCTION_ARRAY.Count)
-            {
-                CPU.Globals.runflag = true;
+                while (CPU.Globals._INSTRUCTION_ARRAY.Count != 0 && CPU.Globals._INSTR_PC < CPU.Globals._INSTRUCTION_ARRAY.Count)
+                {
+                    CPU.Globals.runflag = true;
                     CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
                     dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC] + "    " + currentInstr.call;
                     CPU.Globals._DATA_BUS = (byte)currentInstr.dataopcode;
-                dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
-                CPU.Globals._INSTR_PC++;
+                    dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
+                    CPU.Globals._INSTR_PC++;
 
-                currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+                    currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
                     dispPC.Text = CPU.Globals._PC.ToString("X2") + "               " + CPU.Globals._PC.ToString();
                     Console.WriteLine(CPU.Globals._AC);
 
-                if (CPU.Globals._AC == 0)
-                {
-                    CPU.Globals._ZERO = true;
-                    zeroFlag.Checked = true;
-                }
-                else
-                {
-                    CPU.Globals._ZERO = false;
-                    zeroFlag.Checked = false;
-                }
+                    if (CPU.Globals._AC == 0)
+                    {
+                        CPU.Globals._ZERO = true;
+                        zeroFlag.Checked = true;
+                    }
+                    else
+                    {
+                        CPU.Globals._ZERO = false;
+                        zeroFlag.Checked = false;
+                    }
 
-                if (CPU.Globals._AC < 0)
-                {
-                    CPU.Globals._NEGATIVE = true;
-                    negFlag.Checked = true;
-                }
-                else
-                {
-                    CPU.Globals._NEGATIVE = false;
-                    negFlag.Checked = false;
-                }
+                    if (CPU.Globals._AC < 0)
+                    {
+                        CPU.Globals._NEGATIVE = true;
+                        negFlag.Checked = true;
+                    }
+                    else
+                    {
+                        CPU.Globals._NEGATIVE = false;
+                        negFlag.Checked = false;
+                    }
 
 
 
-                if (CPU.Globals._CARRY == true)
-                {
-                    carryFlag.Checked = true;
-                }
-                else
-
-                if (CPU.Globals._CARRY == true)
+                    if (CPU.Globals._CARRY == true)
+                    {
+                        carryFlag.Checked = true;
+                    }
+                    else
 
                     if (CPU.Globals._CARRY == true)
 
-                    {
-                        carryFlag.Checked = false;
-
+                        if (CPU.Globals._CARRY == true)
 
                         {
                             carryFlag.Checked = false;
 
+
+                            {
+                                carryFlag.Checked = false;
+
+                            }
+
+
                         }
-
-
-                    }
-                if(sw.ElapsedMilliseconds > 5000)
+                    if (sw.ElapsedMilliseconds > 5000)
                     {
                         DialogResult dialogResult = MessageBox.Show("Potential infinite loop detected, continue?", "Infinite Loop Alert", MessageBoxButtons.YesNo);
                         if (dialogResult == DialogResult.No)
@@ -107,9 +107,9 @@ namespace MicroComputer
                             continue;
                         }
                     }
-                    
-            }
-            dispAC.Text = (byte)CPU.Globals._AC+ "    " + CPU.Globals._AC.ToString();
+
+                }
+            dispAC.Text = (byte)CPU.Globals._AC + "    " + CPU.Globals._AC.ToString();
             refreshMem_Click(sender, e);
 
 
@@ -119,7 +119,7 @@ namespace MicroComputer
         {
 
 
-            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
+            if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC >= CPU.Globals._INSTRUCTION_ARRAY.Count)
             {
                 if (!CPU.Globals.runflag)
                     dispIR.Text = "Please load program first.";
@@ -132,7 +132,11 @@ namespace MicroComputer
             {
                 CPU.Globals.runflag = true;
                 dispPC.Text = CPU.Globals._PC.ToString("X2") + "               " + CPU.Globals._PC.ToString();
+                programMem.ClearSelected();
+                programMem.SetSelected(CPU.Globals._PC, true);
+
                 CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
+
                 dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC] + "    " + currentInstr.call;
 
                 CPU.Globals._DATA_BUS = (byte)currentInstr.dataopcode;
@@ -140,6 +144,7 @@ namespace MicroComputer
                 CPU.Globals._INSTR_PC++;
 
                 currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+
                 Console.WriteLine(CPU.Globals._AC);
 
                 if (CPU.Globals._AC == 0)
@@ -215,15 +220,15 @@ namespace MicroComputer
             dispAC.Text = "";
             dispPC.Text = "";
             dispIR.Text = "";
-            dispDataBus.Text = ""; 
+            dispDataBus.Text = "";
 
-
+            loadProgram_Click(sender, e);
         }
 
 
         private void refreshMem_Click(object sender, EventArgs e)
         {
-            dispDataBus.Text = Convert.ToString(CPU.Globals._DATA_BUS, 2).PadLeft(8, '0')+ "    " + CPU.Globals._DATA_BUS.ToString();
+            dispDataBus.Text = Convert.ToString(CPU.Globals._DATA_BUS, 2).PadLeft(8, '0') + "    " + CPU.Globals._DATA_BUS.ToString();
             dispAC.Text = Convert.ToString(CPU.Globals._AC, 2).PadLeft(8, '0') + "    " + CPU.Globals._AC.ToString();
 
             //            dispIR.Text = CPU.Globals._IR.ToString();
@@ -289,7 +294,7 @@ namespace MicroComputer
             CPU.Globals._INSTRUCTION_ARRAY.Clear();
             CPU.Globals._INSTRUCTION_LABELS.Clear();
             CPU.Globals._INSTR_PC_LOOKUP.Clear();
-
+            CPU.Globals._MEMORY= new sbyte[256]; ;
             CPU.Instr.Directcount = 0;
             string[] tempArray = programEditor.Lines;
             tokenize(tempArray);
@@ -311,28 +316,34 @@ namespace MicroComputer
                 //output opcodes to opCodes textbox 
                 string opcodestring = "";
                 int i = 0;
-
+                List<String> items = new List<string>();
 
                 foreach (CPU.Instr ins in CPU.Globals._INSTRUCTION_ARRAY)
                 {
                     opcodestring += i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.call + System.Environment.NewLine;
+                    items.Add(i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.call);
                     i++;
                     if (!ins.isInherent)
                     {
                         opcodestring += i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.data + System.Environment.NewLine;
-                        i++;
 
+                        items.Add(i.ToString("X2") + "         " + CPU.Globals._OPCODE_ARRAY[i] + "         " + ins.data);
+                        i++;
                     }
+
                 }
 
 
 
                 opCodes.Text = opcodestring;
                 programMem.Text = opcodestring;
+                programMem.DataSource = items;
 
             }
 
-           refreshMem_Click(sender, e);
+
+
+            refreshMem_Click(sender, e);
 
         }
 
@@ -346,7 +357,7 @@ namespace MicroComputer
                 hold += program[counter];
 
             }
-            
+
 
             String[] tempArray2 = hold.Split(delimiterChars, System.StringSplitOptions.RemoveEmptyEntries);
 
@@ -374,37 +385,37 @@ namespace MicroComputer
                 }
 
             }
- 
-             
 
-            
+
+
+
 
             List<String> dataFromFile = new List<String>();
-                if (CPU.Globals._PROGRAM_TOKENS.Contains(".DATA") || CPU.Globals._PROGRAM_TOKENS.Contains("END"))
- 
+            if (CPU.Globals._PROGRAM_TOKENS.Contains(".DATA") || CPU.Globals._PROGRAM_TOKENS.Contains("END"))
+
+            {
+
+                int start = CPU.Globals._PROGRAM_TOKENS.IndexOf(".DATA");
+                int end = CPU.Globals._PROGRAM_TOKENS.IndexOf("END");
+
+
+
+                for (int i = start + 1; i < end; i++)
                 {
 
-                    int start = CPU.Globals._PROGRAM_TOKENS.IndexOf(".DATA");
-                    int end = CPU.Globals._PROGRAM_TOKENS.IndexOf("END");
-
- 
-                     
-                for (int i=start+1; i < end; i++)
-                    {
-
                     dataFromFile.Add(CPU.Globals._PROGRAM_TOKENS.ElementAt(i));
-                    
-
-                    }
-                CPU.Globals._PROGRAM_TOKENS.RemoveRange(start, end+1 - start); 
 
 
                 }
+                CPU.Globals._PROGRAM_TOKENS.RemoveRange(start, end + 1 - start);
 
-            
-            
-                while(dataFromFile.Count > 0)
-                {
+
+            }
+
+
+
+            while (dataFromFile.Count > 0)
+            {
 
                 String address = dataFromFile.ElementAt(0);
                 dataFromFile.RemoveAt(0);
@@ -414,19 +425,19 @@ namespace MicroComputer
                 int memAdd = int.Parse(address, System.Globalization.NumberStyles.HexNumber);
                 sbyte memValue = 0;
                 memValue = (sbyte)Int32.Parse(data);
-                
+
                 CPU.Globals._MEMORY[memAdd] = memValue;
-                
+
             }
 
 
 
         }
-  
 
 
-            
-         public static void convertToOpCode()
+
+
+        public static void convertToOpCode()
         {
 
             for (int i = 0; i < CPU.Globals._PROGRAM_TOKENS.Count; i++)
@@ -625,9 +636,120 @@ namespace MicroComputer
                 programEditor.Text = "";
                 loadProgram.Enabled = true;
             }
-            
+
         }
 
+        private void debugPrg_Click(object sender, EventArgs e)
+        {
+
+
+                int index = (byte)CPU.Globals._INSTR_PC_LOOKUP[programMem.SelectedIndices[0]];
+
+                System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
+                sw.Start();
+
+                if (CPU.Globals._INSTRUCTION_ARRAY.Count == 0 || CPU.Globals._INSTR_PC > CPU.Globals._INSTRUCTION_ARRAY.Count)
+                {
+                    if (!CPU.Globals.runflag)
+                        dispIR.Text = "Please load program first.";
+                    else
+                        dispIR.Text = "End of execution";
+                    //dispIR.Text = "Load Program."; 
+                    MessageBox.Show("Please load program first.");
+                }
+                else
+                {
+                    Console.WriteLine("iPC " + CPU.Globals._INSTR_PC);
+                    Console.WriteLine(" PC " + CPU.Globals._PC);
+
+                    if (CPU.Globals._INSTR_PC == index)
+                    {
+                    runStep_Click(sender, e);
+
+                }
+
+                while (CPU.Globals._INSTR_PC != index && CPU.Globals._INSTR_PC < CPU.Globals._INSTRUCTION_ARRAY.Count)
+                    {
+
+                    CPU.Globals.runflag = true;
+                    dispPC.Text = CPU.Globals._PC.ToString("X2") + "               " + CPU.Globals._PC.ToString();
+
+                    CPU.Instr currentInstr = CPU.Globals._INSTRUCTION_ARRAY[CPU.Globals._INSTR_PC];
+
+                    dispIR.Text = CPU.Globals._OPCODE_ARRAY[CPU.Globals._PC] + "    " + currentInstr.call;
+
+                    CPU.Globals._DATA_BUS = (byte)currentInstr.dataopcode;
+                    dispDataBus.Text = CPU.Globals._DATA_BUS.ToString();
+                    CPU.Globals._INSTR_PC++;
+
+                    currentInstr.operation(CPU.Globals._AC, (sbyte)currentInstr.dataopcode);
+
+                    Console.WriteLine(CPU.Globals._AC);
+
+                    if (CPU.Globals._AC == 0)
+                    {
+                        CPU.Globals._ZERO = true;
+                        zeroFlag.Checked = true;
+                    }
+                    else
+                    {
+                        CPU.Globals._ZERO = false;
+                        zeroFlag.Checked = false;
+                    }
+
+                    if (CPU.Globals._AC < 0)
+                    {
+                        CPU.Globals._NEGATIVE = true;
+                        negFlag.Checked = true;
+                    }
+                    else
+                    {
+                        CPU.Globals._NEGATIVE = false;
+                        negFlag.Checked = false;
+                    }
+
+
+
+                    if (CPU.Globals._CARRY == true)
+                    {
+                        carryFlag.Checked = true;
+                    }
+                    else
+
+                    if (CPU.Globals._CARRY == true)
+
+                        if (CPU.Globals._CARRY == true)
+
+                        {
+                            carryFlag.Checked = false;
+
+
+                            {
+                                carryFlag.Checked = false;
+
+                            }
+
+
+                        }
+
+                    if (sw.ElapsedMilliseconds > 5000)
+                        {
+                            DialogResult dialogResult = MessageBox.Show("Potential infinite loop detected, continue?", "Infinite Loop Alert", MessageBoxButtons.YesNo);
+                            if (dialogResult == DialogResult.No)
+                            {
+                                break;
+                            }
+                            else if (dialogResult == DialogResult.Yes)
+                            {
+                                sw.Restart();
+                                continue;
+                            }
+                      
+                    }
+                }
+            }
+
+        }
 
         private void dataGridView1_Layout(object sender, LayoutEventArgs e)
         {
