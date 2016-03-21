@@ -232,7 +232,8 @@ namespace MicroComputer
             public override void operation(sbyte ac, sbyte db)
             {
                 Globals._PC += 2;
-                Globals._MEMORY[db] = ac;
+                if (!isImmediate) Globals._MEMORY[Globals._MEMORY[db]] = ac; 
+                else Globals._MEMORY[db] = ac;
 
             }
         }
