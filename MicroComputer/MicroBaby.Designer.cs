@@ -31,10 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MicroBaby));
             this.EMULATOR = new System.Windows.Forms.TabControl();
             this.Sim = new System.Windows.Forms.TabPage();
-            this.debugPrg = new System.Windows.Forms.Button();
             this.memView = new System.Windows.Forms.GroupBox();
-            this.programMem = new System.Windows.Forms.ListBox();
             this.refreshMem = new System.Windows.Forms.Button();
+            this.programMem = new System.Windows.Forms.TextBox();
             this.dataMem = new System.Windows.Forms.TextBox();
             this.resetProgram = new System.Windows.Forms.Button();
             this.runStep = new System.Windows.Forms.Button();
@@ -92,7 +91,6 @@
             // 
             // Sim
             // 
-            this.Sim.Controls.Add(this.debugPrg);
             this.Sim.Controls.Add(this.memView);
             this.Sim.Controls.Add(this.resetProgram);
             this.Sim.Controls.Add(this.runStep);
@@ -108,28 +106,16 @@
             this.Sim.Controls.Add(this.pcLabel);
             this.Sim.Location = new System.Drawing.Point(4, 22);
             this.Sim.Name = "Sim";
-            this.Sim.Padding = new System.Windows.Forms.Padding(3);
+            this.Sim.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Sim.Size = new System.Drawing.Size(877, 483);
             this.Sim.TabIndex = 0;
             this.Sim.Text = "Sim";
             this.Sim.UseVisualStyleBackColor = true;
             // 
-            // debugPrg
-            // 
-            this.debugPrg.BackColor = System.Drawing.Color.SkyBlue;
-            this.debugPrg.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.debugPrg.Location = new System.Drawing.Point(214, 16);
-            this.debugPrg.Name = "debugPrg";
-            this.debugPrg.Size = new System.Drawing.Size(79, 42);
-            this.debugPrg.TabIndex = 17;
-            this.debugPrg.Text = "DEBUG";
-            this.debugPrg.UseVisualStyleBackColor = false;
-            this.debugPrg.Click += new System.EventHandler(this.debugPrg_Click);
-            // 
             // memView
             // 
-            this.memView.Controls.Add(this.programMem);
             this.memView.Controls.Add(this.refreshMem);
+            this.memView.Controls.Add(this.programMem);
             this.memView.Controls.Add(this.dataMem);
             this.memView.Location = new System.Drawing.Point(410, 16);
             this.memView.Name = "memView";
@@ -137,16 +123,6 @@
             this.memView.TabIndex = 16;
             this.memView.TabStop = false;
             this.memView.Text = "Memory Display";
-            // 
-            // programMem
-            // 
-            this.programMem.FormattingEnabled = true;
-            this.programMem.Location = new System.Drawing.Point(15, 73);
-            this.programMem.Name = "programMem";
-            this.programMem.ScrollAlwaysVisible = true;
-            this.programMem.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.programMem.Size = new System.Drawing.Size(206, 368);
-            this.programMem.TabIndex = 18;
             // 
             // refreshMem
             // 
@@ -159,6 +135,16 @@
             this.refreshMem.UseVisualStyleBackColor = true;
             this.refreshMem.Click += new System.EventHandler(this.refreshMem_Click);
             // 
+            // programMem
+            // 
+            this.programMem.Location = new System.Drawing.Point(15, 73);
+            this.programMem.Multiline = true;
+            this.programMem.Name = "programMem";
+            this.programMem.ReadOnly = true;
+            this.programMem.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.programMem.Size = new System.Drawing.Size(206, 372);
+            this.programMem.TabIndex = 14;
+            // 
             // dataMem
             // 
             this.dataMem.Location = new System.Drawing.Point(236, 73);
@@ -166,16 +152,16 @@
             this.dataMem.Name = "dataMem";
             this.dataMem.ReadOnly = true;
             this.dataMem.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataMem.Size = new System.Drawing.Size(206, 368);
+            this.dataMem.Size = new System.Drawing.Size(206, 372);
             this.dataMem.TabIndex = 15;
             // 
             // resetProgram
             // 
             this.resetProgram.BackColor = System.Drawing.Color.Coral;
             this.resetProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resetProgram.Location = new System.Drawing.Point(311, 16);
+            this.resetProgram.Location = new System.Drawing.Point(274, 16);
             this.resetProgram.Name = "resetProgram";
-            this.resetProgram.Size = new System.Drawing.Size(79, 42);
+            this.resetProgram.Size = new System.Drawing.Size(93, 42);
             this.resetProgram.TabIndex = 13;
             this.resetProgram.Text = "RESET";
             this.resetProgram.UseVisualStyleBackColor = false;
@@ -186,9 +172,9 @@
             this.runStep.AllowDrop = true;
             this.runStep.BackColor = System.Drawing.Color.Khaki;
             this.runStep.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
-            this.runStep.Location = new System.Drawing.Point(117, 16);
+            this.runStep.Location = new System.Drawing.Point(153, 16);
             this.runStep.Name = "runStep";
-            this.runStep.Size = new System.Drawing.Size(79, 42);
+            this.runStep.Size = new System.Drawing.Size(93, 42);
             this.runStep.TabIndex = 12;
             this.runStep.Text = "STEP";
             this.runStep.UseVisualStyleBackColor = false;
@@ -199,9 +185,9 @@
             this.runProgram.BackColor = System.Drawing.Color.MediumAquamarine;
             this.runProgram.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold);
             this.runProgram.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.runProgram.Location = new System.Drawing.Point(21, 16);
+            this.runProgram.Location = new System.Drawing.Point(32, 16);
             this.runProgram.Name = "runProgram";
-            this.runProgram.Size = new System.Drawing.Size(79, 42);
+            this.runProgram.Size = new System.Drawing.Size(93, 42);
             this.runProgram.TabIndex = 11;
             this.runProgram.Text = "RUN";
             this.runProgram.UseVisualStyleBackColor = false;
@@ -212,7 +198,7 @@
             this.dispDataBus.Location = new System.Drawing.Point(73, 207);
             this.dispDataBus.Name = "dispDataBus";
             this.dispDataBus.ReadOnly = true;
-            this.dispDataBus.Size = new System.Drawing.Size(120, 20);
+            this.dispDataBus.Size = new System.Drawing.Size(141, 20);
             this.dispDataBus.TabIndex = 10;
             // 
             // groupBox1
@@ -220,9 +206,9 @@
             this.groupBox1.Controls.Add(this.negFlag);
             this.groupBox1.Controls.Add(this.zeroFlag);
             this.groupBox1.Controls.Add(this.carryFlag);
-            this.groupBox1.Location = new System.Drawing.Point(21, 255);
+            this.groupBox1.Location = new System.Drawing.Point(21, 242);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(207, 173);
+            this.groupBox1.Size = new System.Drawing.Size(192, 173);
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Condition Signals";
@@ -269,7 +255,7 @@
             this.dispAC.Location = new System.Drawing.Point(73, 166);
             this.dispAC.Name = "dispAC";
             this.dispAC.ReadOnly = true;
-            this.dispAC.Size = new System.Drawing.Size(120, 20);
+            this.dispAC.Size = new System.Drawing.Size(141, 20);
             this.dispAC.TabIndex = 7;
             // 
             // dispIR
@@ -277,7 +263,7 @@
             this.dispIR.Location = new System.Drawing.Point(73, 127);
             this.dispIR.Name = "dispIR";
             this.dispIR.ReadOnly = true;
-            this.dispIR.Size = new System.Drawing.Size(120, 20);
+            this.dispIR.Size = new System.Drawing.Size(141, 20);
             this.dispIR.TabIndex = 6;
             // 
             // dispPC
@@ -285,7 +271,7 @@
             this.dispPC.Location = new System.Drawing.Point(73, 89);
             this.dispPC.Name = "dispPC";
             this.dispPC.ReadOnly = true;
-            this.dispPC.Size = new System.Drawing.Size(120, 20);
+            this.dispPC.Size = new System.Drawing.Size(141, 20);
             this.dispPC.TabIndex = 5;
             // 
             // dataBusLabel
@@ -334,7 +320,7 @@
             this.Editor.Controls.Add(this.groupBox2);
             this.Editor.Location = new System.Drawing.Point(4, 22);
             this.Editor.Name = "Editor";
-            this.Editor.Padding = new System.Windows.Forms.Padding(3);
+            this.Editor.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Editor.Size = new System.Drawing.Size(877, 483);
             this.Editor.TabIndex = 1;
             this.Editor.Text = "Editor";
@@ -380,7 +366,7 @@
             this.opCodes.Name = "opCodes";
             this.opCodes.ReadOnly = true;
             this.opCodes.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.opCodes.Size = new System.Drawing.Size(206, 368);
+            this.opCodes.Size = new System.Drawing.Size(206, 372);
             this.opCodes.TabIndex = 4;
             // 
             // dataMem2
@@ -390,7 +376,7 @@
             this.dataMem2.Name = "dataMem2";
             this.dataMem2.ReadOnly = true;
             this.dataMem2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataMem2.Size = new System.Drawing.Size(206, 368);
+            this.dataMem2.Size = new System.Drawing.Size(206, 372);
             this.dataMem2.TabIndex = 15;
             // 
             // groupBox3
@@ -750,7 +736,7 @@
             this.Help.Controls.Add(this.label6);
             this.Help.Location = new System.Drawing.Point(4, 22);
             this.Help.Name = "Help";
-            this.Help.Padding = new System.Windows.Forms.Padding(3);
+            this.Help.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Help.Size = new System.Drawing.Size(877, 483);
             this.Help.TabIndex = 2;
             this.Help.Text = "Help";
@@ -819,6 +805,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox opCodes;
         private System.Windows.Forms.TextBox dataMem;
+        private System.Windows.Forms.TextBox programMem;
         private System.Windows.Forms.Button resetProgram;
         private System.Windows.Forms.GroupBox memView;
         private System.Windows.Forms.Button refreshMem;
@@ -837,9 +824,6 @@
         private System.Windows.Forms.CheckBox negFlag;
         private System.Windows.Forms.CheckBox zeroFlag;
         private System.Windows.Forms.CheckBox carryFlag;
-        private System.Windows.Forms.ListBox programMem;
-        
-        private System.Windows.Forms.Button debugPrg;
     }
 }
 
