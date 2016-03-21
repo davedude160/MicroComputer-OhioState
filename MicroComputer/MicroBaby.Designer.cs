@@ -74,6 +74,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label6 = new System.Windows.Forms.Label();
             this.table = new System.Data.DataTable();
+            this.label1 = new System.Windows.Forms.Label();
             this.EMULATOR.SuspendLayout();
             this.Sim.SuspendLayout();
             this.memView.SuspendLayout();
@@ -742,6 +743,7 @@
             // 
             // Help
             // 
+            this.Help.Controls.Add(this.label1);
             this.Help.Controls.Add(this.dataGridView1);
             this.Help.Controls.Add(this.label6);
             this.Help.Location = new System.Drawing.Point(4, 22);
@@ -806,9 +808,22 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(33, 19);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(304, 13);
+            this.label6.Size = new System.Drawing.Size(467, 13);
             this.label6.TabIndex = 0;
-            this.label6.Text = "This tab will contain the instructions on operating the Emulator. ";
+            this.label6.Text = "This tab will contain the instructions on operating the Emulator. For User Guide " +
+    "please click         . ";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.label1.Location = new System.Drawing.Point(463, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "here";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // MicroBaby
             // 
@@ -892,8 +907,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-
-        
+        private System.Windows.Forms.Label label1;
     }
 }
 
