@@ -7,12 +7,6 @@
  
 
  
-label:            Add $13;
+            Add $13;
             INc;
-            jmp label;
-
-.data;
-
-24=5;
-2=53;
-end
+            jmp #$F1;

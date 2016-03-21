@@ -17,7 +17,7 @@ namespace MicroComputer
             public static byte _PC = 0;
             public static int _INSTR_PC = 0;
             public static sbyte _AC = 0;
-            public static sbyte _IR = 0;
+            public static byte _IR = 0;
             public static bool _CARRY = false;
             public static bool _OVERFLOW = false;
             public static bool _NEGATIVE = false;
@@ -501,7 +501,7 @@ namespace MicroComputer
             }
             public override void operation(sbyte a, sbyte b)
             {
-                if (CPU.Globals._NEGATIVE)
+                if (!CPU.Globals._NEGATIVE)
                 {
                     CPU.Globals._PC = (byte)(b);
                     CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
@@ -526,7 +526,7 @@ namespace MicroComputer
             }
             public override void operation(sbyte a, sbyte b)
             {
-                if (!CPU.Globals._NEGATIVE)
+                if (CPU.Globals._NEGATIVE)
                 {
                     CPU.Globals._PC = (byte)(b);
                     CPU.Globals._INSTR_PC = CPU.Globals._INSTR_PC_LOOKUP[b];
@@ -893,50 +893,14 @@ namespace MicroComputer
 
         }
 
+
+
         [STAThread]
         static void Main()
         {
-            
-                        Application.EnableVisualStyles();
-                        Application.SetCompatibleTextRenderingDefault(false);
-                        Application.Run(new MicroBaby());
-            //comment above to test
-
-            /*
-            test.testAdd();
-            test.testAddc();
-            test.testSub();
-            test.testSubc();
-            test.testInc();
-            test.testDec();
-            */
-
-            /*
-            test.testAnd();
-            test.testOr();
-            test.testXOr();
-            test.testInv();
-            test.testCmp();
-            test.testClra();
-            test.testJmp();
-            test.testJc();
-            test.testJNC();
-            test.testJN();
-            test.testJNN();
-            test.testJZ();
-            test.testJNZ();
-            test.testJCN();
-            test.testJNCN();
-            test.testJCNN();
-            test.testJNCNN();
-            test.testJCZ();
-            test.testJNCZ();
-            test.testJCNZ();
-            test.testJNCNZ();
-            test.testJZN();
-            test.testJZNN();
-            test.testJNZNN();
-                          */
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new MicroBaby());
 
         }
 

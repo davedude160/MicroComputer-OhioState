@@ -230,8 +230,6 @@ namespace MicroComputer
 
 
 
-
-
             if (CPU.Globals._MEMORY.Length > 0)
             {
 

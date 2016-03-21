@@ -116,7 +116,7 @@
             this.Sim.Controls.Add(this.pcLabel);
             this.Sim.Location = new System.Drawing.Point(4, 22);
             this.Sim.Name = "Sim";
-            this.Sim.Padding = new System.Windows.Forms.Padding(3);
+            this.Sim.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Sim.Size = new System.Drawing.Size(877, 483);
             this.Sim.TabIndex = 0;
             this.Sim.Text = "Sim";
@@ -330,7 +330,7 @@
             this.Editor.Controls.Add(this.groupBox2);
             this.Editor.Location = new System.Drawing.Point(4, 22);
             this.Editor.Name = "Editor";
-            this.Editor.Padding = new System.Windows.Forms.Padding(3);
+            this.Editor.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Editor.Size = new System.Drawing.Size(877, 483);
             this.Editor.TabIndex = 1;
             this.Editor.Text = "Editor";
@@ -748,7 +748,7 @@
             this.Help.Controls.Add(this.label6);
             this.Help.Location = new System.Drawing.Point(4, 22);
             this.Help.Name = "Help";
-            this.Help.Padding = new System.Windows.Forms.Padding(3);
+            this.Help.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
             this.Help.Size = new System.Drawing.Size(877, 483);
             this.Help.TabIndex = 2;
             this.Help.Text = "Help";
@@ -806,9 +806,9 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(33, 19);
+            this.label6.Location = new System.Drawing.Point(24, 40);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(467, 13);
+            this.label6.Size = new System.Drawing.Size(304, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "This tab will contain the instructions on operating the Emulator. For User Guide " +
     "please click         . ";

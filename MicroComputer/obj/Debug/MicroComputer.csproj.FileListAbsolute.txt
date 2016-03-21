@@ -6,3 +6,4 @@ C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\D
 C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.csproj.GenerateResource.Cache
 C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.exe
 C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.pdb
+C:\Users\Yulou Yang\Documents\GitHub\MicroComputer-OhioState\MicroComputer\obj\Debug\MicroComputer.csprojResolveAssemblyReference.cache
